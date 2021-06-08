@@ -1,14 +1,18 @@
 const { app, BrowserWindow } = require("electron");
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  new BrowserWindow({
     width: 800,
     height: 600,
     // transparent: true,
     // frame: false,
-  });
-
-  mainWindow.loadFile("index.html");
+  }).loadFile("index.html");
+  new BrowserWindow({
+    width: 100,
+    height: 600,
+    // transparent: true,
+    // frame: false,
+  }).loadFile("menu.html");
 }
 
 app.whenReady().then(() => {
