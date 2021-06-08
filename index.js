@@ -1,22 +1,34 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 
+let mainWindow;
+let menuWindow;
 function createWindow() {
-  new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
     // transparent: true,
     // frame: false,
-  }).loadFile("index.html");
-  new BrowserWindow({
+  });
+  mainWindow.loadFile("index.html");
+  menuWindow = new BrowserWindow({
     width: 100,
     height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
     // transparent: true,
     // frame: false,
-  }).loadFile("menu.html");
+  });
+  menuWindow.loadFile("menu.html");
 }
 
 ipcMain.on("color", (_, color) => {
-  console.log(color);
+  mainWindow.webContents.send("color", color);
 });
 
 app.whenReady().then(() => {

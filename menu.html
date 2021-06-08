@@ -5,28 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
     <script>
-      alert("BEFORE REQUIRE");
       const { ipcRenderer } = require("electron");
-      alert("AFTER REQUIRE");
     </script>
   </head>
   <body style="margin: 0">
     <div
       style="display: flex; flex-direction: column; gap: 1rem; height: 100vh"
     >
-      <button
-        onclick="alert(ipcRenderer);ipcRenderer.sendSync('color', 'Blue')"
-      >
-        Blue
-      </button>
-      <button onclick="alert(ipcRenderer);ipcRenderer.sendSync('color', 'Red')">
-        Red
-      </button>
-      <button
-        onclick="alert(ipcRenderer);ipcRenderer.sendSync('color', 'Green')"
-      >
-        Green
-      </button>
+      <button onclick="ipcRenderer.send('color', 'black')">Black</button>
+      <button onclick="ipcRenderer.send('color', 'blue')">Blue</button>
+      <button onclick="ipcRenderer.send('color', 'red')">Red</button>
+      <button onclick="ipcRenderer.send('color', 'green')">Green</button>
     </div>
   </body>
 </html>

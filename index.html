@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notestrator</title>
+    <script>
+      const { ipcRenderer } = require("electron");
+    </script>
   </head>
   <body style="margin: 0">
-    <svg width="800" height="600" viewBox="0 0 800 600"></svg>
+    <svg width="800" height="600" viewBox="0 0 800 600" data-current-color="black"></svg>
   </div>
     <script>
       const drawing = document.currentScript.previousElementSibling;
@@ -18,7 +21,7 @@
             <polyline
               points="${event.x} ${event.y}"
               fill="none"
-              stroke="black"
+              stroke="${drawing.dataset.currentColor}"
             />
           `
         );
@@ -36,6 +39,10 @@
       window.addEventListener("mouseup", () => {
         currentLine = null;
       });
+
+      ipcRenderer.on("color", (_, color) => {
+        drawing.dataset.currentColor = color;
+      })
     </script>
   </body>
 </html>
