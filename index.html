@@ -14,27 +14,31 @@
     ></svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
-      let isDrawing = false;
-      let x;
-      let y;
+      let currentLine = null;
       window.addEventListener("mousedown", (event) => {
-        isDrawing = true;
-        x = event.x;
-        y = event.y;
+        drawing.insertAdjacentHTML(
+          "beforeend",
+          `
+            <polyline
+              points="${event.x} ${event.y}"
+              fill="none"
+              stroke="black"
+            />
+          `
+        );
+        currentLine = drawing.lastElementChild;
       });
 
       window.addEventListener("mousemove", (event) => {
-        if (!isDrawing) return;
-        drawing.insertAdjacentHTML(
-          "beforeend",
-          `<line x1="${x}" y1="${y}" x2="${event.x}" y2="${event.y}" stroke="black" />`
+        if (currentLine === null) return;
+        currentLine.setAttribute(
+          "points",
+          `${currentLine.getAttribute("points")}, ${event.x} ${event.y}`
         );
-        x = event.x;
-        y = event.y;
       });
 
       window.addEventListener("mouseup", () => {
-        isDrawing = false;
+        currentLine = null;
       });
     </script>
   </body>
