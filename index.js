@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 
 function createWindow() {
   new BrowserWindow({
@@ -14,6 +14,10 @@ function createWindow() {
     // frame: false,
   }).loadFile("menu.html");
 }
+
+ipcMain.on("color", (_, color) => {
+  console.log(color);
+});
 
 app.whenReady().then(() => {
   createWindow();
