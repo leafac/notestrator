@@ -4,14 +4,20 @@ let mainWindow;
 let menuWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    // transparent: true,
-    // frame: false,
+    fullscreen: true,
+    simpleFullscreen: true,
+    transparent: true,
+    frame: false,
+    hasShadow: false,
+    // resizable / movable
+    closable: false,
+    alwaysOnTop: true,
+    // show: false
+    // acceptFirstMouse
   });
   mainWindow.loadFile("index.html");
   menuWindow = new BrowserWindow({
@@ -21,8 +27,7 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    // transparent: true,
-    // frame: false,
+    parent: mainWindow,
   });
   menuWindow.loadFile("menu.html");
 }
