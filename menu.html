@@ -8,17 +8,27 @@
       const { ipcRenderer } = require("electron");
     </script>
   </head>
-  <body style="margin: 0">
-    <div
-      style="display: flex; flex-direction: column; gap: 1rem; height: 100vh"
-    >
-      <button onclick="ipcRenderer.send('color', 'black')">Black</button>
-      <button onclick="ipcRenderer.send('color', 'blue')">Blue</button>
-      <button onclick="ipcRenderer.send('color', 'red')">Red</button>
-      <button onclick="ipcRenderer.send('color', 'green')">Green</button>
-      <button onclick="ipcRenderer.send('strokeWidth', '1')">Thin</button>
-      <button onclick="ipcRenderer.send('strokeWidth', '3')">Medium</button>
-      <button onclick="ipcRenderer.send('strokeWidth', '5')">Thick</button>
-    </div>
+  <body
+    style="
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100vh;
+    "
+  >
+    <label><input type="radio" name="color" value="black" /> Black</label>
+    <label><input type="radio" name="color" value="red" /> Red</label>
+    <label><input type="radio" name="color" value="green" /> Green</label>
+    <label><input type="radio" name="color" value="blue" /> Blue</label>
+
+    <label><input type="radio" name="strokeWidth" value="1" /> Thin</label>
+    <label><input type="radio" name="strokeWidth" value="3" /> Medium</label>
+    <label><input type="radio" name="strokeWidth" value="5" /> Thick</label>
+    <script>
+      document.addEventListener("change", (event) => {
+        ipcRenderer.send(event.target.name, event.target.value);
+      });
+    </script>
   </body>
 </html>
