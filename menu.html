@@ -17,14 +17,21 @@
       height: 100vh;
     "
   >
-    <label><input type="radio" name="color" value="black" /> Black</label>
+    <label
+      ><input type="radio" name="color" value="black" checked /> Black</label
+    >
     <label><input type="radio" name="color" value="red" /> Red</label>
     <label><input type="radio" name="color" value="green" /> Green</label>
     <label><input type="radio" name="color" value="blue" /> Blue</label>
 
     <label><input type="radio" name="strokeWidth" value="1" /> Thin</label>
-    <label><input type="radio" name="strokeWidth" value="3" /> Medium</label>
+    <label
+      ><input type="radio" name="strokeWidth" value="3" checked /> Medium</label
+    >
     <label><input type="radio" name="strokeWidth" value="5" /> Thick</label>
+
+    <label><input type="radio" name="tool" value="pen" checked /> Pen</label>
+    <label><input type="radio" name="tool" value="marker" /> Marker</label>
     <script>
       document.addEventListener("change", (event) => {
         ipcRenderer.send(event.target.name, event.target.value);

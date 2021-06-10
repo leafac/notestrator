@@ -40,6 +40,10 @@ ipcMain.on("strokeWidth", (_, strokeWidth) => {
   mainWindow.webContents.send("strokeWidth", strokeWidth);
 });
 
+ipcMain.on("tool", (_, tool) => {
+  mainWindow.webContents.send("tool", tool);
+});
+
 app.whenReady().then(() => {
   createWindow();
   app.on("activate", function () {

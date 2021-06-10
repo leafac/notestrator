@@ -13,6 +13,7 @@
       style="width: 100vw; height: 100vh"
       data-current-color="black"
       data-current-stroke-width="3"
+      data-current-tool="pen"
     ></svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
@@ -25,7 +26,15 @@
               points="${event.x} ${event.y}"
               fill="none"
               stroke="${drawing.dataset.currentColor}"
-              stroke-width="${drawing.dataset.currentStrokeWidth}"
+              stroke-width="${
+                drawing.dataset.currentStrokeWidth *
+                (drawing.dataset.currentTool === "marker" ? 3 : 1)
+              }"
+              stroke-opacity="${
+                drawing.dataset.currentTool === "marker" ? 0.5 : 1
+              }"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
           `
         );
@@ -50,6 +59,10 @@
 
       ipcRenderer.on("strokeWidth", (_, strokeWidth) => {
         drawing.dataset.currentStrokeWidth = strokeWidth;
+      });
+
+      ipcRenderer.on("tool", (_, tool) => {
+        drawing.dataset.currentTool = tool;
       });
     </script>
   </body>
