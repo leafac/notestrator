@@ -9,8 +9,11 @@
     </script>
   </head>
   <body style="margin: 0">
-    <svg style="width: 100vw; height: 100vh;" data-current-color="black" data-current-stroke-width="3"></svg>
-  </div>
+    <svg
+      style="width: 100vw; height: 100vh"
+      data-current-color="black"
+      data-current-stroke-width="3"
+    ></svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
       let currentLine = null;
@@ -43,11 +46,11 @@
 
       ipcRenderer.on("color", (_, color) => {
         drawing.dataset.currentColor = color;
-      })
+      });
 
       ipcRenderer.on("strokeWidth", (_, strokeWidth) => {
         drawing.dataset.currentStrokeWidth = strokeWidth;
-      })
+      });
     </script>
   </body>
 </html>
