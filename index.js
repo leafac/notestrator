@@ -36,6 +36,10 @@ ipcMain.on("color", (_, color) => {
   mainWindow.webContents.send("color", color);
 });
 
+ipcMain.on("strokeWidth", (_, strokeWidth) => {
+  mainWindow.webContents.send("strokeWidth", strokeWidth);
+});
+
 app.whenReady().then(() => {
   createWindow();
   app.on("activate", function () {

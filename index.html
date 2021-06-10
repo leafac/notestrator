@@ -9,7 +9,7 @@
     </script>
   </head>
   <body style="margin: 0">
-    <svg style="width: 100vw; height: 100vh; " data-current-color="black"></svg>
+    <svg style="width: 100vw; height: 100vh;" data-current-color="black" data-current-stroke-width="3"></svg>
   </div>
     <script>
       const drawing = document.currentScript.previousElementSibling;
@@ -22,6 +22,7 @@
               points="${event.x} ${event.y}"
               fill="none"
               stroke="${drawing.dataset.currentColor}"
+              stroke-width="${drawing.dataset.currentStrokeWidth}"
             />
           `
         );
@@ -42,6 +43,10 @@
 
       ipcRenderer.on("color", (_, color) => {
         drawing.dataset.currentColor = color;
+      })
+
+      ipcRenderer.on("strokeWidth", (_, strokeWidth) => {
+        drawing.dataset.currentStrokeWidth = strokeWidth;
       })
     </script>
   </body>
