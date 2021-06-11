@@ -1,24 +1,27 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, screen } = require("electron");
 
 let mainWindow;
 let menuWindow;
 function createWindow() {
+  // FIXME: Deal with multiple displays.
   mainWindow = new BrowserWindow({
+    ...screen.getPrimaryDisplay().bounds,
+    hasShadow: false,
+    enableLargerThanScreen: true,
+    resizable: false,
+    movable: false,
+    frame: false,
+    transparent: true,
+    // closable: false,
+    // alwaysOnTop: true,
+    // show: false,
+    // acceptFirstMouse
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    fullscreen: true,
-    simpleFullscreen: true,
-    transparent: true,
-    frame: false,
-    hasShadow: false,
-    // resizable / movable
-    closable: false,
-    alwaysOnTop: true,
-    // show: false
-    // acceptFirstMouse
   });
+  mainWindow.setAlwaysOnTop(true, "screen-saver", 1);
   mainWindow.loadFile("index.html");
   menuWindow = new BrowserWindow({
     width: 100,
