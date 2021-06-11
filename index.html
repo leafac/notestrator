@@ -8,9 +8,17 @@
       const { ipcRenderer } = require("electron");
     </script>
   </head>
-  <body style="margin: 0">
+  <body>
     <svg
-      style="width: 100vw; height: 100vh"
+      style="
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+      "
       data-current-color="black"
       data-current-stroke-width="3"
       data-current-tool="pen"
