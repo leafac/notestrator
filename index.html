@@ -23,11 +23,15 @@
     <script>
       const drawing = document.currentScript.previousElementSibling;
       let currentLine = null;
+      let currentEraserRadius = null;
       window.addEventListener("mousedown", async (event) => {
         const menu = await ipcRenderer.invoke("menu--main");
-        drawing.insertAdjacentHTML(
-          "beforeend",
-          `
+        switch (menu.tool) {
+          case "pen":
+          case "marker":
+            drawing.insertAdjacentHTML(
+              "beforeend",
+              `
             <polyline
               points="${event.x} ${event.y}"
               fill="none"
@@ -40,20 +44,46 @@
               stroke-linejoin="round"
             />
           `
-        );
-        currentLine = drawing.lastElementChild;
+            );
+            currentLine = drawing.lastElementChild;
+            break;
+          case "eraser":
+            currentEraserRadius = menu.strokeWidth * 5;
+            break;
+        }
       });
 
       window.addEventListener("mousemove", (event) => {
-        if (currentLine === null) return;
-        currentLine.setAttribute(
-          "points",
-          `${currentLine.getAttribute("points")}, ${event.x} ${event.y}`
-        );
+        if (currentLine !== null)
+          currentLine.setAttribute(
+            "points",
+            `${currentLine.getAttribute("points")}, ${event.x} ${event.y}`
+          );
+
+        if (currentEraserRadius !== null) {
+          const elementsToRemove = new Set();
+          for (const element of drawing.querySelectorAll("*"))
+            switch (element.tagName) {
+              case "polyline":
+                for (const [x, y] of element
+                  .getAttribute("points")
+                  .split(",")
+                  .map((point) => point.trim().split(" ")))
+                  if (
+                    Math.sqrt((event.x - x) ** 2 + (event.y - y) ** 2) <
+                    currentEraserRadius
+                  )
+                    elementsToRemove.add(element);
+                break;
+            }
+
+          for (const element of elementsToRemove) element.remove();
+        }
       });
 
       window.addEventListener("mouseup", () => {
         currentLine = null;
+        currentEraserRadius = null;
       });
     </script>
   </body>
