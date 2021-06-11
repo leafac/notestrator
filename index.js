@@ -35,19 +35,16 @@ function createWindow() {
   menuWindow.loadFile("menu.html");
 }
 
-ipcMain.on("color", (_, color) => {
-  mainWindow.webContents.send("color", color);
-});
-
-ipcMain.on("strokeWidth", (_, strokeWidth) => {
-  mainWindow.webContents.send("strokeWidth", strokeWidth);
-});
-
-ipcMain.on("tool", (_, tool) => {
-  mainWindow.webContents.send("tool", tool);
-});
-
 app.whenReady().then(() => {
+  ipcMain.handle("menu--main", () => {
+    return new Promise((resolve) => {
+      ipcMain.once("menu--menu--response", (_, menu) => {
+        resolve(menu);
+      });
+      menuWindow.webContents.send("menu--menu--request");
+    });
+  });
+
   createWindow();
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

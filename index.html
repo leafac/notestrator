@@ -19,28 +19,23 @@
         width: 100vw;
         height: 100vh;
       "
-      data-current-color="black"
-      data-current-stroke-width="3"
-      data-current-tool="pen"
     ></svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
       let currentLine = null;
-      window.addEventListener("mousedown", (event) => {
+      window.addEventListener("mousedown", async (event) => {
+        const menu = await ipcRenderer.invoke("menu--main");
         drawing.insertAdjacentHTML(
           "beforeend",
           `
             <polyline
               points="${event.x} ${event.y}"
               fill="none"
-              stroke="${drawing.dataset.currentColor}"
+              stroke="${menu.color}"
               stroke-width="${
-                drawing.dataset.currentStrokeWidth *
-                (drawing.dataset.currentTool === "marker" ? 3 : 1)
+                menu.strokeWidth * (menu.tool === "marker" ? 3 : 1)
               }"
-              stroke-opacity="${
-                drawing.dataset.currentTool === "marker" ? 0.5 : 1
-              }"
+              stroke-opacity="${menu.tool === "marker" ? 0.5 : 1}"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
@@ -59,18 +54,6 @@
 
       window.addEventListener("mouseup", () => {
         currentLine = null;
-      });
-
-      ipcRenderer.on("color", (_, color) => {
-        drawing.dataset.currentColor = color;
-      });
-
-      ipcRenderer.on("strokeWidth", (_, strokeWidth) => {
-        drawing.dataset.currentStrokeWidth = strokeWidth;
-      });
-
-      ipcRenderer.on("tool", (_, tool) => {
-        drawing.dataset.currentTool = tool;
       });
     </script>
   </body>
