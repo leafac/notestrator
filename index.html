@@ -24,6 +24,7 @@
       const drawing = document.currentScript.previousElementSibling;
       window.addEventListener("mousedown", async (event) => {
         const menu = await ipcRenderer.invoke("menu--main");
+        let handleMousemove;
         switch (menu.tool) {
           case "pen":
           case "marker":
@@ -44,19 +45,15 @@
               `
             );
             const polyline = drawing.lastElementChild;
-            function addPoint(event) {
+            handleMousemove = (event) => {
               polyline.setAttribute(
                 "points",
                 `${polyline.getAttribute("points")}, ${event.x} ${event.y}`
               );
-            }
-            window.addEventListener("mousemove", addPoint);
-            window.addEventListener("mouseup", () => {
-              window.removeEventListener("mousemove", addPoint);
-            });
+            };
             break;
           case "eraser":
-            function removeElements(event) {
+            handleMousemove = (event) => {
               const elementsToRemove = new Set();
               for (const element of drawing.querySelectorAll("*"))
                 switch (element.tagName) {
@@ -74,13 +71,13 @@
                 }
 
               for (const element of elementsToRemove) element.remove();
-            }
-            window.addEventListener("mousemove", removeElements);
-            window.addEventListener("mouseup", () => {
-              window.removeEventListener("mousemove", removeElements);
-            });
+            };
             break;
         }
+        window.addEventListener("mousemove", handleMousemove);
+        window.addEventListener("mouseup", () => {
+          window.removeEventListener("mousemove", handleMousemove);
+        });
       });
     </script>
   </body>
