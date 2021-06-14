@@ -13,7 +13,6 @@ function createWindow() {
     frame: false,
     transparent: true,
     // closable: false,
-    // alwaysOnTop: true,
     // show: false,
     // acceptFirstMouse
     webPreferences: {
@@ -22,6 +21,7 @@ function createWindow() {
     },
   });
   mainWindow.setAlwaysOnTop(true, "screen-saver", 1);
+  mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.loadFile("index.html");
   menuWindow = new BrowserWindow({
     width: 100,
