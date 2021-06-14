@@ -22,8 +22,6 @@
     ></svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
-      let currentLine = null;
-      let currentEraserRadius = null;
       window.addEventListener("mousedown", async (event) => {
         const menu = await ipcRenderer.invoke("menu--main");
         switch (menu.tool) {
@@ -32,58 +30,57 @@
             drawing.insertAdjacentHTML(
               "beforeend",
               `
-            <polyline
-              points="${event.x} ${event.y}"
-              fill="none"
-              stroke="${menu.color}"
-              stroke-width="${
-                menu.strokeWidth * (menu.tool === "marker" ? 3 : 1)
-              }"
-              stroke-opacity="${menu.tool === "marker" ? 0.5 : 1}"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          `
+                <polyline
+                  points="${event.x} ${event.y}"
+                  fill="none"
+                  stroke="${menu.color}"
+                  stroke-width="${
+                    menu.strokeWidth * (menu.tool === "marker" ? 3 : 1)
+                  }"
+                  stroke-opacity="${menu.tool === "marker" ? 0.5 : 1}"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              `
             );
-            currentLine = drawing.lastElementChild;
+            const polyline = drawing.lastElementChild;
+            function addPoint(event) {
+              polyline.setAttribute(
+                "points",
+                `${polyline.getAttribute("points")}, ${event.x} ${event.y}`
+              );
+            }
+            window.addEventListener("mousemove", addPoint);
+            window.addEventListener("mouseup", () => {
+              window.removeEventListener("mousemove", addPoint);
+            });
             break;
           case "eraser":
-            currentEraserRadius = menu.strokeWidth * 5;
+            function removeElements(event) {
+              const elementsToRemove = new Set();
+              for (const element of drawing.querySelectorAll("*"))
+                switch (element.tagName) {
+                  case "polyline":
+                    for (const [x, y] of element
+                      .getAttribute("points")
+                      .split(",")
+                      .map((point) => point.trim().split(" ")))
+                      if (
+                        Math.sqrt((event.x - x) ** 2 + (event.y - y) ** 2) <
+                        menu.strokeWidth * 5
+                      )
+                        elementsToRemove.add(element);
+                    break;
+                }
+
+              for (const element of elementsToRemove) element.remove();
+            }
+            window.addEventListener("mousemove", removeElements);
+            window.addEventListener("mouseup", () => {
+              window.removeEventListener("mousemove", removeElements);
+            });
             break;
         }
-      });
-
-      window.addEventListener("mousemove", (event) => {
-        if (currentLine !== null)
-          currentLine.setAttribute(
-            "points",
-            `${currentLine.getAttribute("points")}, ${event.x} ${event.y}`
-          );
-
-        if (currentEraserRadius !== null) {
-          const elementsToRemove = new Set();
-          for (const element of drawing.querySelectorAll("*"))
-            switch (element.tagName) {
-              case "polyline":
-                for (const [x, y] of element
-                  .getAttribute("points")
-                  .split(",")
-                  .map((point) => point.trim().split(" ")))
-                  if (
-                    Math.sqrt((event.x - x) ** 2 + (event.y - y) ** 2) <
-                    currentEraserRadius
-                  )
-                    elementsToRemove.add(element);
-                break;
-            }
-
-          for (const element of elementsToRemove) element.remove();
-        }
-      });
-
-      window.addEventListener("mouseup", () => {
-        currentLine = null;
-        currentEraserRadius = null;
       });
     </script>
   </body>
