@@ -23,7 +23,7 @@
     <script>
       const drawing = document.currentScript.previousElementSibling;
       window.addEventListener("mousedown", async (event) => {
-        const menu = await ipcRenderer.invoke("menu--main");
+        const menu = await ipcRenderer.invoke("menu");
         let handleMousemove;
         switch (menu.tool) {
           case "pen":

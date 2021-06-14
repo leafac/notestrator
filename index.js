@@ -36,7 +36,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle("menu--main", async () => {
+  ipcMain.handle("menu", async () => {
     return await menuWindow.webContents.executeJavaScript(
       `Object.fromEntries(new URLSearchParams(new FormData(document.querySelector("form"))))`
     );
