@@ -42,6 +42,10 @@ app.whenReady().then(() => {
     );
   });
 
+  ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
+    mainWindow.setIgnoreMouseEvents(ignoreMouseEvents === "true");
+  });
+
   createWindow();
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

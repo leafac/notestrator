@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
+    <script>
+      const { ipcRenderer } = require("electron");
+    </script>
   </head>
   <body>
     <form
@@ -32,6 +35,26 @@
       <label><input type="radio" name="tool" value="pen" checked /> Pen</label>
       <label><input type="radio" name="tool" value="marker" /> Marker</label>
       <label><input type="radio" name="tool" value="eraser" /> Eraser</label>
+
+      <label>
+        <input
+          type="radio"
+          name="ignoreMouseEvents"
+          value="false"
+          checked
+          onchange="ipcRenderer.send(this.name, this.value)"
+        />
+        Draw
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="ignoreMouseEvents"
+          value="true"
+          onchange="ipcRenderer.send(this.name, this.value)"
+        />
+        Click-through
+      </label>
     </form>
   </body>
 </html>
