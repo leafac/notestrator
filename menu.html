@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
-    <script>
-      const { ipcRenderer } = require("electron");
-    </script>
   </head>
   <body>
     <form
@@ -36,15 +33,5 @@
       <label><input type="radio" name="tool" value="marker" /> Marker</label>
       <label><input type="radio" name="tool" value="eraser" /> Eraser</label>
     </form>
-    <script>
-      ipcRenderer.on("menu--menu--request", (event) => {
-        event.sender.send(
-          "menu--menu--response",
-          Object.fromEntries(
-            new URLSearchParams(new FormData(document.querySelector("form")))
-          )
-        );
-      });
-    </script>
   </body>
 </html>

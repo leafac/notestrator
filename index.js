@@ -36,13 +36,10 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle("menu--main", () => {
-    return new Promise((resolve) => {
-      ipcMain.once("menu--menu--response", (_, menu) => {
-        resolve(menu);
-      });
-      menuWindow.webContents.send("menu--menu--request");
-    });
+  ipcMain.handle("menu--main", async () => {
+    return await menuWindow.webContents.executeJavaScript(
+      `Object.fromEntries(new URLSearchParams(new FormData(document.querySelector("form"))))`
+    );
   });
 
   createWindow();
