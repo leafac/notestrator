@@ -21,7 +21,67 @@
       "
     ></svg>
     <script>
+      function dist(a, b) {
+        return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+      }
+      function slope(a, b) {
+        return (b.y - a.y) / (b.x - a.x);
+      }
       const drawing = document.currentScript.previousElementSibling;
+      const smoothnessFactor = 0.5;
+      const x0 = { x: 100, y: 300 };
+      const x1 = { x: 300, y: 320 };
+      const x2 = { x: 200, y: 400 };
+      const distance_x0_x1 = Math.sqrt((x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2);
+      const distance_x1_x2 = Math.sqrt((x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2);
+      const distance_x0_x1_x2 = distance_x0_x1 + distance_x1_x2;
+      const ratioBetween_distance_x0_x1__distance_x0_x1_x2 =
+        distance_x0_x1 / distance_x0_x1_x2;
+      const ratioBetween_distance_x1_x2__distance_x0_x1_x2 =
+        distance_x1_x2 / distance_x0_x1_x2;
+      const w = x2.x - x0.x;
+      const h = x2.y - x0.y;
+
+      const p1 = {
+        x:
+          x1.x -
+          w * smoothnessFactor * ratioBetween_distance_x0_x1__distance_x0_x1_x2,
+        y:
+          x1.y -
+          h * smoothnessFactor * ratioBetween_distance_x0_x1__distance_x0_x1_x2,
+      };
+      const p2 = {
+        x:
+          x1.x +
+          w * smoothnessFactor * ratioBetween_distance_x1_x2__distance_x0_x1_x2,
+        y:
+          x1.y +
+          h * smoothnessFactor * ratioBetween_distance_x1_x2__distance_x0_x1_x2,
+      };
+
+      drawing.insertAdjacentHTML(
+        "beforeend",
+        `
+        <path
+          d="
+            M ${x0.x} ${x0.y}
+            C ${x0.x} ${x0.y}, ${p1.x} ${p1.y}, ${x1.x} ${x1.y}
+              ${p2.x} ${p2.y}, ${x2.x} ${x2.y}, ${x2.x} ${x2.y}
+          "
+          stroke="crimson"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+        <circle cx="${x0.x}" cy="${x0.y}" r="5" fill="blue" />
+        <circle cx="${x1.x}" cy="${x1.y}" r="5" fill="blue" />
+        <circle cx="${x2.x}" cy="${x2.y}" r="5" fill="blue" />
+
+        <circle cx="${p1.x}" cy="${p1.y}" r="5" fill="purple" />
+        <circle cx="${p2.x}" cy="${p2.y}" r="5" fill="purple" />
+       `
+      );
       window.addEventListener("mousedown", async (event) => {
         const menu = await ipcRenderer.invoke("menu");
         let handleMousemove;
