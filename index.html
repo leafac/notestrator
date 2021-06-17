@@ -28,6 +28,7 @@
       window.addEventListener("mousedown", async (event) => {
         const menu = await ipcRenderer.invoke("menu");
         let handleMousemove;
+        let handleMouseup;
         switch (menu.tool) {
           case "pen":
           case "marker":
@@ -45,6 +46,11 @@
                   stroke-opacity="${menu.tool === "marker" ? 0.5 : 1}"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  style="${
+                    menu.fade === "false"
+                      ? ``
+                      : `transition: opacity ${menu.fade}ms ease-in;`
+                  }"
                 />
               `
             );
@@ -83,6 +89,13 @@
               x0 = x1;
               x1 = x2;
             };
+            handleMouseup = () => {
+              if (menu.fade === "false") return;
+              path.style.opacity = 0;
+              path.addEventListener("transitionend", () => {
+                path.remove();
+              });
+            };
             break;
           case "eraser":
             handleMousemove = (event) => {
@@ -109,6 +122,7 @@
         window.addEventListener("mousemove", handleMousemove);
         window.addEventListener("mouseup", () => {
           window.removeEventListener("mousemove", handleMousemove);
+          if (handleMouseup !== undefined) handleMouseup();
         });
       });
     </script>
