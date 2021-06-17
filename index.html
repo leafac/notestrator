@@ -19,7 +19,10 @@
         width: 100vw;
         height: 100vh;
       "
-    ></svg>
+    >
+      <g class="marker"></g>
+      <g class="pen"></g>
+    </svg>
     <script>
       const drawing = document.currentScript.previousElementSibling;
       window.addEventListener("mousedown", async (event) => {
@@ -28,7 +31,8 @@
         switch (menu.tool) {
           case "pen":
           case "marker":
-            drawing.insertAdjacentHTML(
+            const group = drawing.querySelector(`.${menu.tool}`);
+            group.insertAdjacentHTML(
               "beforeend",
               `
                 <path
@@ -44,7 +48,7 @@
                 />
               `
             );
-            const path = drawing.lastElementChild;
+            const path = group.lastElementChild;
             const t = 0.4;
             let x0 = { x: event.x, y: event.y };
             let x1 = { x: event.x, y: event.y };
