@@ -12,9 +12,7 @@ function createWindow() {
     movable: false,
     frame: false,
     transparent: true,
-    // closable: false,
-    // show: false,
-    // acceptFirstMouse
+    closable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -24,8 +22,16 @@ function createWindow() {
   mainWindow.setVisibleOnAllWorkspaces(true);
   mainWindow.loadFile("index.html");
   menuWindow = new BrowserWindow({
+    ...screen.getPrimaryDisplay().bounds,
     width: 100,
     height: 600,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    closable: false,
+    focusable: false,
+    skipTaskbar: true,
+    hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
