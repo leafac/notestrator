@@ -8,9 +8,12 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
     closable: false,
+    minimizable: false,
+    maximizable: false,
     movable: false,
     resizable: false,
     frame: false,
+    focusable: false,
     transparent: true,
     hasShadow: false,
     webPreferences: {
