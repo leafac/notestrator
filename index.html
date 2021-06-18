@@ -93,7 +93,10 @@
               const d = path.getAttribute("d");
               if (!d.includes("C")) {
                 const [x, y] = d.split(" ").slice(1);
-                path.setAttribute("d", `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`);
+                path.setAttribute(
+                  "d",
+                  `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`
+                );
               }
               if (menu.fade === "false") return;
               path.style.opacity = 0;
@@ -129,10 +132,14 @@
             break;
         }
         window.addEventListener("mousemove", handleMousemove);
-        window.addEventListener("mouseup", () => {
-          window.removeEventListener("mousemove", handleMousemove);
-          if (handleMouseup !== undefined) handleMouseup();
-        });
+        window.addEventListener(
+          "mouseup",
+          () => {
+            window.removeEventListener("mousemove", handleMousemove);
+            if (handleMouseup !== undefined) handleMouseup();
+          },
+          { once: true }
+        );
       });
     </script>
   </body>
