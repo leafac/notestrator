@@ -4,7 +4,7 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
   await app.whenReady();
 
   // FIXME: Deal with multiple displays.
-  const mainWindow = new BrowserWindow({
+  const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
     closable: false,
@@ -21,12 +21,12 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
       contextIsolation: false,
     },
   });
-  mainWindow.setAlwaysOnTop(true, "screen-saver", 1);
-  mainWindow.setVisibleOnAllWorkspaces(true);
-  mainWindow.loadFile("index.html");
+  drawing.setAlwaysOnTop(true, "screen-saver", 1);
+  drawing.setVisibleOnAllWorkspaces(true);
+  drawing.loadFile("drawing.html");
 
-  const menuWindow = new BrowserWindow({
-    parent: mainWindow,
+  const menu = new BrowserWindow({
+    parent: drawing,
     ...screen.getPrimaryDisplay().bounds,
     width: 100,
     height: 600,
@@ -41,15 +41,15 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
       contextIsolation: false,
     },
   });
-  menuWindow.loadFile("menu.html");
+  menu.loadFile("menu.html");
 
   ipcMain.handle("menu", async () => {
-    return await menuWindow.webContents.executeJavaScript(
+    return await menu.webContents.executeJavaScript(
       `Object.fromEntries(new URLSearchParams(new FormData(document.querySelector("form"))))`
     );
   });
 
   ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
-    mainWindow.setIgnoreMouseEvents(ignoreMouseEvents === "true");
+    drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
   });
 })();
