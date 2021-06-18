@@ -90,6 +90,11 @@
               x1 = x2;
             };
             handleMouseup = () => {
+              const d = path.getAttribute("d");
+              if (!d.includes("C")) {
+                const [x, y] = d.split(" ").slice(1);
+                path.setAttribute("d", `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`);
+              }
               if (menu.fade === "false") return;
               path.style.opacity = 0;
               path.addEventListener("transitionend", () => {
@@ -102,11 +107,15 @@
               const elementsToRemove = new Set();
               for (const element of drawing.querySelectorAll("*"))
                 switch (element.tagName) {
-                  case "polyline":
+                  case "path":
                     for (const [x, y] of element
-                      .getAttribute("points")
-                      .split(",")
-                      .map((point) => point.trim().split(" ")))
+                      .getAttribute("d")
+                      .match(
+                        /C [\d\.]+ [\d\.]+, [\d\.]+ [\d\.]+, [\d\.]+ [\d\.]+/g
+                      )
+                      .map((curve) =>
+                        curve.split(",")[2].trim().split(" ").map(Number)
+                      ))
                       if (
                         Math.sqrt((event.x - x) ** 2 + (event.y - y) ** 2) <
                         menu.strokeWidth * 5
