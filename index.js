@@ -6,13 +6,13 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
   // FIXME: Deal with multiple displays.
   const mainWindow = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
-    hasShadow: false,
     enableLargerThanScreen: true,
-    resizable: false,
+    closable: false,
     movable: false,
+    resizable: false,
     frame: false,
     transparent: true,
-    closable: false,
+    hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -23,21 +23,20 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
   mainWindow.loadFile("index.html");
 
   const menuWindow = new BrowserWindow({
+    parent: mainWindow,
     ...screen.getPrimaryDisplay().bounds,
     width: 100,
     height: 600,
-    resizable: false,
+    closable: false,
     minimizable: false,
     maximizable: false,
-    closable: false,
+    resizable: false,
     focusable: false,
-    skipTaskbar: true,
     hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    parent: mainWindow,
   });
   menuWindow.loadFile("menu.html");
 
