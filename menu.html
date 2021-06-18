@@ -7,23 +7,141 @@
     <script>
       const { ipcRenderer } = require("electron");
     </script>
+    <style>
+      .color {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        appearance: none;
+        display: grid;
+        box-shadow: 0 2px 2px #d1d5db;
+        transition: transform 200ms;
+      }
+
+      .color:checked {
+        transform: scale(1.5);
+      }
+
+      hr {
+        border-top: 1px solid #d1d5db;
+        width: 100%;
+        margin: 0;
+      }
+    </style>
   </head>
-  <body>
+  <body style="margin: 0">
     <form
       style="
-        margin: 0;
         display: flex;
         flex-direction: column;
         gap: 1rem;
         height: 100vh;
+        background-color: #f3f4f6;
       "
     >
-      <label
-        ><input type="radio" name="color" value="black" checked /> Black</label
+      <div
+        style="
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          padding: 0.5rem;
+          justify-content: center;
+        "
       >
-      <label><input type="radio" name="color" value="red" /> Red</label>
-      <label><input type="radio" name="color" value="green" /> Green</label>
-      <label><input type="radio" name="color" value="blue" /> Blue</label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#111827"
+            checked
+            class="color"
+            style="background-color: #111827"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#F9FAFB"
+            class="color"
+            style="background-color: #f9fafb"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#DC2626"
+            class="color"
+            style="background-color: #dc2626"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#D97706"
+            class="color"
+            style="background-color: #d97706"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#65A30D"
+            class="color"
+            style="background-color: #65a30d"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#059669"
+            class="color"
+            style="background-color: #059669"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#0891B2"
+            class="color"
+            style="background-color: #0891b2"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#2563EB"
+            class="color"
+            style="background-color: #2563eb"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#7C3AED"
+            class="color"
+            style="background-color: #7c3aed"
+          />
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="color"
+            value="#C026D3"
+            class="color"
+            style="background-color: #c026d3"
+          />
+        </label>
+      </div>
+
+      <hr />
 
       <label><input type="radio" name="strokeWidth" value="1" /> Thin</label>
       <label
