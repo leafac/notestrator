@@ -18,6 +18,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
     focusable: false,
     transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
+    roundedCorners: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -41,15 +42,11 @@ const { css, extractInlineStyles } = require("@leafac/css");
         </head>
         <body>
           <svg
-            style="
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-          "
+            style="${css`
+              position: absolute;
+              width: 100vw;
+              height: 100vh;
+            `}"
           >
             <g class="marker"></g>
             <g class="pen"></g>
@@ -214,20 +211,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
               const { ipcRenderer } = require("electron");
             </script>
             <style>
-              .color {
-                width: 1.5rem;
-                height: 1.5rem;
-                border-radius: 50%;
-                appearance: none;
-                display: grid;
-                box-shadow: 0 2px 2px #d1d5db;
-                transition: transform 200ms;
-              }
-
-              .color:checked {
-                transform: scale(1.5);
-              }
-
               hr {
                 border-top: 1px solid #d1d5db;
                 width: 100%;
@@ -235,119 +218,76 @@ const { css, extractInlineStyles } = require("@leafac/css");
               }
             </style>
           </head>
-          <body style="margin: 0">
-            <div style="-webkit-user-select: none; -webkit-app-region: drag">
+          <body
+            style="${css`
+              color: var(--color--gray--warm--800);
+              background-color: var(--color--gray--warm--100);
+              @media (prefers-color-scheme: dark) {
+                color: var(--color--gray--warm--100);
+                background-color: var(--color--gray--warm--900);
+              }
+            `}"
+          >
+            <div
+              style="${css`
+                -webkit-user-select: none;
+                -webkit-app-region: drag;
+              `}"
+            >
               Notestrator
             </div>
             <form
-              style="
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        height: 100vh;
-        background-color: #f3f4f6;
-      "
+              style="${css`
+                display: flex;
+                flex-direction: column;
+                gap: var(--space--4);
+              `}"
             >
               <div
-                style="
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
-          padding: 0.5rem;
-          justify-content: center;
-        "
+                style="${css`
+                  display: flex;
+                  gap: var(--space--4);
+                  flex-wrap: wrap;
+                  padding: var(--space--2);
+                  justify-content: center;
+                `}"
               >
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#111827"
-                    checked
-                    class="color"
-                    style="background-color: #111827"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#F9FAFB"
-                    class="color"
-                    style="background-color: #f9fafb"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#DC2626"
-                    class="color"
-                    style="background-color: #dc2626"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#D97706"
-                    class="color"
-                    style="background-color: #d97706"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#65A30D"
-                    class="color"
-                    style="background-color: #65a30d"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#059669"
-                    class="color"
-                    style="background-color: #059669"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#0891B2"
-                    class="color"
-                    style="background-color: #0891b2"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#2563EB"
-                    class="color"
-                    style="background-color: #2563eb"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#7C3AED"
-                    class="color"
-                    style="background-color: #7c3aed"
-                  />
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="color"
-                    value="#C026D3"
-                    class="color"
-                    style="background-color: #c026d3"
-                  />
-                </label>
+                $${[
+                  "var(--color--gray--warm--900)",
+                  "var(--color--gray--warm--50)",
+                  "var(--color--red--600)",
+                  "var(--color--amber--600)",
+                  "var(--color--lime--600)",
+                  "var(--color--teal--600)",
+                  "var(--color--sky--600)",
+                  "var(--color--indigo--600)",
+                  "var(--color--purple--600)",
+                  "var(--color--pink--600)",
+                ].map(
+                  (color, index) => html`<label>
+                    <input
+                      type="radio"
+                      name="color"
+                      value="${color}"
+                      $${index === 0 ? html`checked` : html``}
+                      style="${css`
+                        background-color: ${color};
+                        width: var(--font-size--2xl);
+                        height: var(--font-size--2xl);
+                        border-radius: var(--border-radius--circle);
+                        appearance: none;
+                        display: grid;
+                        /*
+                        box-shadow: 0 2px 2px #d1d5db;
+                        transition: transform 200ms;
+                        &:checked {
+                          transform: scale(1.5);
+                        }
+                        */
+                      `}"
+                    />
+                  </label>`
+                )}
               </div>
 
               <hr />
