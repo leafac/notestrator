@@ -277,13 +277,16 @@ const { css, extractInlineStyles } = require("@leafac/css");
                         border-radius: var(--border-radius--circle);
                         appearance: none;
                         display: grid;
-                        /*
-                        box-shadow: 0 2px 2px #d1d5db;
-                        transition: transform 200ms;
+                        box-shadow: var(--box-shadow--base);
+                        transition-property: var(--transition-property--base);
+                        transition-duration: var(--transition-duration--150);
+                        transition-timing-function: var(
+                          --transition-timing-function--in-out
+                        );
                         &:checked {
-                          transform: scale(1.5);
+                          transform: scale(var(--scale--150));
+                          box-shadow: var(--box-shadow--lg);
                         }
-                        */
                       `}"
                     />
                   </label>`
