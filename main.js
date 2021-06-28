@@ -8,13 +8,13 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
     closable: false,
-    minimizable: false,
+    minimizable: false, // TODO: Breaks in Windows.
     maximizable: false,
     movable: false,
     resizable: false,
     frame: false,
     focusable: false,
-    transparent: true,
+    transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
@@ -34,6 +34,7 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
     minimizable: false,
     maximizable: false,
     resizable: false,
+    frame: false,
     focusable: false,
     hasShadow: false,
     webPreferences: {
