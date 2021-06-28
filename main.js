@@ -220,6 +220,8 @@ const { css, extractInlineStyles } = require("@leafac/css");
           </head>
           <body
             style="${css`
+              font-family: var(--font-family--sans-serif);
+              font-size: var(--font-size--sm);
               color: var(--color--gray--warm--800);
               background-color: var(--color--gray--warm--100);
               @media (prefers-color-scheme: dark) {
@@ -253,43 +255,92 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 `}"
               >
                 $${[
-                  "var(--color--gray--warm--900)",
-                  "var(--color--gray--warm--50)",
-                  "var(--color--red--600)",
-                  "var(--color--amber--600)",
-                  "var(--color--lime--600)",
-                  "var(--color--teal--600)",
-                  "var(--color--sky--600)",
-                  "var(--color--indigo--600)",
-                  "var(--color--purple--600)",
-                  "var(--color--pink--600)",
+                  {
+                    color: "var(--color--gray--warm--50)",
+                    backgroundColor: "var(--color--gray--warm--900)",
+                    shortcut: "1",
+                    isDefault: true,
+                  },
+                  {
+                    color: "var(--color--gray--warm--900)",
+                    backgroundColor: "var(--color--gray--warm--50)",
+                    shortcut: "2",
+                  },
+                  {
+                    color: "var(--color--red--900)",
+                    backgroundColor: "var(--color--red--600)",
+                    shortcut: "3",
+                  },
+                  {
+                    color: "var(--color--amber--900)",
+                    backgroundColor: "var(--color--amber--600)",
+                    shortcut: "4",
+                  },
+                  {
+                    color: "var(--color--lime--900)",
+                    backgroundColor: "var(--color--lime--600)",
+                    shortcut: "5",
+                  },
+                  {
+                    color: "var(--color--teal--900)",
+                    backgroundColor: "var(--color--teal--600)",
+                    shortcut: "6",
+                  },
+                  {
+                    color: "var(--color--sky--900)",
+                    backgroundColor: "var(--color--sky--600)",
+                    shortcut: "7",
+                  },
+                  {
+                    color: "var(--color--indigo--900)",
+                    backgroundColor: "var(--color--indigo--600)",
+                    shortcut: "8",
+                  },
+                  {
+                    color: "var(--color--purple--900)",
+                    backgroundColor: "var(--color--purple--600)",
+                    shortcut: "9",
+                  },
+                  {
+                    color: "var(--color--pink--900)",
+                    backgroundColor: "var(--color--pink--600)",
+                    shortcut: "0",
+                  },
                 ].map(
-                  (color, index) => html`<label>
-                    <input
-                      type="radio"
-                      name="color"
-                      value="${color}"
-                      $${index === 0 ? html`checked` : html``}
-                      style="${css`
-                        background-color: ${color};
-                        width: var(--font-size--2xl);
-                        height: var(--font-size--2xl);
-                        border-radius: var(--border-radius--circle);
-                        appearance: none;
-                        display: grid;
-                        box-shadow: var(--box-shadow--base);
-                        transition-property: var(--transition-property--base);
-                        transition-duration: var(--transition-duration--150);
-                        transition-timing-function: var(
-                          --transition-timing-function--in-out
-                        );
-                        &:checked {
-                          transform: scale(var(--scale--150));
-                          box-shadow: var(--box-shadow--lg);
-                        }
-                      `}"
-                    />
-                  </label>`
+                  ({ color, backgroundColor, shortcut, isDefault }) => html`
+                    <label>
+                      <input
+                        type="radio"
+                        name="color"
+                        value="${backgroundColor}"
+                        $${isDefault ? html`checked` : html``}
+                      />
+                      <div
+                        style="${css`
+                          color: ${color};
+                          background-color: ${backgroundColor};
+                          width: var(--font-size--2xl);
+                          height: var(--font-size--2xl);
+                          border-radius: var(--border-radius--circle);
+                          box-shadow: var(--box-shadow--base);
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          transition-property: var(--transition-property--base);
+                          transition-duration: var(--transition-duration--150);
+                          transition-timing-function: var(
+                            --transition-timing-function--in-out
+                          );
+                          :checked + & {
+                            transform: scale(var(--scale--150));
+                            box-shadow: var(--box-shadow--lg);
+                          }
+                        `}"
+                      >
+                        ${shortcut}
+                      </div>
+                    </label>
+                  `
                 )}
               </div>
 
