@@ -320,27 +320,43 @@ const { css, extractInlineStyles } = require("@leafac/css");
                       />
                       <div
                         style="${css`
-                          color: ${color};
-                          background-color: ${backgroundColor};
-                          width: var(--font-size--2xl);
-                          height: var(--font-size--2xl);
-                          border-radius: var(--border-radius--circle);
-                          box-shadow: var(--box-shadow--base);
-                          display: flex;
-                          justify-content: center;
-                          align-items: center;
-                          transition-property: var(--transition-property--base);
-                          transition-duration: var(--transition-duration--150);
-                          transition-timing-function: var(
-                            --transition-timing-function--in-out
-                          );
-                          :checked + & {
-                            transform: scale(var(--scale--150));
-                            box-shadow: var(--box-shadow--lg);
+                          display: grid;
+                          place-items: center;
+                          & > * {
+                            grid-area: 1 / 1;
+                            position: relative;
                           }
                         `}"
                       >
-                        ${shortcut}
+                        <div
+                          style="${css`
+                            background-color: ${backgroundColor};
+                            width: var(--font-size--2xl);
+                            height: var(--font-size--2xl);
+                            border-radius: var(--border-radius--circle);
+                            box-shadow: var(--box-shadow--base);
+                            transition-property: var(
+                              --transition-property--base
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+                            :checked + * > & {
+                              transform: scale(var(--scale--150));
+                              box-shadow: var(--box-shadow--lg);
+                            }
+                          `}"
+                        ></div>
+                        <div
+                          style="${css`
+                            color: ${color};
+                          `}"
+                        >
+                          ${shortcut}
+                        </div>
                       </div>
                     </label>
                   `
