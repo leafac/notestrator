@@ -314,6 +314,9 @@ const { css, extractInlineStyles } = require("@leafac/css");
                         name="color"
                         value="${backgroundColor}"
                         $${isDefault ? html`checked` : html``}
+                        style="${css`
+                          display: none;
+                        `}"
                       />
                       <div
                         style="${css`
