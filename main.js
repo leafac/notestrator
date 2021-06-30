@@ -232,6 +232,17 @@ const javascript = require("tagged-template-noop");
               }
               -webkit-user-select: none;
               --space--base: var(--space--2);
+
+              @at-root {
+                .separator {
+                  border-top: var(--border-width--1) solid
+                    var(--color--gray--warm--200);
+                  @media (prefers-color-scheme: dark) {
+                    border-color: var(--color--gray--warm--800);
+                  }
+                  margin: var(--space--base) var(--space--0);
+                }
+              }
             `}"
           >
             <div
@@ -252,16 +263,13 @@ const javascript = require("tagged-template-noop");
             <form
               style="${css`
                 padding: var(--space--base) var(--space--base);
-                display: flex;
-                flex-direction: column;
-                gap: var(--space--4);
               `}"
             >
               <div
                 style="${css`
                   display: grid;
-                  gap: var(--space--base);
                   grid-template-columns: 1fr 1fr;
+                  gap: var(--space--base);
                 `}"
               >
                 $${[
@@ -388,7 +396,7 @@ const javascript = require("tagged-template-noop");
                 )}
               </div>
 
-              <hr />
+              <hr class="separator" />
 
               <label
                 ><input type="radio" name="strokeWidth" value="1" /> Thin</label
