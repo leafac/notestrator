@@ -189,7 +189,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
     maximizable: false,
     resizable: false,
     frame: false,
-    focusable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -343,7 +342,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            :checked + * > &::after {
+                            &::after {
                               content: "";
                               background-color: ${checkedColor ??
                               "var(--color--gray--warm--50)"};
@@ -351,6 +350,19 @@ const { css, extractInlineStyles } = require("@leafac/css");
                               width: var(--space--2);
                               height: var(--space--2);
                               border-radius: var(--border-radius--circle);
+                              opacity: var(--opacity--0);
+                              transition-property: var(
+                                --transition-property--opacity
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                            :checked + * > &::after {
+                              opacity: var(--opacity--100);
                             }
                           `}"
                         ></div>
