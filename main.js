@@ -270,59 +270,61 @@ const javascript = require("tagged-template-noop");
                   display: grid;
                   grid-template-columns: 1fr 1fr;
                   gap: var(--space--base);
+                  column-gap: var(--space--4);
+                  row-gap: var(--space--base);
                 `}"
               >
                 $${[
                   {
-                    color: "var(--color--gray--warm--900)",
-                    borderColor: "var(--color--gray--warm--700)",
+                    color: "var(--color--red--600)",
+                    borderColor: "var(--color--red--500)",
                     shortcut: "1",
                     isDefault: true,
+                  },
+                  {
+                    color: "var(--color--amber--600)",
+                    borderColor: "var(--color--amber--500)",
+                    shortcut: "2",
+                  },
+                  {
+                    color: "var(--color--lime--600)",
+                    borderColor: "var(--color--lime--500)",
+                    shortcut: "3",
+                  },
+                  {
+                    color: "var(--color--teal--600)",
+                    borderColor: "var(--color--teal--500)",
+                    shortcut: "4",
+                  },
+                  {
+                    color: "var(--color--sky--600)",
+                    borderColor: "var(--color--sky--500)",
+                    shortcut: "5",
+                  },
+                  {
+                    color: "var(--color--indigo--600)",
+                    borderColor: "var(--color--indigo--500)",
+                    shortcut: "6",
+                  },
+                  {
+                    color: "var(--color--purple--600)",
+                    borderColor: "var(--color--purple--500)",
+                    shortcut: "7",
+                  },
+                  {
+                    color: "var(--color--pink--600)",
+                    borderColor: "var(--color--pink--500)",
+                    shortcut: "8",
+                  },
+                  {
+                    color: "var(--color--gray--warm--900)",
+                    borderColor: "var(--color--gray--warm--700)",
+                    shortcut: "9",
                   },
                   {
                     color: "var(--color--gray--warm--50)",
                     borderColor: "var(--color--gray--warm--200)",
                     checkedColor: "var(--color--gray--warm--600)",
-                    shortcut: "2",
-                  },
-                  {
-                    color: "var(--color--red--600)",
-                    borderColor: "var(--color--red--500)",
-                    shortcut: "3",
-                  },
-                  {
-                    color: "var(--color--amber--600)",
-                    borderColor: "var(--color--amber--500)",
-                    shortcut: "4",
-                  },
-                  {
-                    color: "var(--color--lime--600)",
-                    borderColor: "var(--color--lime--500)",
-                    shortcut: "5",
-                  },
-                  {
-                    color: "var(--color--teal--600)",
-                    borderColor: "var(--color--teal--500)",
-                    shortcut: "6",
-                  },
-                  {
-                    color: "var(--color--sky--600)",
-                    borderColor: "var(--color--sky--500)",
-                    shortcut: "7",
-                  },
-                  {
-                    color: "var(--color--indigo--600)",
-                    borderColor: "var(--color--indigo--500)",
-                    shortcut: "8",
-                  },
-                  {
-                    color: "var(--color--purple--600)",
-                    borderColor: "var(--color--purple--500)",
-                    shortcut: "9",
-                  },
-                  {
-                    color: "var(--color--pink--600)",
-                    borderColor: "var(--color--pink--500)",
                     shortcut: "0",
                   },
                 ].map(
@@ -351,7 +353,7 @@ const javascript = require("tagged-template-noop");
                       <div
                         style="${css`
                           display: flex;
-                          gap: var(--space--1);
+                          justify-content: space-between;
                           align-items: center;
                         `}"
                       >
