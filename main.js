@@ -190,7 +190,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
     resizable: false,
     frame: false,
     focusable: false,
-    hasShadow: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -210,29 +209,32 @@ const { css, extractInlineStyles } = require("@leafac/css");
             <script>
               const { ipcRenderer } = require("electron");
             </script>
-            <style>
-              hr {
-                border-top: 1px solid #d1d5db;
-                width: 100%;
-                margin: 0;
-              }
-            </style>
           </head>
           <body
             style="${css`
               font-family: var(--font-family--sans-serif);
-              font-size: var(--font-size--sm);
-              color: var(--color--gray--warm--800);
+              font-size: var(--font-size--xs);
+              line-height: var(--line-height--xs);
+              color: var(--color--gray--warm--500);
               background-color: var(--color--gray--warm--100);
               @media (prefers-color-scheme: dark) {
-                color: var(--color--gray--warm--100);
+                color: var(--color--gray--warm--500);
                 background-color: var(--color--gray--warm--900);
               }
+              -webkit-user-select: none;
+              --space--base: var(--space--2);
             `}"
           >
             <div
               style="${css`
-                -webkit-user-select: none;
+                text-align: center;
+                color: var(--color--gray--warm--900);
+                background-color: var(--color--gray--warm--300);
+                @media (prefers-color-scheme: dark) {
+                  color: var(--color--gray--warm--400);
+                  background-color: var(--color--gray--warm--800);
+                }
+                padding: var(--space--1) var(--space--base);
                 -webkit-app-region: drag;
               `}"
             >
@@ -240,6 +242,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
             </div>
             <form
               style="${css`
+                padding: var(--space--base) var(--space--base);
                 display: flex;
                 flex-direction: column;
                 gap: var(--space--4);
@@ -247,72 +250,77 @@ const { css, extractInlineStyles } = require("@leafac/css");
             >
               <div
                 style="${css`
-                  display: flex;
-                  gap: var(--space--4);
-                  flex-wrap: wrap;
-                  padding: var(--space--2);
-                  justify-content: center;
+                  display: grid;
+                  gap: var(--space--base);
+                  grid-template-columns: 1fr 1fr;
                 `}"
               >
                 $${[
                   {
-                    color: "var(--color--gray--warm--50)",
-                    backgroundColor: "var(--color--gray--warm--900)",
+                    color: "var(--color--gray--warm--900)",
+                    borderColor: "var(--color--gray--warm--700)",
                     shortcut: "1",
                     isDefault: true,
                   },
                   {
-                    color: "var(--color--gray--warm--900)",
-                    backgroundColor: "var(--color--gray--warm--50)",
+                    color: "var(--color--gray--warm--50)",
+                    borderColor: "var(--color--gray--warm--200)",
+                    checkedColor: "var(--color--gray--warm--600)",
                     shortcut: "2",
                   },
                   {
-                    color: "var(--color--red--900)",
-                    backgroundColor: "var(--color--red--600)",
+                    color: "var(--color--red--600)",
+                    borderColor: "var(--color--red--500)",
                     shortcut: "3",
                   },
                   {
-                    color: "var(--color--amber--900)",
-                    backgroundColor: "var(--color--amber--600)",
+                    color: "var(--color--amber--600)",
+                    borderColor: "var(--color--amber--500)",
                     shortcut: "4",
                   },
                   {
-                    color: "var(--color--lime--900)",
-                    backgroundColor: "var(--color--lime--600)",
+                    color: "var(--color--lime--600)",
+                    borderColor: "var(--color--lime--500)",
                     shortcut: "5",
                   },
                   {
-                    color: "var(--color--teal--900)",
-                    backgroundColor: "var(--color--teal--600)",
+                    color: "var(--color--teal--600)",
+                    borderColor: "var(--color--teal--500)",
                     shortcut: "6",
                   },
                   {
-                    color: "var(--color--sky--900)",
-                    backgroundColor: "var(--color--sky--600)",
+                    color: "var(--color--sky--600)",
+                    borderColor: "var(--color--sky--500)",
                     shortcut: "7",
                   },
                   {
-                    color: "var(--color--indigo--900)",
-                    backgroundColor: "var(--color--indigo--600)",
+                    color: "var(--color--indigo--600)",
+                    borderColor: "var(--color--indigo--500)",
                     shortcut: "8",
                   },
                   {
-                    color: "var(--color--purple--900)",
-                    backgroundColor: "var(--color--purple--600)",
+                    color: "var(--color--purple--600)",
+                    borderColor: "var(--color--purple--500)",
                     shortcut: "9",
                   },
                   {
-                    color: "var(--color--pink--900)",
-                    backgroundColor: "var(--color--pink--600)",
+                    color: "var(--color--pink--600)",
+                    borderColor: "var(--color--pink--500)",
                     shortcut: "0",
                   },
                 ].map(
-                  ({ color, backgroundColor, shortcut, isDefault }) => html`
+                  ({
+                    color,
+                    borderColor,
+                    checkedColor,
+                    shortcut,
+                    isDefault,
+                  }) => html`
                     <label>
                       <input
                         type="radio"
                         name="color"
-                        value="${backgroundColor}"
+                        value="${color}"
                         $${isDefault ? html`checked` : html``}
                         style="${css`
                           display: none;
@@ -320,43 +328,33 @@ const { css, extractInlineStyles } = require("@leafac/css");
                       />
                       <div
                         style="${css`
-                          display: grid;
-                          place-items: center;
-                          & > * {
-                            grid-area: 1 / 1;
-                            position: relative;
-                          }
+                          display: flex;
+                          gap: var(--space--1);
+                          align-items: center;
                         `}"
                       >
                         <div
                           style="${css`
-                            background-color: ${backgroundColor};
+                            background-color: ${color};
                             width: var(--font-size--2xl);
                             height: var(--font-size--2xl);
+                            border: var(--border-width--1) solid ${borderColor};
                             border-radius: var(--border-radius--circle);
-                            box-shadow: var(--box-shadow--base);
-                            transition-property: var(
-                              --transition-property--base
-                            );
-                            transition-duration: var(
-                              --transition-duration--150
-                            );
-                            transition-timing-function: var(
-                              --transition-timing-function--in-out
-                            );
-                            :checked + * > & {
-                              transform: scale(var(--scale--150));
-                              box-shadow: var(--box-shadow--lg);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            :checked + * > &::after {
+                              content: "";
+                              background-color: ${checkedColor ??
+                              "var(--color--gray--warm--50)"};
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
                             }
                           `}"
                         ></div>
-                        <div
-                          style="${css`
-                            color: ${color};
-                          `}"
-                        >
-                          ${shortcut}
-                        </div>
+                        ${shortcut}
                       </div>
                     </label>
                   `
