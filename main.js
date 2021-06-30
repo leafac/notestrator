@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const { html } = require("@leafac/html");
 const { css, extractInlineStyles } = require("@leafac/css");
+const javascript = require("tagged-template-noop");
 
 (async () => {
   await app.whenReady();
@@ -207,6 +208,15 @@ const { css, extractInlineStyles } = require("@leafac/css");
             />
             <script>
               const { ipcRenderer } = require("electron");
+              const Mousetrap = require("mousetrap");
+              window.addEventListener("DOMContentLoaded", () => {
+                for (const element of document.querySelectorAll(
+                  "[data-ondomcontentloaded]"
+                ))
+                  new Function(element.dataset.ondomcontentloaded).call(
+                    element
+                  );
+              });
             </script>
           </head>
           <body
@@ -323,6 +333,11 @@ const { css, extractInlineStyles } = require("@leafac/css");
                         $${isDefault ? html`checked` : html``}
                         style="${css`
                           display: none;
+                        `}"
+                        data-ondomcontentloaded="${javascript`
+                          Mousetrap.bind(${JSON.stringify(
+                            shortcut
+                          )}, () => { this.click(); })
                         `}"
                       />
                       <div
