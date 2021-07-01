@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
+const express = require("express");
 const { html } = require("@leafac/html");
 const { css, extractInlineStyles } = require("@leafac/css");
 const javascript = require("tagged-template-noop");
@@ -6,6 +7,7 @@ const javascript = require("tagged-template-noop");
 (async () => {
   await app.whenReady();
 
+  /*
   // FIXME: Deal with multiple displays.
   const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
@@ -482,4 +484,53 @@ const javascript = require("tagged-template-noop");
       extractInlineStyles(html)
     ).toString("base64")}`;
   }
+  */
+
+  const OBSBrowserSourceApp = express();
+  OBSBrowserSourceApp.get("/", (req, res) => {
+    res.send(
+      extractInlineStyles(html`
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <script>
+              const eventSource = new EventSource("/event-source");
+              eventSource.addEventListener("update", (event) => {
+                document.querySelector("body").innerHTML = event.data;
+              });
+            </script>
+          </head>
+          <body>
+            <svg>
+              <circle cx="100" cy="100" r="50" />
+            </svg>
+          </body>
+        </html>
+      `)
+    );
+  });
+
+  OBSBrowserSourceApp.get("/event-source", (req, res) => {
+    res.contentType("text/event-stream").write("");
+    OBSBrowserSourceApp.locals.eventSource = res;
+
+    let cx = 100;
+    setInterval(() => {
+      cx += 10;
+      OBSBrowserSourceApp.locals.eventSource.write(
+        `event: update\ndata: ${html`
+          <svg>
+            <circle cx="${cx}" cy="100" r="50" />
+          </svg>
+        `.replace(/\n/g, "\ndata: ")}\n\n`
+      );
+    }, 1000);
+  });
+
+  const OBSBrowserSourceServer = OBSBrowserSourceApp.listen(4445);
 })();

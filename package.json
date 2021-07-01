@@ -9,6 +9,7 @@
   "dependencies": {
     "@leafac/css": "^0.2.2",
     "@leafac/html": "^3.0.0",
+    "express": "^4.17.1",
     "mousetrap": "^1.6.5",
     "tagged-template-noop": "^2.1.1"
   }
