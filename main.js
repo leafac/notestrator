@@ -768,6 +768,11 @@ const javascript = require("tagged-template-noop");
               width: 100%;
               height: 100%;
             `}"
+            data-ondomcontentloaded="${javascript`
+              new MutationObserver(() => {
+                ipcRenderer.send("OBSBrowserSourceUpdate", this.innerHTML);
+              }).observe(this, { subtree: true, childList: true, attributes: true });
+            `}"
           >
             <g class="marker"></g>
             <g class="pen"></g>
@@ -921,14 +926,25 @@ const javascript = require("tagged-template-noop");
             <script>
               const eventSource = new EventSource("/event-source");
               eventSource.addEventListener("update", (event) => {
-                document.querySelector("body").innerHTML = event.data;
+                document.querySelector("svg").innerHTML = event.data;
               });
             </script>
           </head>
-          <body>
-            <svg>
-              <circle cx="100" cy="100" r="50" />
-            </svg>
+          <body
+            style="${css`
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            `}"
+          >
+            <svg
+              style="${css`
+                width: 100%;
+                height: 100%;
+              `}"
+            ></svg>
           </body>
         </html>
       `)
@@ -938,18 +954,13 @@ const javascript = require("tagged-template-noop");
   OBSBrowserSourceApp.get("/event-source", (req, res) => {
     res.contentType("text/event-stream").write("");
     OBSBrowserSourceApp.locals.eventSource = res;
+  });
 
-    let cx = 100;
-    setInterval(() => {
-      cx += 10;
-      OBSBrowserSourceApp.locals.eventSource.write(
-        `event: update\ndata: ${html`
-          <svg>
-            <circle cx="${cx}" cy="100" r="50" />
-          </svg>
-        `.replace(/\n/g, "\ndata: ")}\n\n`
-      );
-    }, 1000);
+  ipcMain.on("OBSBrowserSourceUpdate", (_, data) => {
+    if (OBSBrowserSourceApp.locals.eventSource === undefined) return;
+    OBSBrowserSourceApp.locals.eventSource.write(
+      `event: update\ndata: ${data.replace(/\n/g, "\ndata: ")}\n\n`
+    );
   });
 
   const OBSBrowserSourceServer = OBSBrowserSourceApp.listen(4445);
