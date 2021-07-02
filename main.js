@@ -445,7 +445,7 @@ const javascript = require("tagged-template-noop");
                             fill="none"
                           />
                         </svg>
-                        ${shortcut}
+                        ${shortcut.toUpperCase()}
                       </div>
                     </label>
                   `
