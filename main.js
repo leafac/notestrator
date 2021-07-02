@@ -50,7 +50,7 @@ const javascript = require("tagged-template-noop");
               height: 100vh;
             `}"
           >
-            <g class="marker"></g>
+            <g class="highlighter"></g>
             <g class="pen"></g>
           </svg>
           <script>
@@ -61,7 +61,7 @@ const javascript = require("tagged-template-noop");
               let handleMouseup;
               switch (menu.tool) {
                 case "pen":
-                case "marker":
+                case "highlighter":
                   const group = drawing.querySelector(\`.\${menu.tool}\`);
                   group.insertAdjacentHTML(
                     "beforeend",
@@ -71,9 +71,9 @@ const javascript = require("tagged-template-noop");
                       fill="none"
                       stroke="\${menu.color}"
                       stroke-width="\${
-                        menu.strokeWidth * (menu.tool === "marker" ? 3 : 1)
+                        menu.strokeWidth * (menu.tool === "highlighter" ? 3 : 1)
                       }"
-                      stroke-opacity="\${menu.tool === "marker" ? 0.5 : 1}"
+                      stroke-opacity="\${menu.tool === "highlighter" ? 0.5 : 1}"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       style="\${
@@ -494,7 +494,7 @@ const javascript = require("tagged-template-noop");
                 <i class="fas fa-pen-fancy"></i>
               </label>
               <label>
-                <input type="radio" name="tool" value="marker" />
+                <input type="radio" name="tool" value="highlighter" />
                 <i class="fas fa-highlighter"></i>
               </label>
               <label>
@@ -796,7 +796,7 @@ const javascript = require("tagged-template-noop");
                 Pen</label
               >
               <label
-                ><input type="radio" name="tool" value="marker" /> Marker</label
+                ><input type="radio" name="tool" value="highlighter" /> highlighter</label
               >
               <label
                 ><input type="radio" name="tool" value="eraser" /> Eraser</label
@@ -867,7 +867,7 @@ const javascript = require("tagged-template-noop");
                 }).observe(this, { subtree: true, childList: true, attributes: true });
               `}"
             >
-              <g class="marker"></g>
+              <g class="highlighter"></g>
               <g class="pen"></g>
             </svg>
             <script>
@@ -882,7 +882,7 @@ const javascript = require("tagged-template-noop");
                 let handleMouseup;
                 switch (menu.tool) {
                   case "pen":
-                  case "marker":
+                  case "highlighter":
                     const group = drawing.querySelector(\`.\${menu.tool}\`);
                     group.insertAdjacentHTML(
                       "beforeend",
@@ -892,9 +892,9 @@ const javascript = require("tagged-template-noop");
                       fill="none"
                       stroke="\${menu.color}"
                       stroke-width="\${
-                        menu.strokeWidth * (menu.tool === "marker" ? 3 : 1)
+                        menu.strokeWidth * (menu.tool === "highlighter" ? 3 : 1)
                       }"
-                      stroke-opacity="\${menu.tool === "marker" ? 0.5 : 1}"
+                      stroke-opacity="\${menu.tool === "highlighter" ? 0.5 : 1}"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       style="\${
