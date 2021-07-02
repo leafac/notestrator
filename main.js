@@ -338,14 +338,49 @@ const javascript = require("tagged-template-noop");
                     shortcut,
                     isDefault,
                   }) => html`
-                    <label>
+                    <label
+                      style="${css`
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      `}"
+                    >
                       <input
                         type="radio"
                         name="color"
                         value="${color}"
                         $${isDefault ? html`checked` : html``}
                         style="${css`
-                          display: none;
+                          background-color: ${color};
+                          width: var(--font-size--xl);
+                          height: var(--font-size--xl);
+                          border: var(--border-width--1) solid ${borderColor};
+                          border-radius: var(--border-radius--circle);
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          &::after {
+                            content: "";
+                            background-color: ${checkedColor ??
+                            "var(--color--gray--warm--50)"};
+                            display: block;
+                            width: var(--space--2);
+                            height: var(--space--2);
+                            border-radius: var(--border-radius--circle);
+                            transform: scale(var(--scale--0));
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+                          }
+                          &:checked::after {
+                            transform: scale(var(--scale--100));
+                          }
                         `}"
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
@@ -353,49 +388,7 @@ const javascript = require("tagged-template-noop");
                           )}, () => { this.click(); })
                         `}"
                       />
-                      <div
-                        style="${css`
-                          display: flex;
-                          justify-content: space-between;
-                          align-items: center;
-                        `}"
-                      >
-                        <div
-                          style="${css`
-                            background-color: ${color};
-                            width: var(--font-size--xl);
-                            height: var(--font-size--xl);
-                            border: var(--border-width--1) solid ${borderColor};
-                            border-radius: var(--border-radius--circle);
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            &::after {
-                              content: "";
-                              background-color: ${checkedColor ??
-                              "var(--color--gray--warm--50)"};
-                              display: block;
-                              width: var(--space--2);
-                              height: var(--space--2);
-                              border-radius: var(--border-radius--circle);
-                              opacity: var(--opacity--0);
-                              transition-property: var(
-                                --transition-property--opacity
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-                            }
-                            :checked + * > &::after {
-                              opacity: var(--opacity--100);
-                            }
-                          `}"
-                        ></div>
-                        ${shortcut}
-                      </div>
+                      ${shortcut}
                     </label>
                   `
                 )}
