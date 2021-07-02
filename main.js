@@ -399,9 +399,9 @@ const javascript = require("tagged-template-noop");
                 `}"
               >
                 $${[
-                  { strokeWidth: 1, shortcut: "Q" },
-                  { strokeWidth: 3, shortcut: "W" },
-                  { strokeWidth: 5, shortcut: "E" },
+                  { strokeWidth: 1, shortcut: "q" },
+                  { strokeWidth: 3, shortcut: "w" },
+                  { strokeWidth: 5, shortcut: "e" },
                 ].map(
                   ({ strokeWidth, shortcut }, index) => html`
                     <label>
