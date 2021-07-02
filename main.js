@@ -212,6 +212,7 @@ const javascript = require("tagged-template-noop");
             <script>
               const { ipcRenderer } = require("electron");
               const Mousetrap = require("mousetrap");
+              require("@fortawesome/fontawesome-free/js/all.js");
               window.addEventListener("DOMContentLoaded", () => {
                 for (const element of document.querySelectorAll(
                   "[data-ondomcontentloaded]"
@@ -488,16 +489,18 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <label
-                ><input type="radio" name="tool" value="pen" checked />
-                Pen</label
-              >
-              <label
-                ><input type="radio" name="tool" value="marker" /> Marker</label
-              >
-              <label
-                ><input type="radio" name="tool" value="eraser" /> Eraser</label
-              >
+              <label>
+                <input type="radio" name="tool" value="pen" checked />
+                <i class="fas fa-pen-fancy"></i>
+              </label>
+              <label>
+                <input type="radio" name="tool" value="marker" />
+                <i class="fas fa-highlighter"></i>
+              </label>
+              <label>
+                <input type="radio" name="tool" value="eraser" />
+                <i class="fas fa-eraser"></i>
+              </label>
 
               <label>
                 <input
