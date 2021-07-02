@@ -7,7 +7,6 @@ const javascript = require("tagged-template-noop");
 (async () => {
   await app.whenReady();
 
-  /*
   // FIXME: Deal with multiple displays.
   const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
@@ -94,7 +93,8 @@ const javascript = require("tagged-template-noop");
                   let p2 = { x: event.offsetX, y: event.offsetY };
                   handleMousemove = (event) => {
                     // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                    if (event.offsetX === x2.x && event.offsetY === x2.y) return;
+                    if (event.offsetX === x2.x && event.offsetY === x2.y)
+                      return;
                     x2 = { x: event.offsetX, y: event.offsetY };
                     const x0_x1 = Math.sqrt(
                       (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
@@ -154,7 +154,8 @@ const javascript = require("tagged-template-noop");
                             ))
                             if (
                               Math.sqrt(
-                                (event.offsetX - x) ** 2 + (event.offsetY - y) ** 2
+                                (event.offsetX - x) ** 2 +
+                                  (event.offsetY - y) ** 2
                               ) <
                               menu.strokeWidth * 5
                             )
@@ -362,8 +363,8 @@ const javascript = require("tagged-template-noop");
                         <div
                           style="${css`
                             background-color: ${color};
-                            width: var(--font-size--2xl);
-                            height: var(--font-size--2xl);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
                             border: var(--border-width--1) solid ${borderColor};
                             border-radius: var(--border-radius--circle);
                             display: flex;
@@ -478,8 +479,8 @@ const javascript = require("tagged-template-noop");
   ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
     drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
   });
-  */
 
+  /*
   const OBSDrawing = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
@@ -985,6 +986,7 @@ const javascript = require("tagged-template-noop");
   });
 
   const OBSBrowserSourceServer = OBSBrowserSourceApp.listen(4445);
+  */
 
   function HTMLToURL(html) {
     return `data:text/html;base64,${Buffer.from(
