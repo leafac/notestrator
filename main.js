@@ -282,7 +282,6 @@ const javascript = require("tagged-template-noop");
                     color: "var(--color--red--600)",
                     borderColor: "var(--color--red--500)",
                     shortcut: "1",
-                    isDefault: true,
                   },
                   {
                     color: "var(--color--amber--600)",
@@ -331,13 +330,10 @@ const javascript = require("tagged-template-noop");
                     shortcut: "0",
                   },
                 ].map(
-                  ({
-                    color,
-                    borderColor,
-                    checkedColor,
-                    shortcut,
-                    isDefault,
-                  }) => html`
+                  (
+                    { color, borderColor, checkedColor, shortcut },
+                    index
+                  ) => html`
                     <label
                       style="${css`
                         display: flex;
@@ -349,7 +345,7 @@ const javascript = require("tagged-template-noop");
                         type="radio"
                         name="color"
                         value="${color}"
-                        $${isDefault ? html`checked` : html``}
+                        $${index === 0 ? html`checked` : html``}
                         style="${css`
                           background-color: ${color};
                           width: var(--font-size--xl);
@@ -396,17 +392,65 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <label
-                ><input type="radio" name="strokeWidth" value="1" /> Thin</label
+              <div
+                style="${css`
+                  display: flex;
+                  justify-content: space-between;
+                `}"
               >
-              <label
-                ><input type="radio" name="strokeWidth" value="3" checked />
-                Medium</label
-              >
-              <label
-                ><input type="radio" name="strokeWidth" value="5" />
-                Thick</label
-              >
+                $${[
+                  { strokeWidth: 1, shortcut: "Q" },
+                  { strokeWidth: 3, shortcut: "W" },
+                  { strokeWidth: 5, shortcut: "E" },
+                ].map(
+                  ({ strokeWidth, shortcut }, index) => html`
+                    <label>
+                      <input
+                        type="radio"
+                        name="strokeWidth"
+                        value="${strokeWidth}"
+                        hidden
+                        $${index === 0 ? html`checked` : html``}
+                        data-ondomcontentloaded="${javascript`
+                          Mousetrap.bind(${JSON.stringify(
+                            shortcut
+                          )}, () => { this.click(); })
+                        `}"
+                      />
+                      <div
+                        style="${css`
+                          display: flex;
+                          flex-direction: column;
+                          align-items: center;
+                          gap: var(--space--1);
+                        `}"
+                      >
+                        <svg
+                          style="${css`
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                          `}"
+                        >
+                          <path
+                            d="
+                              M ${strokeWidth} ${20 - strokeWidth / 2}
+                              C ${strokeWidth} ${strokeWidth},
+                                ${20 - strokeWidth / 2} ${20 - strokeWidth / 2},
+                                ${20 - strokeWidth / 2} ${strokeWidth}
+                            "
+                            stroke-width="${strokeWidth}"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke="var(--color--gray--warm--600)"
+                            fill="none"
+                          />
+                        </svg>
+                        ${shortcut}
+                      </div>
+                    </label>
+                  `
+                )}
+              </div>
 
               <label
                 ><input type="radio" name="tool" value="pen" checked />
