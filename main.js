@@ -404,9 +404,19 @@ const javascript = require("tagged-template-noop");
                 `}"
               >
                 $${[
-                  { strokeWidth: 1, shortcut: "q" },
-                  { strokeWidth: 3, shortcut: "w", isDefault: true },
-                  { strokeWidth: 5, shortcut: "e" },
+                  {
+                    strokeWidth: 1,
+                    shortcut: "q",
+                  },
+                  {
+                    strokeWidth: 3,
+                    shortcut: "w",
+                    isDefault: true,
+                  },
+                  {
+                    strokeWidth: 5,
+                    shortcut: "e",
+                  },
                 ].map(
                   ({ strokeWidth, shortcut, isDefault }) => html`
                     <label
@@ -489,18 +499,91 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <label>
-                <input type="radio" name="tool" value="pen" checked />
-                <i class="fas fa-pen-fancy"></i>
-              </label>
-              <label>
-                <input type="radio" name="tool" value="highlighter" />
-                <i class="fas fa-highlighter"></i>
-              </label>
-              <label>
-                <input type="radio" name="tool" value="eraser" />
-                <i class="fas fa-eraser"></i>
-              </label>
+              <div
+                style="${css`
+                  display: flex;
+                  justify-content: space-between;
+                `}"
+              >
+                $${[
+                  {
+                    tool: "pen",
+                    icon: "pen-fancy",
+                    shortcut: "a",
+                    isDefault: true,
+                  },
+                  {
+                    tool: "highlighter",
+                    icon: "highlighter",
+                    shortcut: "s",
+                  },
+                  {
+                    tool: "eraser",
+                    icon: "eraser",
+                    shortcut: "d",
+                  },
+                ].map(
+                  ({ tool, icon, shortcut, isDefault }) => html`
+                    <label
+                      style="${css`
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: var(--space--1);
+                      `}"
+                    >
+                      <input
+                        type="radio"
+                        name="tool"
+                        value="${tool}"
+                        hidden
+                        $${isDefault ? html`checked` : html``}
+                        data-ondomcontentloaded="${javascript`
+                          Mousetrap.bind(${JSON.stringify(
+                            shortcut
+                          )}, () => { this.click(); })
+                        `}"
+                      />
+                      <div
+                        style="${css`
+                          color: var(--color--gray--warm--600);
+                          @media (prefers-color-scheme: dark) {
+                            color: var(--color--gray--warm--400);
+                          }
+                          :checked + & {
+                            color: var(--color--gray--warm--100);
+                            background-color: var(--color--gray--warm--600);
+                            @media (prefers-color-scheme: dark) {
+                              color: var(--color--gray--warm--900);
+                              background-color: var(--color--gray--warm--400);
+                            }
+                          }
+                          width: var(--font-size--xl);
+                          height: var(--font-size--xl);
+                          font-size: var(--font-size--sm);
+                          line-height: var(--line-height--sm);
+                          border-radius: var(--border-radius--md);
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          transition-property: var(
+                            --transition-property--colors
+                          );
+                          transition-duration: var(--transition-duration--150);
+                          transition-timing-function: var(
+                            --transition-timing-function--in-out
+                          );
+                        `}"
+                      >
+                        <i class="fas fa-${icon}"></i>
+                      </div>
+                      ${shortcut.toUpperCase()}
+                    </label>
+                  `
+                )}
+              </div>
+
+              <hr class="separator" />
 
               <label>
                 <input
