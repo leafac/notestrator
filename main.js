@@ -408,7 +408,14 @@ const javascript = require("tagged-template-noop");
                   { strokeWidth: 5, shortcut: "e" },
                 ].map(
                   ({ strokeWidth, shortcut, isDefault }) => html`
-                    <label>
+                    <label
+                      style="${css`
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: var(--space--1);
+                      `}"
+                    >
                       <input
                         type="radio"
                         name="strokeWidth"
@@ -421,36 +428,27 @@ const javascript = require("tagged-template-noop");
                           )}, () => { this.click(); })
                         `}"
                       />
-                      <div
+                      <svg
                         style="${css`
-                          display: flex;
-                          flex-direction: column;
-                          align-items: center;
-                          gap: var(--space--1);
+                          width: var(--font-size--xl);
+                          height: var(--font-size--xl);
                         `}"
                       >
-                        <svg
-                          style="${css`
-                            width: var(--font-size--xl);
-                            height: var(--font-size--xl);
-                          `}"
-                        >
-                          <path
-                            d="
+                        <path
+                          d="
                               M ${strokeWidth} ${20 - strokeWidth / 2}
                               C ${strokeWidth} ${strokeWidth},
                                 ${20 - strokeWidth / 2} ${20 - strokeWidth / 2},
                                 ${20 - strokeWidth / 2} ${strokeWidth}
                             "
-                            stroke-width="${strokeWidth}"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke="var(--color--gray--warm--600)"
-                            fill="none"
-                          />
-                        </svg>
-                        ${shortcut.toUpperCase()}
-                      </div>
+                          stroke-width="${strokeWidth}"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke="var(--color--gray--warm--600)"
+                          fill="none"
+                        />
+                      </svg>
+                      ${shortcut.toUpperCase()}
                     </label>
                   `
                 )}
