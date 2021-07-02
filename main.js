@@ -282,6 +282,7 @@ const javascript = require("tagged-template-noop");
                     color: "var(--color--red--600)",
                     borderColor: "var(--color--red--500)",
                     shortcut: "1",
+                    isDefault: true,
                   },
                   {
                     color: "var(--color--amber--600)",
@@ -330,10 +331,13 @@ const javascript = require("tagged-template-noop");
                     shortcut: "0",
                   },
                 ].map(
-                  (
-                    { color, borderColor, checkedColor, shortcut },
-                    index
-                  ) => html`
+                  ({
+                    color,
+                    borderColor,
+                    checkedColor,
+                    shortcut,
+                    isDefault,
+                  }) => html`
                     <label
                       style="${css`
                         display: flex;
@@ -345,7 +349,7 @@ const javascript = require("tagged-template-noop");
                         type="radio"
                         name="color"
                         value="${color}"
-                        $${index === 0 ? html`checked` : html``}
+                        $${isDefault ? html`checked` : html``}
                         style="${css`
                           background-color: ${color};
                           width: var(--font-size--xl);
@@ -400,17 +404,17 @@ const javascript = require("tagged-template-noop");
               >
                 $${[
                   { strokeWidth: 1, shortcut: "q" },
-                  { strokeWidth: 3, shortcut: "w" },
+                  { strokeWidth: 3, shortcut: "w", isDefault: true },
                   { strokeWidth: 5, shortcut: "e" },
                 ].map(
-                  ({ strokeWidth, shortcut }, index) => html`
+                  ({ strokeWidth, shortcut, isDefault }) => html`
                     <label>
                       <input
                         type="radio"
                         name="strokeWidth"
                         value="${strokeWidth}"
                         hidden
-                        $${index === 0 ? html`checked` : html``}
+                        $${isDefault ? html`checked` : html``}
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
                             shortcut
