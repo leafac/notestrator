@@ -585,25 +585,111 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <label>
-                <input
-                  type="radio"
-                  name="ignoreMouseEvents"
-                  value="false"
-                  checked
-                  onchange="ipcRenderer.send(this.name, this.value)"
-                />
-                Draw
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="ignoreMouseEvents"
-                  value="true"
-                  onchange="ipcRenderer.send(this.name, this.value)"
-                />
-                Click-through
-              </label>
+              <div
+                style="${css`
+                  display: flex;
+                  justify-content: space-between;
+                `}"
+              >
+                <label
+                  style="${css`
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space--1);
+                  `}"
+                >
+                  <input
+                    type="radio"
+                    name="ignoreMouseEvents"
+                    value="false"
+                    checked
+                    onchange="ipcRenderer.send(this.name, this.value)"
+                  />
+                  <div
+                    style="${css`
+                      color: var(--color--gray--warm--600);
+                      @media (prefers-color-scheme: dark) {
+                        color: var(--color--gray--warm--400);
+                      }
+                      :checked + & {
+                        color: var(--color--gray--warm--100);
+                        background-color: var(--color--gray--warm--600);
+                        @media (prefers-color-scheme: dark) {
+                          color: var(--color--gray--warm--900);
+                          background-color: var(--color--gray--warm--400);
+                        }
+                      }
+                      width: var(--font-size--xl);
+                      height: var(--font-size--xl);
+                      font-size: var(--font-size--sm);
+                      line-height: var(--line-height--sm);
+                      border-radius: var(--border-radius--md);
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      transition-property: var(--transition-property--colors);
+                      transition-duration: var(--transition-duration--150);
+                      transition-timing-function: var(
+                        --transition-timing-function--in-out
+                      );
+                    `}"
+                  >
+                    <i class="far fa-edit"></i>
+                  </div>
+                  Z
+                </label>
+                <label
+                  style="${css`
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space--1);
+                  `}"
+                >
+                  <input
+                    type="radio"
+                    name="ignoreMouseEvents"
+                    value="true"
+                    onchange="ipcRenderer.send(this.name, this.value)"
+                  />
+
+                  <div
+                    style="${css`
+                      color: var(--color--gray--warm--600);
+                      @media (prefers-color-scheme: dark) {
+                        color: var(--color--gray--warm--400);
+                      }
+                      :checked + & {
+                        color: var(--color--gray--warm--100);
+                        background-color: var(--color--gray--warm--600);
+                        @media (prefers-color-scheme: dark) {
+                          color: var(--color--gray--warm--900);
+                          background-color: var(--color--gray--warm--400);
+                        }
+                      }
+                      width: var(--font-size--xl);
+                      height: var(--font-size--xl);
+                      font-size: var(--font-size--sm);
+                      line-height: var(--line-height--sm);
+                      border-radius: var(--border-radius--md);
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      transition-property: var(--transition-property--colors);
+                      transition-duration: var(--transition-duration--150);
+                      transition-timing-function: var(
+                        --transition-timing-function--in-out
+                      );
+                    `}"
+                  >
+                    <i class="far fa-window-restore"></i>
+                  </div>
+                  X
+                </label>
+              </div>
+
+              <hr class="separator" />
 
               <div>Fade</div>
               <label>
