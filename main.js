@@ -560,20 +560,8 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div
-                style="${css`
-                  display: flex;
-                  justify-content: space-between;
-                `}"
-              >
-                <label
-                  style="${css`
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: var(--space--1);
-                  `}"
-                >
+              <div class="section">
+                <label class="section--item">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
@@ -581,47 +569,12 @@ const javascript = require("tagged-template-noop");
                     checked
                     onchange="ipcRenderer.send(this.name, this.value)"
                   />
-                  <div
-                    style="${css`
-                      color: var(--color--gray--warm--600);
-                      @media (prefers-color-scheme: dark) {
-                        color: var(--color--gray--warm--400);
-                      }
-                      :checked + & {
-                        color: var(--color--gray--warm--100);
-                        background-color: var(--color--gray--warm--600);
-                        @media (prefers-color-scheme: dark) {
-                          color: var(--color--gray--warm--900);
-                          background-color: var(--color--gray--warm--400);
-                        }
-                      }
-                      width: var(--font-size--xl);
-                      height: var(--font-size--xl);
-                      font-size: var(--font-size--sm);
-                      line-height: var(--line-height--sm);
-                      border-radius: var(--border-radius--md);
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      transition-property: var(--transition-property--colors);
-                      transition-duration: var(--transition-duration--150);
-                      transition-timing-function: var(
-                        --transition-timing-function--in-out
-                      );
-                    `}"
-                  >
+                  <div class="section--item--icon">
                     <i class="far fa-edit"></i>
                   </div>
                   Z
                 </label>
-                <label
-                  style="${css`
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: var(--space--1);
-                  `}"
-                >
+                <label class="section--item">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
@@ -629,35 +582,7 @@ const javascript = require("tagged-template-noop");
                     onchange="ipcRenderer.send(this.name, this.value)"
                   />
 
-                  <div
-                    style="${css`
-                      color: var(--color--gray--warm--600);
-                      @media (prefers-color-scheme: dark) {
-                        color: var(--color--gray--warm--400);
-                      }
-                      :checked + & {
-                        color: var(--color--gray--warm--100);
-                        background-color: var(--color--gray--warm--600);
-                        @media (prefers-color-scheme: dark) {
-                          color: var(--color--gray--warm--900);
-                          background-color: var(--color--gray--warm--400);
-                        }
-                      }
-                      width: var(--font-size--xl);
-                      height: var(--font-size--xl);
-                      font-size: var(--font-size--sm);
-                      line-height: var(--line-height--sm);
-                      border-radius: var(--border-radius--md);
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      transition-property: var(--transition-property--colors);
-                      transition-duration: var(--transition-duration--150);
-                      transition-timing-function: var(
-                        --transition-timing-function--in-out
-                      );
-                    `}"
-                  >
+                  <div class="section--item--icon">
                     <i class="far fa-window-restore"></i>
                   </div>
                   X
