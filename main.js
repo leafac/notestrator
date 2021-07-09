@@ -252,49 +252,46 @@ const javascript = require("tagged-template-noop");
                 }
 
                 .section--item--icon {
-                  width: var(--font-size--xl);
-                  height: var(--font-size--xl);
-                  border-radius: var(--border-radius--md);
-                  * {
-                    stroke: var(--color--gray--warm--600);
-                    @media (prefers-color-scheme: dark) {
-                      stroke: var(--color--gray--warm--400);
-                    }
-                    transition-property: var(--transition-property--colors);
-                    transition-duration: var(--transition-duration--150);
-                    transition-timing-function: var(
-                      --transition-timing-function--in-out
-                    );
-                  }
+                  font-size: var(--font-size--sm);
+                  line-height: var(--line-height--sm);
+                  color: var(--color--gray--warm--600);
                   &:hover {
                     background-color: var(--color--gray--warm--200);
-                    @media (prefers-color-scheme: dark) {
-                      background-color: var(--color--gray--warm--800);
-                    }
                   }
                   &:active {
                     background-color: var(--color--gray--warm--300);
-                    @media (prefers-color-scheme: dark) {
-                      background-color: var(--color--gray--warm--700);
-                    }
                   }
                   :checked + & {
+                    color: var(--color--gray--warm--100);
                     background-color: var(--color--gray--warm--600);
-                    * {
-                      stroke: var(--color--gray--warm--100);
+                  }
+                  @media (prefers-color-scheme: dark) {
+                    color: var(--color--gray--warm--400);
+                    &:hover {
+                      background-color: var(--color--gray--warm--800);
                     }
-                    @media (prefers-color-scheme: dark) {
+                    &:active {
+                      background-color: var(--color--gray--warm--700);
+                    }
+                    :checked + & {
+                      color: var(--color--gray--warm--900);
                       background-color: var(--color--gray--warm--400);
-                      * {
-                        stroke: var(--color--gray--warm--900);
-                      }
                     }
                   }
+                  width: var(--font-size--xl);
+                  height: var(--font-size--xl);
+                  border-radius: var(--border-radius--md);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
                   transition-property: var(--transition-property--colors);
                   transition-duration: var(--transition-duration--150);
                   transition-timing-function: var(
                     --transition-timing-function--in-out
                   );
+                  * {
+                    stroke: currentColor;
+                  }
                 }
 
                 .separator {
@@ -552,37 +549,7 @@ const javascript = require("tagged-template-noop");
                           )}, () => { this.click(); })
                         `}"
                       />
-                      <div
-                        style="${css`
-                          color: var(--color--gray--warm--600);
-                          @media (prefers-color-scheme: dark) {
-                            color: var(--color--gray--warm--400);
-                          }
-                          :checked + & {
-                            color: var(--color--gray--warm--100);
-                            background-color: var(--color--gray--warm--600);
-                            @media (prefers-color-scheme: dark) {
-                              color: var(--color--gray--warm--900);
-                              background-color: var(--color--gray--warm--400);
-                            }
-                          }
-                          width: var(--font-size--xl);
-                          height: var(--font-size--xl);
-                          font-size: var(--font-size--sm);
-                          line-height: var(--line-height--sm);
-                          border-radius: var(--border-radius--md);
-                          display: flex;
-                          justify-content: center;
-                          align-items: center;
-                          transition-property: var(
-                            --transition-property--colors
-                          );
-                          transition-duration: var(--transition-duration--150);
-                          transition-timing-function: var(
-                            --transition-timing-function--in-out
-                          );
-                        `}"
-                      >
+                      <div class="section--item--icon">
                         <i class="fas fa-${icon}"></i>
                       </div>
                       ${shortcut.toUpperCase()}
