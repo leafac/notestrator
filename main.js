@@ -519,12 +519,7 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div
-                style="${css`
-                  display: flex;
-                  justify-content: space-between;
-                `}"
-              >
+              <div class="section">
                 $${[
                   {
                     tool: "pen",
@@ -544,14 +539,7 @@ const javascript = require("tagged-template-noop");
                   },
                 ].map(
                   ({ tool, icon, shortcut, isDefault }) => html`
-                    <label
-                      style="${css`
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        gap: var(--space--1);
-                      `}"
-                    >
+                    <label class="section--item">
                       <input
                         type="radio"
                         name="tool"
