@@ -186,8 +186,8 @@ const javascript = require("tagged-template-noop");
   const menu = new BrowserWindow({
     parent: drawing,
     ...screen.getPrimaryDisplay().bounds,
-    width: 96,
-    height: 576,
+    width: 96, // var(--space--24)
+    height: 448, // var(--width--md)
     closable: false,
     minimizable: false,
     maximizable: false,
