@@ -235,12 +235,13 @@ const javascript = require("tagged-template-noop");
                 background-color: var(--color--gray--warm--900);
               }
               -webkit-user-select: none;
-              --space--base: var(--space--2);
 
               @at-root {
                 .section {
-                  display: flex;
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
                   justify-content: space-between;
+                  gap: var(--space--2);
                 }
 
                 .section--item {
@@ -264,6 +265,18 @@ const javascript = require("tagged-template-noop");
                     transition-timing-function: var(
                       --transition-timing-function--in-out
                     );
+                  }
+                  &:hover {
+                    background-color: var(--color--gray--warm--200);
+                    @media (prefers-color-scheme: dark) {
+                      background-color: var(--color--gray--warm--800);
+                    }
+                  }
+                  &:active {
+                    background-color: var(--color--gray--warm--300);
+                    @media (prefers-color-scheme: dark) {
+                      background-color: var(--color--gray--warm--700);
+                    }
                   }
                   :checked + & {
                     background-color: var(--color--gray--warm--600);
@@ -290,7 +303,7 @@ const javascript = require("tagged-template-noop");
                   @media (prefers-color-scheme: dark) {
                     border-color: var(--color--gray--warm--800);
                   }
-                  margin: var(--space--base) var(--space--0);
+                  margin: var(--space--2) var(--space--0);
                 }
               }
             `}"
@@ -304,7 +317,7 @@ const javascript = require("tagged-template-noop");
                   color: var(--color--gray--warm--400);
                   background-color: var(--color--gray--warm--800);
                 }
-                padding: var(--space--1) var(--space--base);
+                padding: var(--space--1) var(--space--2);
                 -webkit-app-region: drag;
               `}"
             >
@@ -312,16 +325,16 @@ const javascript = require("tagged-template-noop");
             </div>
             <form
               style="${css`
-                padding: var(--space--base) var(--space--base);
+                padding: var(--space--2) var(--space--2);
               `}"
             >
               <div
                 style="${css`
                   display: grid;
                   grid-template-columns: 1fr 1fr;
-                  gap: var(--space--base);
+                  gap: var(--space--2);
                   column-gap: var(--space--4);
-                  row-gap: var(--space--base);
+                  row-gap: var(--space--2);
                 `}"
               >
                 $${[
@@ -406,6 +419,12 @@ const javascript = require("tagged-template-noop");
                           display: flex;
                           justify-content: center;
                           align-items: center;
+                          &:hover {
+                            transform: scale(var(--scale--110));
+                          }
+                          &:active {
+                            transform: scale(var(--scale--90));
+                          }
                           &::after {
                             content: "";
                             background-color: ${checkedColor ??
@@ -428,6 +447,13 @@ const javascript = require("tagged-template-noop");
                           &:checked::after {
                             transform: scale(var(--scale--100));
                           }
+                          transition-property: var(
+                            --transition-property--transform
+                          );
+                          transition-duration: var(--transition-duration--150);
+                          transition-timing-function: var(
+                            --transition-timing-function--in-out
+                          );
                         `}"
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
@@ -773,7 +799,7 @@ const javascript = require("tagged-template-noop");
               }
               width: 100px;
               -webkit-user-select: none;
-              --space--base: var(--space--2);
+              --space--2: var(--space--2);
 
               @at-root {
                 .separator {
@@ -782,7 +808,7 @@ const javascript = require("tagged-template-noop");
                   @media (prefers-color-scheme: dark) {
                     border-color: var(--color--gray--warm--800);
                   }
-                  margin: var(--space--base) var(--space--0);
+                  margin: var(--space--2) var(--space--0);
                 }
               }
             `}"
@@ -796,7 +822,7 @@ const javascript = require("tagged-template-noop");
                   color: var(--color--gray--warm--400);
                   background-color: var(--color--gray--warm--800);
                 }
-                padding: var(--space--1) var(--space--base);
+                padding: var(--space--1) var(--space--2);
                 -webkit-app-region: drag;
               `}"
             >
@@ -804,16 +830,16 @@ const javascript = require("tagged-template-noop");
             </div>
             <form
               style="${css`
-                padding: var(--space--base) var(--space--base);
+                padding: var(--space--2) var(--space--2);
               `}"
             >
               <div
                 style="${css`
                   display: grid;
                   grid-template-columns: 1fr 1fr;
-                  gap: var(--space--base);
+                  gap: var(--space--2);
                   column-gap: var(--space--4);
-                  row-gap: var(--space--base);
+                  row-gap: var(--space--2);
                 `}"
               >
                 $${[
