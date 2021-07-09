@@ -561,6 +561,56 @@ const javascript = require("tagged-template-noop");
               <hr class="separator" />
 
               <div class="section">
+                $${[
+                  {
+                    fade: "false",
+                    shortcut: "z",
+                    isDefault: true,
+                  },
+                  {
+                    fade: "1500",
+                    shortcut: "x",
+                  },
+                  {
+                    fade: "500",
+                    shortcut: "c",
+                  },
+                ].map(
+                  ({ fade, shortcut, isDefault }) => html`
+                    <label class="section--item">
+                      <input
+                        type="radio"
+                        name="fade"
+                        value="${fade}"
+                        hidden
+                        $${isDefault ? html`checked` : html``}
+                        data-ondomcontentloaded="${javascript`
+                          Mousetrap.bind(${JSON.stringify(
+                            shortcut
+                          )}, () => { this.click(); })
+                        `}"
+                      />
+                      <svg class="section--item--icon">
+                        <line
+                          x1="0"
+                          y1="20"
+                          x2="20"
+                          y2="0"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          fill="none"
+                        />
+                      </svg>
+                      ${shortcut.toUpperCase()}
+                    </label>
+                  `
+                )}
+              </div>
+
+              <hr class="separator" />
+
+              <div class="section">
                 <label class="section--item">
                   <input
                     type="radio"
@@ -588,26 +638,6 @@ const javascript = require("tagged-template-noop");
                   X
                 </label>
               </div>
-
-              <hr class="separator" />
-
-              <div>Fade</div>
-              <label>
-                <input type="radio" name="fade" value="false" checked />
-                None
-              </label>
-              <label>
-                <input type="radio" name="fade" value="1500" />
-                Slow
-              </label>
-              <label>
-                <input type="radio" name="fade" value="1000" />
-                Medium
-              </label>
-              <label>
-                <input type="radio" name="fade" value="500" />
-                Fast
-              </label>
             </form>
           </body>
         </html>
