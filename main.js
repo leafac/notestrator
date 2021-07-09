@@ -234,7 +234,13 @@ const javascript = require("tagged-template-noop");
                 color: var(--color--gray--warm--500);
                 background-color: var(--color--gray--warm--900);
               }
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
               -webkit-user-select: none;
+              -webkit-app-region: drag;
 
               @at-root {
                 .section {
@@ -305,21 +311,6 @@ const javascript = require("tagged-template-noop");
               }
             `}"
           >
-            <div
-              style="${css`
-                text-align: center;
-                color: var(--color--gray--warm--900);
-                background-color: var(--color--gray--warm--300);
-                @media (prefers-color-scheme: dark) {
-                  color: var(--color--gray--warm--400);
-                  background-color: var(--color--gray--warm--800);
-                }
-                padding: var(--space--1) var(--space--2);
-                -webkit-app-region: drag;
-              `}"
-            >
-              Notestrator
-            </div>
             <form
               style="${css`
                 padding: var(--space--2) var(--space--2);
