@@ -50,7 +50,6 @@ const javascript = require("tagged-template-noop");
               position: absolute;
               width: 100vw;
               height: 100vh;
-              cursor: crosshair;
             `}"
           >
             <g class="highlighter"></g>
