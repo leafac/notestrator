@@ -148,7 +148,9 @@ const javascript = require("tagged-template-noop");
                         case "path":
                           for (const [x, y] of element
                             .getAttribute("d")
-                            .match(/C [d.]+ [d.]+, [d.]+ [d.]+, [d.]+ [d.]+/g)
+                            .match(
+                              ${/C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g}
+                            )
                             .map((curve) =>
                               curve.split(",")[2].trim().split(" ").map(Number)
                             ))
