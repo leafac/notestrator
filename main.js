@@ -560,14 +560,44 @@ const javascript = require("tagged-template-noop");
                   },
                   {
                     fade: "1500",
+                    strokeId: "fade--1500",
+                    strokeDef: html`
+                      <defs>
+                        <linearGradient
+                          id="fade--1500"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stop-color="currentColor" />
+                          <stop offset="100%" stop-color="transparent" />
+                        </linearGradient>
+                      </defs>
+                    `,
                     shortcut: "x",
                   },
                   {
                     fade: "500",
+                    strokeId: "fade--500",
+                    strokeDef: html`
+                      <defs>
+                        <linearGradient
+                          id="fade--500"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stop-color="currentColor" />
+                          <stop offset="60%" stop-color="transparent" />
+                        </linearGradient>
+                      </defs>
+                    `,
                     shortcut: "c",
                   },
                 ].map(
-                  ({ fade, shortcut, isDefault }) => html`
+                  ({ fade, strokeId, strokeDef, shortcut, isDefault }) => html`
                     <label class="section--item">
                       <input
                         type="radio"
@@ -582,15 +612,19 @@ const javascript = require("tagged-template-noop");
                         `}"
                       />
                       <svg class="section--item--icon">
-                        <line
-                          x1="0"
-                          y1="20"
-                          x2="20"
-                          y2="0"
-                          stroke-width="3"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          fill="none"
+                        $${strokeDef ?? html``}
+                        <rect
+                          x="5"
+                          y="5"
+                          width="10"
+                          height="10"
+                          rx="3"
+                          style="${css`
+                            stroke: none;
+                            fill: ${strokeId === undefined
+                              ? "currentColor"
+                              : `url('#${strokeId}')`};
+                          `}"
                         />
                       </svg>
                       ${shortcut.toUpperCase()}
