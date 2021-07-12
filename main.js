@@ -560,44 +560,16 @@ const javascript = require("tagged-template-noop");
                   },
                   {
                     fade: "1500",
-                    strokeId: "fade--1500",
-                    strokeDef: html`
-                      <defs>
-                        <linearGradient
-                          id="fade--1500"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stop-color="currentColor" />
-                          <stop offset="100%" stop-color="transparent" />
-                        </linearGradient>
-                      </defs>
-                    `,
+                    gradient: 100,
                     shortcut: "x",
                   },
                   {
                     fade: "500",
-                    strokeId: "fade--500",
-                    strokeDef: html`
-                      <defs>
-                        <linearGradient
-                          id="fade--500"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stop-color="currentColor" />
-                          <stop offset="60%" stop-color="transparent" />
-                        </linearGradient>
-                      </defs>
-                    `,
+                    gradient: 60,
                     shortcut: "c",
                   },
                 ].map(
-                  ({ fade, strokeId, strokeDef, shortcut, isDefault }) => html`
+                  ({ fade, gradient, shortcut, isDefault }) => html`
                     <label class="section--item">
                       <input
                         type="radio"
@@ -612,7 +584,25 @@ const javascript = require("tagged-template-noop");
                         `}"
                       />
                       <svg class="section--item--icon">
-                        $${strokeDef ?? html``}
+                        $${gradient === undefined
+                          ? html``
+                          : html`
+                              <defs>
+                                <linearGradient
+                                  id="fade--${gradient}"
+                                  x1="0%"
+                                  y1="0%"
+                                  x2="100%"
+                                  y2="100%"
+                                >
+                                  <stop offset="0%" stop-color="currentColor" />
+                                  <stop
+                                    offset="${gradient}%"
+                                    stop-color="transparent"
+                                  />
+                                </linearGradient>
+                              </defs>
+                            `}
                         <rect
                           x="5"
                           y="5"
@@ -621,9 +611,9 @@ const javascript = require("tagged-template-noop");
                           rx="3"
                           style="${css`
                             stroke: none;
-                            fill: ${strokeId === undefined
+                            fill: ${gradient === undefined
                               ? "currentColor"
-                              : `url('#${strokeId}')`};
+                              : `url('#fade--${gradient}')`};
                           `}"
                         />
                       </svg>
