@@ -17,6 +17,7 @@ const javascript = require("tagged-template-noop");
     movable: false,
     resizable: false,
     frame: false,
+    focusable: false,
     transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     roundedCorners: false,
@@ -39,9 +40,6 @@ const javascript = require("tagged-template-noop");
           />
           <script>
             const { ipcRenderer } = require("electron");
-            document.addEventListener("keypress", (event) => {
-              ipcRenderer.send("mousetrap", event.key);
-            });
           </script>
         </head>
         <body>
@@ -197,7 +195,6 @@ const javascript = require("tagged-template-noop");
     maximizable: false,
     resizable: false,
     frame: false,
-    focusable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -673,12 +670,6 @@ const javascript = require("tagged-template-noop");
 
   ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
     drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
-  });
-
-  ipcMain.on("mousetrap", (_, key) => {
-    menu.webContents.executeJavaScript(
-      javascript`(() => { Mousetrap.trigger(${JSON.stringify(key)}); })();`
-    );
   });
 
   /*
