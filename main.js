@@ -54,6 +54,7 @@ const javascript = require("tagged-template-noop");
             cursor: none;
           `}"
         >
+          <!-- FIXME: The cursor shows up below the drawing. -->
           <div
             style="${css`
               position: absolute;
