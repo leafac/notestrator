@@ -81,6 +81,7 @@ const javascript = require("tagged-template-noop");
                 const eraser = this.querySelector(".eraser");
                 eraser.hidden = menu.tool !== "eraser";
                 /*
+                TODO: Do we change the cursor on fade?
                 {
                   "fade": "false",
                 }
