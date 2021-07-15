@@ -92,6 +92,13 @@ const javascript = require("tagged-template-noop");
             <div class="circle">
               <svg viewBox="-7.5 -7.5, 15 15">
                 <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+                <path
+                  d="M -6 0 L 6 0 M 0 -6 L 0 6"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </div>
             <div class="eraser" hidden>
