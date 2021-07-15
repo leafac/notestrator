@@ -40,9 +40,39 @@ const javascript = require("tagged-template-noop");
           />
           <script>
             const { ipcRenderer } = require("electron");
+            require("@fortawesome/fontawesome-free/js/all.js");
+            window.addEventListener("DOMContentLoaded", () => {
+              for (const element of document.querySelectorAll(
+                "[data-ondomcontentloaded]"
+              ))
+                new Function(element.dataset.ondomcontentloaded).call(element);
+            });
           </script>
         </head>
         <body>
+          <div
+            style="${css`
+              position: absolute;
+              width: 15px;
+              height: 15px;
+              transform: translate(-50%, -50%);
+            `}"
+            data-ondomcontentloaded="${javascript`
+              document.addEventListener("mousemove", (event) => {
+                this.hidden = false;
+                this.style.top = String(event.offsetY) + "px";
+                this.style.left = String(event.offsetX) + "px";
+              });
+              document.addEventListener("mouseleave", (event) => {
+                this.hidden = true;
+              });
+            `}"
+          >
+            <svg viewBox="-7.5 -7.5, 15 15">
+              <circle cx="0" cy="0" r="1" />
+            </svg>
+            <i class="fas fa-eraser"></i>
+          </div>
           <svg
             style="${css`
               position: absolute;
