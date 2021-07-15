@@ -66,12 +66,31 @@ const javascript = require("tagged-template-noop");
               document.addEventListener("mouseleave", (event) => {
                 this.hidden = true;
               });
+              ipcRenderer.on("cursor", (_, menu) => {
+                const circle = this.querySelector(".circle circle");
+                circle.setAttribute("fill", menu.color);
+                circle.setAttribute("r", menu.strokeWidth / 2 * (menu.tool === "highlighter" ? 3 : 1));
+                circle.style.opacity = menu.tool === "highlighter" ? 0.5 : 1;
+                this.querySelector(".circle").hidden = menu.tool === "eraser";
+                const eraser = this.querySelector(".eraser");
+                eraser.hidden = menu.tool !== "eraser";
+                eraser.style.color = menu.color;
+                /*
+                {
+                  "fade": "false",
+                }
+                */
+              });
             `}"
           >
-            <svg viewBox="-7.5 -7.5, 15 15">
-              <circle cx="0" cy="0" r="1" />
-            </svg>
-            <i class="fas fa-eraser"></i>
+            <div class="circle">
+              <svg viewBox="-7.5 -7.5, 15 15">
+                <circle cx="0" cy="0" r="1.5" fill="var(--color--red--600)" />
+              </svg>
+            </div>
+            <div class="eraser" hidden>
+              <i class="fas fa-eraser"></i>
+            </div>
           </div>
           <svg
             style="${css`
@@ -348,6 +367,9 @@ const javascript = require("tagged-template-noop");
             <form
               style="${css`
                 padding: var(--space--2) var(--space--2);
+              `}"
+              onchange="${javascript`
+                ipcRenderer.send("cursor", Object.fromEntries(new URLSearchParams(new FormData(this))));
               `}"
             >
               <div
@@ -657,6 +679,7 @@ const javascript = require("tagged-template-noop");
                 )}
               </div>
 
+              <!-- FIXME: Remove this section from the <form> because it doesn’t affect the drawing. -->
               <hr class="separator" />
 
               <div class="section">
@@ -698,6 +721,10 @@ const javascript = require("tagged-template-noop");
     return await menu.webContents.executeJavaScript(
       javascript`Object.fromEntries(new URLSearchParams(new FormData(document.querySelector("form"))))`
     );
+  });
+
+  ipcMain.on("cursor", (_, menu) => {
+    drawing.webContents.send("cursor", menu);
   });
 
   ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
