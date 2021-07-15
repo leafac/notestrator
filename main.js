@@ -7,6 +7,7 @@ const javascript = require("tagged-template-noop");
 (async () => {
   await app.whenReady();
 
+  // FIXME: Fix keyboard shortcuts by forwarding the keyboard events to the menu window.
   // FIXME: Deal with multiple displays.
   const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
@@ -17,7 +18,6 @@ const javascript = require("tagged-template-noop");
     movable: false,
     resizable: false,
     frame: false,
-    focusable: false,
     transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     roundedCorners: false,
@@ -48,6 +48,7 @@ const javascript = require("tagged-template-noop");
               position: absolute;
               width: 100vw;
               height: 100vh;
+              cursor: none;
             `}"
           >
             <g class="highlighter"></g>
@@ -195,6 +196,7 @@ const javascript = require("tagged-template-noop");
     maximizable: false,
     resizable: false,
     frame: false,
+    focusable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
