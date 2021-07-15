@@ -56,6 +56,7 @@ const javascript = require("tagged-template-noop");
               width: 15px;
               height: 15px;
               transform: translate(-50%, -50%);
+              color: var(--color--red--600);
             `}"
             data-ondomcontentloaded="${javascript`
               document.addEventListener("mousemove", (event) => {
@@ -67,14 +68,13 @@ const javascript = require("tagged-template-noop");
                 this.hidden = true;
               });
               ipcRenderer.on("cursor", (_, menu) => {
+                this.style.color = menu.color;
                 const circle = this.querySelector(".circle circle");
-                circle.setAttribute("fill", menu.color);
                 circle.setAttribute("r", menu.strokeWidth / 2 * (menu.tool === "highlighter" ? 3 : 1));
                 circle.style.opacity = menu.tool === "highlighter" ? 0.5 : 1;
                 this.querySelector(".circle").hidden = menu.tool === "eraser";
                 const eraser = this.querySelector(".eraser");
                 eraser.hidden = menu.tool !== "eraser";
-                eraser.style.color = menu.color;
                 /*
                 {
                   "fade": "false",
@@ -85,7 +85,7 @@ const javascript = require("tagged-template-noop");
           >
             <div class="circle">
               <svg viewBox="-7.5 -7.5, 15 15">
-                <circle cx="0" cy="0" r="1.5" fill="var(--color--red--600)" />
+                <circle cx="0" cy="0" r="1.5" fill="currentColor" />
               </svg>
             </div>
             <div class="eraser" hidden>
