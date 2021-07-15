@@ -110,141 +110,140 @@ const javascript = require("tagged-template-noop");
                 width: 100%;
                 height: 100%;
               `}"
+              data-ondomcontentloaded="${javascript`
+                window.addEventListener("mousedown", async (event) => {
+                  const menu = await ipcRenderer.invoke("menu");
+                  let handleMousemove;
+                  let handleMouseup;
+                  switch (menu.tool) {
+                    case "pen":
+                    case "highlighter":
+                      const group = this.querySelector(\`.\${menu.tool}\`);
+                      group.insertAdjacentHTML(
+                        "beforeend",
+                        \`
+                      <path
+                        d="M \${event.offsetX} \${event.offsetY}"
+                        fill="none"
+                        stroke="\${menu.color}"
+                        stroke-width="\${
+                          menu.strokeWidth * (menu.tool === "highlighter" ? 3 : 1)
+                        }"
+                        stroke-opacity="\${menu.tool === "highlighter" ? 0.5 : 1}"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="\${
+                          menu.fade === "false"
+                            ? \`\`
+                            : \`transition: opacity \${menu.fade}ms ease-in;\`
+                        }"
+                      />
+                    \`
+                      );
+                      const path = group.lastElementChild;
+                      const t = 0.4;
+                      let x0 = { x: event.offsetX, y: event.offsetY };
+                      let x1 = { x: event.offsetX, y: event.offsetY };
+                      let x2 = { x: event.offsetX, y: event.offsetY };
+                      let p1 = { x: event.offsetX, y: event.offsetY };
+                      let p2 = { x: event.offsetX, y: event.offsetY };
+                      handleMousemove = (event) => {
+                        // http://scaledinnovation.com/analytics/splines/aboutSplines.html
+                        if (event.offsetX === x2.x && event.offsetY === x2.y)
+                          return;
+                        x2 = { x: event.offsetX, y: event.offsetY };
+                        const x0_x1 = Math.sqrt(
+                          (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
+                        );
+                        const x1_x2 = Math.sqrt(
+                          (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
+                        );
+                        const x0_x1_x2 = x0_x1 + x1_x2;
+                        const ratio_x0_x1 = x0_x1 / x0_x1_x2;
+                        const ratio_x1_x2 = x1_x2 / x0_x1_x2;
+                        const w = x2.x - x0.x;
+                        const h = x2.y - x0.y;
+                        p1 = {
+                          x: x1.x - w * t * ratio_x0_x1,
+                          y: x1.y - h * t * ratio_x0_x1,
+                        };
+                        path.setAttribute(
+                          "d",
+                          \`\${path.getAttribute("d")} C \${p2.x} \${p2.y}, \${
+                            p1.x
+                          } \${p1.y}, \${x1.x} \${x1.y}\`
+                        );
+                        p2 = {
+                          x: x1.x + w * t * ratio_x1_x2,
+                          y: x1.y + h * t * ratio_x1_x2,
+                        };
+                        x0 = x1;
+                        x1 = x2;
+                      };
+                      handleMouseup = () => {
+                        const d = path.getAttribute("d");
+                        if (!d.includes("C")) {
+                          const [x, y] = d.split(" ").slice(1);
+                          path.setAttribute(
+                            "d",
+                            \`\${d} C \${x} \${y}, \${x} \${y}, \${x} \${y}\`
+                          );
+                        }
+                        if (menu.fade === "false") return;
+                        path.style.opacity = 0;
+                        path.addEventListener("transitionend", () => {
+                          path.remove();
+                        });
+                      };
+                      break;
+                    case "eraser":
+                      handleMousemove = (event) => {
+                        const elementsToRemove = new Set();
+                        for (const element of this.querySelectorAll("*"))
+                          switch (element.tagName) {
+                            case "path":
+                              for (const [x, y] of element
+                                .getAttribute("d")
+                                .match(
+                                  ${/C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g}
+                                )
+                                .map((curve) =>
+                                  curve
+                                    .split(",")[2]
+                                    .trim()
+                                    .split(" ")
+                                    .map(Number)
+                                ))
+                                if (
+                                  Math.sqrt(
+                                    (event.offsetX - x) ** 2 +
+                                      (event.offsetY - y) ** 2
+                                  ) <
+                                  menu.strokeWidth * 5
+                                )
+                                  elementsToRemove.add(element);
+                              break;
+                          }
+
+                        for (const element of elementsToRemove) element.remove();
+                      };
+                      break;
+                  }
+                  window.addEventListener("mousemove", handleMousemove);
+                  window.addEventListener(
+                    "mouseup",
+                    () => {
+                      window.removeEventListener("mousemove", handleMousemove);
+                      if (handleMouseup !== undefined) handleMouseup();
+                    },
+                    { once: true }
+                  );
+                });
+              `}"
             >
               <g class="highlighter"></g>
               <g class="pen"></g>
             </svg>
-            <script>
-              const drawing = document.currentScript.previousElementSibling;
-              window.addEventListener("mousedown", async (event) => {
-                const menu = await ipcRenderer.invoke("menu");
-                let handleMousemove;
-                let handleMouseup;
-                switch (menu.tool) {
-                  case "pen":
-                  case "highlighter":
-                    const group = drawing.querySelector(\`.\${menu.tool}\`);
-                    group.insertAdjacentHTML(
-                      "beforeend",
-                      \`
-                    <path
-                      d="M \${event.offsetX} \${event.offsetY}"
-                      fill="none"
-                      stroke="\${menu.color}"
-                      stroke-width="\${
-                        menu.strokeWidth * (menu.tool === "highlighter" ? 3 : 1)
-                      }"
-                      stroke-opacity="\${menu.tool === "highlighter" ? 0.5 : 1}"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      style="\${
-                        menu.fade === "false"
-                          ? \`\`
-                          : \`transition: opacity \${menu.fade}ms ease-in;\`
-                      }"
-                    />
-                  \`
-                    );
-                    const path = group.lastElementChild;
-                    const t = 0.4;
-                    let x0 = { x: event.offsetX, y: event.offsetY };
-                    let x1 = { x: event.offsetX, y: event.offsetY };
-                    let x2 = { x: event.offsetX, y: event.offsetY };
-                    let p1 = { x: event.offsetX, y: event.offsetY };
-                    let p2 = { x: event.offsetX, y: event.offsetY };
-                    handleMousemove = (event) => {
-                      // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                      if (event.offsetX === x2.x && event.offsetY === x2.y)
-                        return;
-                      x2 = { x: event.offsetX, y: event.offsetY };
-                      const x0_x1 = Math.sqrt(
-                        (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
-                      );
-                      const x1_x2 = Math.sqrt(
-                        (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
-                      );
-                      const x0_x1_x2 = x0_x1 + x1_x2;
-                      const ratio_x0_x1 = x0_x1 / x0_x1_x2;
-                      const ratio_x1_x2 = x1_x2 / x0_x1_x2;
-                      const w = x2.x - x0.x;
-                      const h = x2.y - x0.y;
-                      p1 = {
-                        x: x1.x - w * t * ratio_x0_x1,
-                        y: x1.y - h * t * ratio_x0_x1,
-                      };
-                      path.setAttribute(
-                        "d",
-                        \`\${path.getAttribute("d")} C \${p2.x} \${p2.y}, \${
-                          p1.x
-                        } \${p1.y}, \${x1.x} \${x1.y}\`
-                      );
-                      p2 = {
-                        x: x1.x + w * t * ratio_x1_x2,
-                        y: x1.y + h * t * ratio_x1_x2,
-                      };
-                      x0 = x1;
-                      x1 = x2;
-                    };
-                    handleMouseup = () => {
-                      const d = path.getAttribute("d");
-                      if (!d.includes("C")) {
-                        const [x, y] = d.split(" ").slice(1);
-                        path.setAttribute(
-                          "d",
-                          \`\${d} C \${x} \${y}, \${x} \${y}, \${x} \${y}\`
-                        );
-                      }
-                      if (menu.fade === "false") return;
-                      path.style.opacity = 0;
-                      path.addEventListener("transitionend", () => {
-                        path.remove();
-                      });
-                    };
-                    break;
-                  case "eraser":
-                    handleMousemove = (event) => {
-                      const elementsToRemove = new Set();
-                      for (const element of drawing.querySelectorAll("*"))
-                        switch (element.tagName) {
-                          case "path":
-                            for (const [x, y] of element
-                              .getAttribute("d")
-                              .match(
-                                ${/C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g}
-                              )
-                              .map((curve) =>
-                                curve
-                                  .split(",")[2]
-                                  .trim()
-                                  .split(" ")
-                                  .map(Number)
-                              ))
-                              if (
-                                Math.sqrt(
-                                  (event.offsetX - x) ** 2 +
-                                    (event.offsetY - y) ** 2
-                                ) <
-                                menu.strokeWidth * 5
-                              )
-                                elementsToRemove.add(element);
-                            break;
-                        }
-
-                      for (const element of elementsToRemove) element.remove();
-                    };
-                    break;
-                }
-                window.addEventListener("mousemove", handleMousemove);
-                window.addEventListener(
-                  "mouseup",
-                  () => {
-                    window.removeEventListener("mousemove", handleMousemove);
-                    if (handleMouseup !== undefined) handleMouseup();
-                  },
-                  { once: true }
-                );
-              });
-            </script>
           </div>
         </body>
       </html>
