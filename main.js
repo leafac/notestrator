@@ -49,210 +49,223 @@ const javascript = require("tagged-template-noop");
             });
           </script>
         </head>
-        <body
-          style="${css`
-            cursor: none;
-          `}"
-        >
-          <!-- FIXME: The cursor shows up below the drawing. -->
+        <body>
           <div
+            class="drawing"
             style="${css`
-              position: absolute;
-              width: 15px;
-              height: 15px;
-              transform: translate(-50%, -50%);
-              color: var(--color--red--600);
-            `}"
-            data-ondomcontentloaded="${javascript`
-              document.addEventListener("mousemove", (event) => {
-                this.hidden = false;
-                this.style.top = String(event.offsetY) + "px";
-                this.style.left = String(event.offsetX) + "px";
-              });
-              document.addEventListener("mouseleave", (event) => {
-                this.hidden = true;
-              });
-              ipcRenderer.on("cursor", (_, menu) => {
-                this.style.color = menu.color;
-                const circle = this.querySelector(".circle circle");
-                circle.setAttribute("r", menu.strokeWidth / 2 * (menu.tool === "highlighter" ? 3 : 1));
-                circle.style.opacity = menu.tool === "highlighter" ? 0.5 : 1;
-                this.querySelector(".circle").hidden = menu.tool === "eraser";
-                const eraser = this.querySelector(".eraser");
-                eraser.hidden = menu.tool !== "eraser";
-                /*
-                TODO: Do we change the cursor on fade?
-                {
-                  "fade": "false",
-                }
-                */
-              });
-            `}"
-          >
-            <div class="circle">
-              <svg viewBox="-7.5 -7.5, 15 15">
-                <circle cx="0" cy="0" r="1.5" fill="currentColor" />
-                <path
-                  d="M -6 0 L 6 0 M 0 -6 L 0 6"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <div class="eraser" hidden>
-              <i class="fas fa-eraser"></i>
-            </div>
-          </div>
-          <div
-            style="${css`
+              cursor: none;
               position: absolute;
               top: 0;
               right: 0;
               bottom: 0;
               left: 0;
             `}"
+            data-ondomcontentloaded="${javascript`
+              ipcRenderer.on("settings", (_, settings) => {
+                this.settings = settings;
+              });
+            `}"
           >
-            <svg
+            <!-- FIXME: The cursor shows up below the drawing. -->
+            <div
               style="${css`
-                width: 100%;
-                height: 100%;
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                transform: translate(-50%, -50%);
+                color: var(--color--red--600);
               `}"
               data-ondomcontentloaded="${javascript`
-                window.addEventListener("mousedown", async (event) => {
-                  const menu = await ipcRenderer.invoke("menu");
-                  let handleMousemove;
-                  let handleMouseup;
-                  switch (menu.tool) {
-                    case "pen":
-                    case "highlighter":
-                      const group = this.querySelector(\`.\${menu.tool}\`);
-                      group.insertAdjacentHTML(
-                        "beforeend",
-                        \`
-                      <path
-                        d="M \${event.offsetX} \${event.offsetY}"
-                        fill="none"
-                        stroke="\${menu.color}"
-                        stroke-width="\${
-                          menu.strokeWidth * (menu.tool === "highlighter" ? 3 : 1)
-                        }"
-                        stroke-opacity="\${menu.tool === "highlighter" ? 0.5 : 1}"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        style="\${
-                          menu.fade === "false"
-                            ? \`\`
-                            : \`transition: opacity \${menu.fade}ms ease-in;\`
-                        }"
-                      />
-                    \`
-                      );
-                      const path = group.lastElementChild;
-                      const t = 0.4;
-                      let x0 = { x: event.offsetX, y: event.offsetY };
-                      let x1 = { x: event.offsetX, y: event.offsetY };
-                      let x2 = { x: event.offsetX, y: event.offsetY };
-                      let p1 = { x: event.offsetX, y: event.offsetY };
-                      let p2 = { x: event.offsetX, y: event.offsetY };
-                      handleMousemove = (event) => {
-                        // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                        if (event.offsetX === x2.x && event.offsetY === x2.y)
-                          return;
-                        x2 = { x: event.offsetX, y: event.offsetY };
-                        const x0_x1 = Math.sqrt(
-                          (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
-                        );
-                        const x1_x2 = Math.sqrt(
-                          (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
-                        );
-                        const x0_x1_x2 = x0_x1 + x1_x2;
-                        const ratio_x0_x1 = x0_x1 / x0_x1_x2;
-                        const ratio_x1_x2 = x1_x2 / x0_x1_x2;
-                        const w = x2.x - x0.x;
-                        const h = x2.y - x0.y;
-                        p1 = {
-                          x: x1.x - w * t * ratio_x0_x1,
-                          y: x1.y - h * t * ratio_x0_x1,
-                        };
-                        path.setAttribute(
-                          "d",
-                          \`\${path.getAttribute("d")} C \${p2.x} \${p2.y}, \${
-                            p1.x
-                          } \${p1.y}, \${x1.x} \${x1.y}\`
-                        );
-                        p2 = {
-                          x: x1.x + w * t * ratio_x1_x2,
-                          y: x1.y + h * t * ratio_x1_x2,
-                        };
-                        x0 = x1;
-                        x1 = x2;
-                      };
-                      handleMouseup = () => {
-                        const d = path.getAttribute("d");
-                        if (!d.includes("C")) {
-                          const [x, y] = d.split(" ").slice(1);
-                          path.setAttribute(
-                            "d",
-                            \`\${d} C \${x} \${y}, \${x} \${y}, \${x} \${y}\`
-                          );
-                        }
-                        if (menu.fade === "false") return;
-                        path.style.opacity = 0;
-                        path.addEventListener("transitionend", () => {
-                          path.remove();
-                        });
-                      };
-                      break;
-                    case "eraser":
-                      handleMousemove = (event) => {
-                        const elementsToRemove = new Set();
-                        for (const element of this.querySelectorAll("*"))
-                          switch (element.tagName) {
-                            case "path":
-                              for (const [x, y] of element
-                                .getAttribute("d")
-                                .match(
-                                  ${/C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g}
-                                )
-                                .map((curve) =>
-                                  curve
-                                    .split(",")[2]
-                                    .trim()
-                                    .split(" ")
-                                    .map(Number)
-                                ))
-                                if (
-                                  Math.sqrt(
-                                    (event.offsetX - x) ** 2 +
-                                      (event.offsetY - y) ** 2
-                                  ) <
-                                  menu.strokeWidth * 5
-                                )
-                                  elementsToRemove.add(element);
-                              break;
-                          }
-
-                        for (const element of elementsToRemove) element.remove();
-                      };
-                      break;
+                document.addEventListener("mousemove", (event) => {
+                  this.hidden = false;
+                  this.style.top = String(event.offsetY) + "px";
+                  this.style.left = String(event.offsetX) + "px";
+                });
+                document.addEventListener("mouseleave", (event) => {
+                  this.hidden = true;
+                });
+                ipcRenderer.on("settings", (_, settings) => {
+                  this.style.color = settings.color;
+                  const circle = this.querySelector(".circle circle");
+                  circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
+                  circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
+                  this.querySelector(".circle").hidden = settings.tool === "eraser";
+                  const eraser = this.querySelector(".eraser");
+                  eraser.hidden = settings.tool !== "eraser";
+                  /*
+                  TODO: Do we change the cursor on fade?
+                  {
+                    "fade": "false",
                   }
-                  window.addEventListener("mousemove", handleMousemove);
-                  window.addEventListener(
-                    "mouseup",
-                    () => {
-                      window.removeEventListener("mousemove", handleMousemove);
-                      if (handleMouseup !== undefined) handleMouseup();
-                    },
-                    { once: true }
-                  );
+                  */
                 });
               `}"
             >
-              <g class="highlighter"></g>
-              <g class="pen"></g>
-            </svg>
+              <div class="circle">
+                <svg viewBox="-7.5 -7.5, 15 15">
+                  <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+                  <path
+                    d="M -6 0 L 6 0 M 0 -6 L 0 6"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="eraser" hidden>
+                <i class="fas fa-eraser"></i>
+              </div>
+            </div>
+            <div
+              style="${css`
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+              `}"
+            >
+              <svg
+                style="${css`
+                  width: 100%;
+                  height: 100%;
+                `}"
+                data-ondomcontentloaded="${javascript`
+                  const drawing = this.closest(".drawing");
+                  window.addEventListener("mousedown", async (event) => {
+                    let handleMousemove;
+                    let handleMouseup;
+                    switch (drawing.settings.tool) {
+                      case "pen":
+                      case "highlighter":
+                        const group = this.querySelector(\`.\${drawing.settings.tool}\`);
+                        group.insertAdjacentHTML(
+                          "beforeend",
+                          \`
+                        <path
+                          d="M \${event.offsetX} \${event.offsetY}"
+                          fill="none"
+                          stroke="\${drawing.settings.color}"
+                          stroke-width="\${
+                            drawing.settings.strokeWidth * (drawing.settings.tool === "highlighter" ? 3 : 1)
+                          }"
+                          stroke-opacity="\${drawing.settings.tool === "highlighter" ? 0.5 : 1}"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          style="\${
+                            drawing.settings.fade === "false"
+                              ? \`\`
+                              : \`transition: opacity \${drawing.settings.fade}ms ease-in;\`
+                          }"
+                        />
+                      \`
+                        );
+                        const path = group.lastElementChild;
+                        const t = 0.4;
+                        let x0 = { x: event.offsetX, y: event.offsetY };
+                        let x1 = { x: event.offsetX, y: event.offsetY };
+                        let x2 = { x: event.offsetX, y: event.offsetY };
+                        let p1 = { x: event.offsetX, y: event.offsetY };
+                        let p2 = { x: event.offsetX, y: event.offsetY };
+                        handleMousemove = (event) => {
+                          // http://scaledinnovation.com/analytics/splines/aboutSplines.html
+                          if (event.offsetX === x2.x && event.offsetY === x2.y)
+                            return;
+                          x2 = { x: event.offsetX, y: event.offsetY };
+                          const x0_x1 = Math.sqrt(
+                            (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
+                          );
+                          const x1_x2 = Math.sqrt(
+                            (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
+                          );
+                          const x0_x1_x2 = x0_x1 + x1_x2;
+                          const ratio_x0_x1 = x0_x1 / x0_x1_x2;
+                          const ratio_x1_x2 = x1_x2 / x0_x1_x2;
+                          const w = x2.x - x0.x;
+                          const h = x2.y - x0.y;
+                          p1 = {
+                            x: x1.x - w * t * ratio_x0_x1,
+                            y: x1.y - h * t * ratio_x0_x1,
+                          };
+                          path.setAttribute(
+                            "d",
+                            \`\${path.getAttribute("d")} C \${p2.x} \${p2.y}, \${
+                              p1.x
+                            } \${p1.y}, \${x1.x} \${x1.y}\`
+                          );
+                          p2 = {
+                            x: x1.x + w * t * ratio_x1_x2,
+                            y: x1.y + h * t * ratio_x1_x2,
+                          };
+                          x0 = x1;
+                          x1 = x2;
+                        };
+                        handleMouseup = () => {
+                          const d = path.getAttribute("d");
+                          if (!d.includes("C")) {
+                            const [x, y] = d.split(" ").slice(1);
+                            path.setAttribute(
+                              "d",
+                              \`\${d} C \${x} \${y}, \${x} \${y}, \${x} \${y}\`
+                            );
+                          }
+                          if (drawing.settings.fade === "false") return;
+                          path.style.opacity = 0;
+                          path.addEventListener("transitionend", () => {
+                            path.remove();
+                          });
+                        };
+                        break;
+                      case "eraser":
+                        handleMousemove = (event) => {
+                          const elementsToRemove = new Set();
+                          for (const element of this.querySelectorAll("*"))
+                            switch (element.tagName) {
+                              case "path":
+                                for (const [x, y] of element
+                                  .getAttribute("d")
+                                  .match(
+                                    ${/C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g}
+                                  )
+                                  .map((curve) =>
+                                    curve
+                                      .split(",")[2]
+                                      .trim()
+                                      .split(" ")
+                                      .map(Number)
+                                  ))
+                                  if (
+                                    Math.sqrt(
+                                      (event.offsetX - x) ** 2 +
+                                        (event.offsetY - y) ** 2
+                                    ) <
+                                    drawing.settings.strokeWidth * 5
+                                  )
+                                    elementsToRemove.add(element);
+                                break;
+                            }
+
+                          for (const element of elementsToRemove) element.remove();
+                        };
+                        break;
+                    }
+                    window.addEventListener("mousemove", handleMousemove);
+                    window.addEventListener(
+                      "mouseup",
+                      () => {
+                        window.removeEventListener("mousemove", handleMousemove);
+                        if (handleMouseup !== undefined) handleMouseup();
+                      },
+                      { once: true }
+                    );
+                  });
+                `}"
+              >
+                <g class="highlighter"></g>
+                <g class="pen"></g>
+              </svg>
+            </div>
           </div>
         </body>
       </html>
@@ -390,9 +403,14 @@ const javascript = require("tagged-template-noop");
             `}"
           >
             <form
-              onchange="${javascript`
-                ipcRenderer.send("cursor", Object.fromEntries(new URLSearchParams(new FormData(this))));
-              `}"
+              onchange="${(() => {
+                ipcMain.on("settings", (_, settings) => {
+                  drawing.webContents.send("settings", settings);
+                });
+                return javascript`
+                  ipcRenderer.send("settings", Object.fromEntries(new URLSearchParams(new FormData(this))));
+                `;
+              })()}"
             >
               <div
                 style="${css`
@@ -706,6 +724,12 @@ const javascript = require("tagged-template-noop");
 
             <div class="section">
               <label class="section--item">
+                $${(() => {
+                  ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
+                    drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
+                  });
+                  return html``;
+                })()}
                 <input
                   type="radio"
                   name="ignoreMouseEvents"
@@ -758,20 +782,6 @@ const javascript = require("tagged-template-noop");
       `
     )
   );
-
-  ipcMain.handle("menu", async () => {
-    return await menu.webContents.executeJavaScript(
-      javascript`Object.fromEntries(new URLSearchParams(new FormData(document.querySelector("form"))))`
-    );
-  });
-
-  ipcMain.on("cursor", (_, menu) => {
-    drawing.webContents.send("cursor", menu);
-  });
-
-  ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
-    drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
-  });
 
   /*
   const OBSDrawing = new BrowserWindow({
