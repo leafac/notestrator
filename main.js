@@ -739,9 +739,14 @@ const javascript = require("tagged-template-noop");
               <label class="section--item">
                 <button
                   class="section--item--icon"
-                  onclick="${javascript`
-                    
-                  `}"
+                  onclick="${(() => {
+                    ipcMain.on("hide", () => {
+                      drawing.hide();
+                    });
+                    return javascript`
+                      ipcRenderer.send("hide");
+                    `;
+                  })()}"
                 >
                   <i class="far fa-window-close"></i>
                 </button>
