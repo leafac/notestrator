@@ -731,11 +731,21 @@ const javascript = require("tagged-template-noop");
                     ipcRenderer.send(this.name, this.value);
                   `}"
                 />
-
                 <div class="section--item--icon">
                   <i class="far fa-window-restore"></i>
                 </div>
                 X
+              </label>
+              <label class="section--item">
+                <button
+                  class="section--item--icon"
+                  onclick="${javascript`
+                    
+                  `}"
+                >
+                  <i class="far fa-window-close"></i>
+                </button>
+                ?
               </label>
             </div>
           </body>
