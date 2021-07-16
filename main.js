@@ -711,7 +711,10 @@ const javascript = require("tagged-template-noop");
                   name="ignoreMouseEvents"
                   value="false"
                   checked
-                  onchange="ipcRenderer.send(this.name, this.value)"
+                  hidden
+                  onchange="${javascript`
+                    ipcRenderer.send(this.name, this.value);
+                  `}"
                 />
                 <div class="section--item--icon">
                   <i class="far fa-edit"></i>
@@ -723,7 +726,10 @@ const javascript = require("tagged-template-noop");
                   type="radio"
                   name="ignoreMouseEvents"
                   value="true"
-                  onchange="ipcRenderer.send(this.name, this.value)"
+                  hidden
+                  onchange="${javascript`
+                    ipcRenderer.send(this.name, this.value);
+                  `}"
                 />
 
                 <div class="section--item--icon">
