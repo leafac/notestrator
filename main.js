@@ -403,12 +403,16 @@ const javascript = require("tagged-template-noop");
             `}"
           >
             <form
-              onchange="${(() => {
+              data-ondomcontentloaded="${(() => {
                 ipcMain.on("settings", (_, settings) => {
                   drawing.webContents.send("settings", settings);
                 });
                 return javascript`
-                  ipcRenderer.send("settings", Object.fromEntries(new URLSearchParams(new FormData(this))));
+                  const settings = () => {
+                    ipcRenderer.send("settings", Object.fromEntries(new URLSearchParams(new FormData(this))));
+                  };
+                  settings();
+                  this.addEventListener("change", settings);
                 `;
               })()}"
             >
