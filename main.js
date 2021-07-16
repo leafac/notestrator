@@ -311,6 +311,7 @@ const javascript = require("tagged-template-noop");
                 color: var(--color--gray--warm--500);
                 background-color: var(--color--gray--warm--900);
               }
+              padding: var(--space--2) var(--space--2);
               position: absolute;
               top: 0;
               right: 0;
@@ -389,9 +390,6 @@ const javascript = require("tagged-template-noop");
             `}"
           >
             <form
-              style="${css`
-                padding: var(--space--2) var(--space--2);
-              `}"
               onchange="${javascript`
                 ipcRenderer.send("cursor", Object.fromEntries(new URLSearchParams(new FormData(this))));
               `}"
@@ -702,39 +700,38 @@ const javascript = require("tagged-template-noop");
                   `
                 )}
               </div>
-
-              <!-- FIXME: Remove this section from the <form> because it doesn’t affect the drawing. -->
-              <hr class="separator" />
-
-              <div class="section">
-                <label class="section--item">
-                  <input
-                    type="radio"
-                    name="ignoreMouseEvents"
-                    value="false"
-                    checked
-                    onchange="ipcRenderer.send(this.name, this.value)"
-                  />
-                  <div class="section--item--icon">
-                    <i class="far fa-edit"></i>
-                  </div>
-                  Z
-                </label>
-                <label class="section--item">
-                  <input
-                    type="radio"
-                    name="ignoreMouseEvents"
-                    value="true"
-                    onchange="ipcRenderer.send(this.name, this.value)"
-                  />
-
-                  <div class="section--item--icon">
-                    <i class="far fa-window-restore"></i>
-                  </div>
-                  X
-                </label>
-              </div>
             </form>
+
+            <hr class="separator" />
+
+            <div class="section">
+              <label class="section--item">
+                <input
+                  type="radio"
+                  name="ignoreMouseEvents"
+                  value="false"
+                  checked
+                  onchange="ipcRenderer.send(this.name, this.value)"
+                />
+                <div class="section--item--icon">
+                  <i class="far fa-edit"></i>
+                </div>
+                Z
+              </label>
+              <label class="section--item">
+                <input
+                  type="radio"
+                  name="ignoreMouseEvents"
+                  value="true"
+                  onchange="ipcRenderer.send(this.name, this.value)"
+                />
+
+                <div class="section--item--icon">
+                  <i class="far fa-window-restore"></i>
+                </div>
+                X
+              </label>
+            </div>
           </body>
         </html>
       `
