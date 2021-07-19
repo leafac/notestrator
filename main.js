@@ -54,13 +54,14 @@ const javascript = require("tagged-template-noop");
     transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     roundedCorners: false,
+    skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
   drawing.setAlwaysOnTop(true, "screen-saver", 1);
-  drawing.setVisibleOnAllWorkspaces(true);
+  drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   drawing.loadURL(
     HTMLToURL(html`
       <!DOCTYPE html>
@@ -316,6 +317,7 @@ const javascript = require("tagged-template-noop");
     resizable: false,
     frame: false,
     focusable: false,
+    skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
