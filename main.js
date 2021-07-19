@@ -4,7 +4,10 @@ const {
   ipcMain,
   screen,
   globalShortcut,
+  Tray,
+  Menu,
 } = require("electron");
+const path = require("path");
 const express = require("express");
 const { html } = require("@leafac/html");
 const { css, extractInlineStyles } = require("@leafac/css");
@@ -12,6 +15,29 @@ const javascript = require("tagged-template-noop");
 
 (async () => {
   await app.whenReady();
+
+  const tray = new Tray(path.join(__dirname, "logo@2x.png"));
+  tray.setToolTip("Notestrator");
+  tray.setContextMenu(
+    Menu.buildFromTemplate([
+      {
+        label: "Draw",
+        click: () => {
+          drawing.show();
+        },
+      },
+      {
+        label: "Quit",
+        click: () => {
+          drawing.destroy();
+          menu.destroy();
+        },
+      },
+    ])
+  );
+  app.addListener("accessibility-support-changed", () => {
+    tray;
+  });
 
   // FIXME: Fix keyboard shortcuts by forwarding the keyboard events to the menu window.
   // FIXME: Deal with multiple displays.
