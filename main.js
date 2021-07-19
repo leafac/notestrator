@@ -1,4 +1,10 @@
-const { app, BrowserWindow, ipcMain, screen } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  screen,
+  globalShortcut,
+} = require("electron");
 const express = require("express");
 const { html } = require("@leafac/html");
 const { css, extractInlineStyles } = require("@leafac/css");
@@ -786,6 +792,10 @@ const javascript = require("tagged-template-noop");
       `
     )
   );
+
+  globalShortcut.register("Control+Alt+Command+Space", () => {
+    drawing.show();
+  });
 
   /*
   const OBSDrawing = new BrowserWindow({
