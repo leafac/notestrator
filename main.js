@@ -6,6 +6,7 @@ const {
   globalShortcut,
   Tray,
   Menu,
+  MenuItem,
 } = require("electron");
 const path = require("path");
 const express = require("express");
@@ -16,29 +17,7 @@ const javascript = require("tagged-template-noop");
 (async () => {
   await app.whenReady();
 
-  const tray = new Tray(path.join(__dirname, "logo@2x.png"));
-  tray.setToolTip("Notestrator");
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      {
-        label: "Draw",
-        accelerator: "Control+Alt+Command+Space",
-        click: () => {
-          drawing.show();
-        },
-      },
-      {
-        label: "Quit",
-        click: () => {
-          drawing.destroy();
-          menu.destroy();
-        },
-      },
-    ])
-  );
-  app.addListener("accessibility-support-changed", () => {
-    tray;
-  });
+  const menuMenu = new Menu();
 
   // FIXME: Fix keyboard shortcuts by forwarding the keyboard events to the menu window.
   // FIXME: Deal with multiple displays.
@@ -578,11 +557,25 @@ const javascript = require("tagged-template-noop");
                             --transition-timing-function--in-out
                           );
                         `}"
-                        data-ondomcontentloaded="${javascript`
-                          Mousetrap.bind(${JSON.stringify(
-                            shortcut
-                          )}, () => { this.click(); })
-                        `}"
+                        ${(() => {
+                          menuMenu.append(
+                            new MenuItem({
+                              label: `Color ${color}`,
+                              submenu: [
+                                {
+                                  label: `Color ${color}`,
+                                  accelerator: shortcut,
+                                  click: () => {
+                                    menu.webContents
+                                      .executeJavaScript(javascript`
+                                      document.querySelector('[name="color"][value="${color}"]').click();
+                                    `);
+                                  },
+                                },
+                              ],
+                            })
+                          );
+                        })()}
                       />
                       ${shortcut}
                     </label>
@@ -825,6 +818,32 @@ const javascript = require("tagged-template-noop");
   globalShortcut.register("Control+Alt+Command+Space", () => {
     drawing.show();
   });
+
+  const tray = new Tray(path.join(__dirname, "logo@2x.png"));
+  tray.setToolTip("Notestrator");
+  tray.setContextMenu(
+    Menu.buildFromTemplate([
+      {
+        label: "Draw",
+        accelerator: "Control+Alt+Command+Space",
+        click: () => {
+          drawing.show();
+        },
+      },
+      {
+        label: "Quit",
+        click: () => {
+          drawing.destroy();
+          menu.destroy();
+        },
+      },
+    ])
+  );
+  app.addListener("accessibility-support-changed", () => {
+    tray;
+  });
+
+  Menu.setApplicationMenu(menuMenu);
 
   /*
   const OBSDrawing = new BrowserWindow({
