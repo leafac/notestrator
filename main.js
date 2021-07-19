@@ -22,6 +22,7 @@ const javascript = require("tagged-template-noop");
     Menu.buildFromTemplate([
       {
         label: "Draw",
+        accelerator: "Control+Alt+Command+Space",
         click: () => {
           drawing.show();
         },
