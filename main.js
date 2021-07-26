@@ -94,6 +94,9 @@ const javascript = require("tagged-template-noop");
                 document.addEventListener("mouseleave", (event) => {
                   this.hidden = true;
                 });
+                new MutationObserver(() => {
+                  this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
+                }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
                 document.addEventListener("mousemove", (event) => {
                   this.style.top = String(event.offsetY) + "px";
                   this.style.left = String(event.offsetX) + "px";
