@@ -794,6 +794,9 @@ const javascript = require("tagged-template-noop");
                     ipcMain.on("hide", () => {
                       drawing.hide();
                     });
+                    shortcuts.set("esc", () => {
+                      ipcMain.emit("hide");
+                    });
                     return javascript`
                       ipcRenderer.send("hide");
                     `;
