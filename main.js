@@ -6,7 +6,6 @@ const {
   globalShortcut,
   Tray,
   Menu,
-  MenuItem,
 } = require("electron");
 const path = require("path");
 const express = require("express");
