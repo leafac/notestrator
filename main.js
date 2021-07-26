@@ -17,7 +17,7 @@ const javascript = require("tagged-template-noop");
 (async () => {
   await app.whenReady();
 
-  const menuMenu = new Menu();
+  const shortcuts = new Map();
 
   // FIXME: Fix keyboard shortcuts by forwarding the keyboard events to the menu window.
   // FIXME: Deal with multiple displays.
@@ -558,23 +558,11 @@ const javascript = require("tagged-template-noop");
                           );
                         `}"
                         ${(() => {
-                          menuMenu.append(
-                            new MenuItem({
-                              label: `Color ${color}`,
-                              submenu: [
-                                {
-                                  label: `Color ${color}`,
-                                  accelerator: shortcut,
-                                  click: () => {
-                                    menu.webContents
-                                      .executeJavaScript(javascript`
-                                      document.querySelector('[name="color"][value="${color}"]').click();
-                                    `);
-                                  },
-                                },
-                              ],
-                            })
-                          );
+                          shortcuts.set(shortcut, () => {
+                            menu.webContents.executeJavaScript(javascript`
+                            document.querySelector('[name="color"][value="${color}"]').click();
+                          `);
+                          });
                         })()}
                       />
                       ${shortcut}
@@ -843,7 +831,18 @@ const javascript = require("tagged-template-noop");
     tray;
   });
 
-  Menu.setApplicationMenu(menuMenu);
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate([
+      {
+        label: "Shortcuts",
+        submenu: [...shortcuts.entries()].map(([accelerator, click]) => ({
+          label: `Shortcut ${accelerator}`,
+          accelerator,
+          click,
+        })),
+      },
+    ])
+  );
 
   /*
   const OBSDrawing = new BrowserWindow({
