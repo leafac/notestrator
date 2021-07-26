@@ -596,11 +596,14 @@ const javascript = require("tagged-template-noop");
                         value="${strokeWidth}"
                         hidden
                         $${isDefault ? html`checked` : html``}
-                        data-ondomcontentloaded="${javascript`
-                          Mousetrap.bind(${JSON.stringify(
-                            accelerator
-                          )}, () => { this.click(); })
-                        `}"
+                        ${(() => {
+                          shortcuts.set(accelerator, () => {
+                            menu.webContents.executeJavaScript(javascript`
+                              document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
+                            `);
+                          });
+                          return html``;
+                        })()}
                       />
                       <svg class="section--item--icon">
                         <line
@@ -649,11 +652,14 @@ const javascript = require("tagged-template-noop");
                         value="${tool}"
                         hidden
                         $${isDefault ? html`checked` : html``}
-                        data-ondomcontentloaded="${javascript`
-                          Mousetrap.bind(${JSON.stringify(
-                            accelerator
-                          )}, () => { this.click(); })
-                        `}"
+                        ${(() => {
+                          shortcuts.set(accelerator, () => {
+                            menu.webContents.executeJavaScript(javascript`
+                              document.querySelector('[name="tool"][value="${tool}"]').click();
+                            `);
+                          });
+                          return html``;
+                        })()}
                       />
                       <div class="section--item--icon">
                         <i class="fas fa-${icon}"></i>
@@ -692,11 +698,14 @@ const javascript = require("tagged-template-noop");
                         value="${fade}"
                         hidden
                         $${isDefault ? html`checked` : html``}
-                        data-ondomcontentloaded="${javascript`
-                          Mousetrap.bind(${JSON.stringify(
-                            accelerator
-                          )}, () => { this.click(); })
-                        `}"
+                        ${(() => {
+                          shortcuts.set(accelerator, () => {
+                            menu.webContents.executeJavaScript(javascript`
+                              document.querySelector('[name="fade"][value="${fade}"]').click();
+                            `);
+                          });
+                          return html``;
+                        })()}
                       />
                       <svg class="section--item--icon">
                         $${gradient === undefined
