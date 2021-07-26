@@ -18,7 +18,6 @@ const javascript = require("tagged-template-noop");
 
   const shortcuts = new Map();
 
-  // FIXME: Fix keyboard shortcuts by forwarding the keyboard events to the menu window.
   // FIXME: Deal with multiple displays.
   const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
@@ -442,61 +441,61 @@ const javascript = require("tagged-template-noop");
                   {
                     color: "var(--color--red--600)",
                     borderColor: "var(--color--red--500)",
-                    shortcut: "1",
+                    accelerator: "1",
                     isDefault: true,
                   },
                   {
                     color: "var(--color--amber--600)",
                     borderColor: "var(--color--amber--500)",
-                    shortcut: "2",
+                    accelerator: "2",
                   },
                   {
                     color: "var(--color--lime--600)",
                     borderColor: "var(--color--lime--500)",
-                    shortcut: "3",
+                    accelerator: "3",
                   },
                   {
                     color: "var(--color--teal--600)",
                     borderColor: "var(--color--teal--500)",
-                    shortcut: "4",
+                    accelerator: "4",
                   },
                   {
                     color: "var(--color--sky--600)",
                     borderColor: "var(--color--sky--500)",
-                    shortcut: "5",
+                    accelerator: "5",
                   },
                   {
                     color: "var(--color--indigo--600)",
                     borderColor: "var(--color--indigo--500)",
-                    shortcut: "6",
+                    accelerator: "6",
                   },
                   {
                     color: "var(--color--purple--600)",
                     borderColor: "var(--color--purple--500)",
-                    shortcut: "7",
+                    accelerator: "7",
                   },
                   {
                     color: "var(--color--pink--600)",
                     borderColor: "var(--color--pink--500)",
-                    shortcut: "8",
+                    accelerator: "8",
                   },
                   {
                     color: "var(--color--gray--warm--900)",
                     borderColor: "var(--color--gray--warm--700)",
-                    shortcut: "9",
+                    accelerator: "9",
                   },
                   {
                     color: "var(--color--gray--warm--50)",
                     borderColor: "var(--color--gray--warm--200)",
                     checkedColor: "var(--color--gray--warm--600)",
-                    shortcut: "0",
+                    accelerator: "0",
                   },
                 ].map(
                   ({
                     color,
                     borderColor,
                     checkedColor,
-                    shortcut,
+                    accelerator,
                     isDefault,
                   }) => html`
                     <label
@@ -557,14 +556,14 @@ const javascript = require("tagged-template-noop");
                           );
                         `}"
                         ${(() => {
-                          shortcuts.set(shortcut, () => {
+                          shortcuts.set(accelerator, () => {
                             menu.webContents.executeJavaScript(javascript`
                             document.querySelector('[name="color"][value="${color}"]').click();
                           `);
                           });
                         })()}
                       />
-                      ${shortcut}
+                      ${accelerator}
                     </label>
                   `
                 )}
@@ -576,19 +575,19 @@ const javascript = require("tagged-template-noop");
                 $${[
                   {
                     strokeWidth: 1,
-                    shortcut: "q",
+                    accelerator: "q",
                   },
                   {
                     strokeWidth: 3,
-                    shortcut: "w",
+                    accelerator: "w",
                     isDefault: true,
                   },
                   {
                     strokeWidth: 5,
-                    shortcut: "e",
+                    accelerator: "e",
                   },
                 ].map(
-                  ({ strokeWidth, shortcut, isDefault }) => html`
+                  ({ strokeWidth, accelerator, isDefault }) => html`
                     <label class="section--item">
                       <input
                         type="radio"
@@ -598,7 +597,7 @@ const javascript = require("tagged-template-noop");
                         $${isDefault ? html`checked` : html``}
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
-                            shortcut
+                            accelerator
                           )}, () => { this.click(); })
                         `}"
                       />
@@ -614,7 +613,7 @@ const javascript = require("tagged-template-noop");
                           fill="none"
                         />
                       </svg>
-                      ${shortcut.toUpperCase()}
+                      ${accelerator.toUpperCase()}
                     </label>
                   `
                 )}
@@ -627,21 +626,21 @@ const javascript = require("tagged-template-noop");
                   {
                     tool: "pen",
                     icon: "pen-fancy",
-                    shortcut: "a",
+                    accelerator: "a",
                     isDefault: true,
                   },
                   {
                     tool: "highlighter",
                     icon: "highlighter",
-                    shortcut: "s",
+                    accelerator: "s",
                   },
                   {
                     tool: "eraser",
                     icon: "eraser",
-                    shortcut: "d",
+                    accelerator: "d",
                   },
                 ].map(
-                  ({ tool, icon, shortcut, isDefault }) => html`
+                  ({ tool, icon, accelerator, isDefault }) => html`
                     <label class="section--item">
                       <input
                         type="radio"
@@ -651,14 +650,14 @@ const javascript = require("tagged-template-noop");
                         $${isDefault ? html`checked` : html``}
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
-                            shortcut
+                            accelerator
                           )}, () => { this.click(); })
                         `}"
                       />
                       <div class="section--item--icon">
                         <i class="fas fa-${icon}"></i>
                       </div>
-                      ${shortcut.toUpperCase()}
+                      ${accelerator.toUpperCase()}
                     </label>
                   `
                 )}
@@ -670,21 +669,21 @@ const javascript = require("tagged-template-noop");
                 $${[
                   {
                     fade: "false",
-                    shortcut: "z",
+                    accelerator: "z",
                     isDefault: true,
                   },
                   {
                     fade: "1500",
                     gradient: 100,
-                    shortcut: "x",
+                    accelerator: "x",
                   },
                   {
                     fade: "500",
                     gradient: 60,
-                    shortcut: "c",
+                    accelerator: "c",
                   },
                 ].map(
-                  ({ fade, gradient, shortcut, isDefault }) => html`
+                  ({ fade, gradient, accelerator, isDefault }) => html`
                     <label class="section--item">
                       <input
                         type="radio"
@@ -694,7 +693,7 @@ const javascript = require("tagged-template-noop");
                         $${isDefault ? html`checked` : html``}
                         data-ondomcontentloaded="${javascript`
                           Mousetrap.bind(${JSON.stringify(
-                            shortcut
+                            accelerator
                           )}, () => { this.click(); })
                         `}"
                       />
@@ -732,7 +731,7 @@ const javascript = require("tagged-template-noop");
                           `}"
                         />
                       </svg>
-                      ${shortcut.toUpperCase()}
+                      ${accelerator.toUpperCase()}
                     </label>
                   `
                 )}
