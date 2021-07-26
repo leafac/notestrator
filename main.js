@@ -804,7 +804,7 @@ const javascript = require("tagged-template-noop");
                 <div class="section--item--icon">
                   <i class="far fa-window-close"></i>
                 </div>
-                ?
+                ⎋
               </button>
             </div>
           </body>
