@@ -79,6 +79,7 @@ const javascript = require("tagged-template-noop");
           >
             <!-- FIXME: The cursor shows up below the drawing. -->
             <div
+              class="cursor"
               style="${css`
                 position: absolute;
                 width: 15px;
@@ -87,13 +88,15 @@ const javascript = require("tagged-template-noop");
                 color: var(--color--red--600);
               `}"
               data-ondomcontentloaded="${javascript`
-                document.addEventListener("mousemove", (event) => {
+                document.addEventListener("mouseenter", (event) => {
                   this.hidden = false;
-                  this.style.top = String(event.offsetY) + "px";
-                  this.style.left = String(event.offsetX) + "px";
                 });
                 document.addEventListener("mouseleave", (event) => {
                   this.hidden = true;
+                });
+                document.addEventListener("mousemove", (event) => {
+                  this.style.top = String(event.offsetY) + "px";
+                  this.style.left = String(event.offsetX) + "px";
                 });
                 ipcRenderer.on("settings", (_, settings) => {
                   this.style.color = settings.color;
@@ -781,6 +784,9 @@ const javascript = require("tagged-template-noop");
                     shortcuts.set("`", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
+                      `);
+                      drawing.webContents.executeJavaScript(javascript`
+                        document.querySelector(".cursor").hidden = true;
                       `);
                     });
                     return javascript`
