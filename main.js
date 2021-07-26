@@ -787,25 +787,25 @@ const javascript = require("tagged-template-noop");
                 </div>
                 X
               </label>
-              <label class="section--item">
-                <button
-                  class="section--item--icon"
-                  onclick="${(() => {
-                    ipcMain.on("hide", () => {
-                      drawing.hide();
-                    });
-                    shortcuts.set("esc", () => {
-                      ipcMain.emit("hide");
-                    });
-                    return javascript`
-                      ipcRenderer.send("hide");
-                    `;
-                  })()}"
-                >
+              <button
+                class="section--item"
+                onclick="${(() => {
+                  ipcMain.on("hide", () => {
+                    drawing.hide();
+                  });
+                  shortcuts.set("esc", () => {
+                    ipcMain.emit("hide");
+                  });
+                  return javascript`
+                    ipcRenderer.send("hide");
+                  `;
+                })()}"
+              >
+                <div class="section--item--icon">
                   <i class="far fa-window-close"></i>
-                </button>
+                </div>
                 ?
-              </label>
+              </button>
             </div>
           </body>
         </html>
