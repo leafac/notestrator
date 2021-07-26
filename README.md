@@ -1,6 +1,7 @@
 ### Backlog
 
 - Fix the rest of the shortcuts.
+- Undo-redo.
 - Mouse modifiers:
   - Right-click to erase.
   - Scroll.
