@@ -770,7 +770,6 @@ const javascript = require("tagged-template-noop");
                 <div class="section--item--icon">
                   <i class="far fa-edit"></i>
                 </div>
-                Z
               </label>
               <label class="section--item">
                 <input
@@ -778,23 +777,32 @@ const javascript = require("tagged-template-noop");
                   name="ignoreMouseEvents"
                   value="true"
                   hidden
-                  onchange="${javascript`
-                    ipcRenderer.send(this.name, this.value);
-                  `}"
+                  onchange="${(() => {
+                    shortcuts.set("`", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send(this.name, this.value);
+                    `;
+                  })()}"
                 />
                 <div class="section--item--icon">
                   <i class="far fa-window-restore"></i>
                 </div>
-                X
+                ${"`"}
               </label>
               <button
-                class="section--item"
+                class="section--item hide"
                 onclick="${(() => {
                   ipcMain.on("hide", () => {
                     drawing.hide();
                   });
                   shortcuts.set("esc", () => {
-                    ipcMain.emit("hide");
+                    menu.webContents.executeJavaScript(javascript`
+                      document.querySelector(".hide").click();
+                    `);
                   });
                   return javascript`
                     ipcRenderer.send("hide");
