@@ -313,7 +313,6 @@ const javascript = require("tagged-template-noop");
             />
             <script>
               const { ipcRenderer } = require("electron");
-              const Mousetrap = require("mousetrap");
               require("@fortawesome/fontawesome-free/js/all.js");
               window.addEventListener("DOMContentLoaded", () => {
                 for (const element of document.querySelectorAll(
