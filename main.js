@@ -77,63 +77,6 @@ const javascript = require("tagged-template-noop");
               });
             `}"
           >
-            <!-- FIXME: The cursor shows up below the drawing. -->
-            <div
-              class="cursor"
-              style="${css`
-                position: absolute;
-                width: 15px;
-                height: 15px;
-                transform: translate(-50%, -50%);
-                color: var(--color--red--600);
-              `}"
-              data-ondomcontentloaded="${javascript`
-                document.addEventListener("mouseenter", (event) => {
-                  this.hidden = false;
-                });
-                document.addEventListener("mouseleave", (event) => {
-                  this.hidden = true;
-                });
-                new MutationObserver(() => {
-                  this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
-                }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
-                document.addEventListener("mousemove", (event) => {
-                  this.style.top = String(event.offsetY) + "px";
-                  this.style.left = String(event.offsetX) + "px";
-                });
-                ipcRenderer.on("settings", (_, settings) => {
-                  this.style.color = settings.color;
-                  const circle = this.querySelector(".circle circle");
-                  circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
-                  circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
-                  this.querySelector(".circle").hidden = settings.tool === "eraser";
-                  const eraser = this.querySelector(".eraser");
-                  eraser.hidden = settings.tool !== "eraser";
-                  /*
-                  TODO: Do we change the cursor on fade?
-                  {
-                    "fade": "false",
-                  }
-                  */
-                });
-              `}"
-            >
-              <div class="circle">
-                <svg viewBox="-7.5 -7.5, 15 15">
-                  <circle cx="0" cy="0" r="1.5" fill="currentColor" />
-                  <path
-                    d="M -6 0 L 6 0 M 0 -6 L 0 6"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="eraser" hidden>
-                <i class="fas fa-eraser"></i>
-              </div>
-            </div>
             <div
               style="${css`
                 position: absolute;
@@ -282,6 +225,62 @@ const javascript = require("tagged-template-noop");
                 <g class="highlighter"></g>
                 <g class="pen"></g>
               </svg>
+            </div>
+            <div
+              class="cursor"
+              style="${css`
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                transform: translate(-50%, -50%);
+                color: var(--color--red--600);
+              `}"
+              data-ondomcontentloaded="${javascript`
+                document.addEventListener("mouseenter", (event) => {
+                  this.hidden = false;
+                });
+                document.addEventListener("mouseleave", (event) => {
+                  this.hidden = true;
+                });
+                new MutationObserver(() => {
+                  this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
+                }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
+                document.addEventListener("mousemove", (event) => {
+                  this.style.top = String(event.offsetY) + "px";
+                  this.style.left = String(event.offsetX) + "px";
+                });
+                ipcRenderer.on("settings", (_, settings) => {
+                  this.style.color = settings.color;
+                  const circle = this.querySelector(".circle circle");
+                  circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
+                  circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
+                  this.querySelector(".circle").hidden = settings.tool === "eraser";
+                  const eraser = this.querySelector(".eraser");
+                  eraser.hidden = settings.tool !== "eraser";
+                  /*
+                  TODO: Do we change the cursor on fade?
+                  {
+                    "fade": "false",
+                  }
+                  */
+                });
+              `}"
+            >
+              <div class="circle">
+                <svg viewBox="-7.5 -7.5, 15 15">
+                  <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+                  <path
+                    d="M -6 0 L 6 0 M 0 -6 L 0 6"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="eraser" hidden>
+                <i class="fas fa-eraser"></i>
+              </div>
             </div>
           </div>
         </body>
