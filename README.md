@@ -1,6 +1,5 @@
 ### Backlog
 
-- Quit button on the menu.
 - Hide menu.
 - Reset drawing.
 - Undo-redo.
