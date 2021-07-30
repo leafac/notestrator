@@ -10,3 +10,4 @@
   - Scroll.
   - Shift to keep line straight.
 - Save the drawing: SVG & PNG with transparent background.
+- Labels to not be clickable.
