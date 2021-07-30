@@ -1,6 +1,5 @@
 ### Backlog
 
-- Hide menu.
 - Reset drawing.
 - Undo-redo.
 - Mouse modifiers:
