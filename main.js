@@ -357,8 +357,8 @@ const javascript = require("tagged-template-noop");
                 }
 
                 .section--heading {
-                  font-size: var(--font-size--xs);
-                  line-height: var(--line-height--xs);
+                  font-size: var(--font-size--2xs);
+                  line-height: var(--line-height--2xs);
                   font-weight: var(--font-weight--bold);
                   color: var(--color--gray--warm--400);
                   display: flex;
@@ -598,252 +598,269 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div class="section--content">
-                $${[
-                  {
-                    strokeWidth: 1,
-                    accelerator: "q",
-                  },
-                  {
-                    strokeWidth: 3,
-                    accelerator: "w",
-                    isDefault: true,
-                  },
-                  {
-                    strokeWidth: 5,
-                    accelerator: "e",
-                  },
-                ].map(
-                  ({ strokeWidth, accelerator, isDefault }) => html`
-                    <label class="section--item">
-                      <input
-                        type="radio"
-                        name="strokeWidth"
-                        value="${strokeWidth}"
-                        hidden
-                        $${isDefault ? html`checked` : html``}
-                        ${(() => {
-                          shortcuts.set(accelerator, () => {
-                            menu.webContents.executeJavaScript(javascript`
+              <div class="section">
+                <div class="section--heading"></div>
+                <div class="section--content">
+                  $${[
+                    {
+                      strokeWidth: 1,
+                      accelerator: "q",
+                    },
+                    {
+                      strokeWidth: 3,
+                      accelerator: "w",
+                      isDefault: true,
+                    },
+                    {
+                      strokeWidth: 5,
+                      accelerator: "e",
+                    },
+                  ].map(
+                    ({ strokeWidth, accelerator, isDefault }) => html`
+                      <label class="section--item">
+                        <input
+                          type="radio"
+                          name="strokeWidth"
+                          value="${strokeWidth}"
+                          hidden
+                          $${isDefault ? html`checked` : html``}
+                          ${(() => {
+                            shortcuts.set(accelerator, () => {
+                              menu.webContents.executeJavaScript(javascript`
                               document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
                             `);
-                          });
-                          return html``;
-                        })()}
-                      />
-                      <svg class="section--item--icon">
-                        <line
-                          x1="${strokeWidth / 2 + 3}"
-                          y1="${20 - strokeWidth / 2 - 3}"
-                          x2="${20 - strokeWidth / 2 - 3}"
-                          y2="${strokeWidth / 2 + 3}"
-                          stroke-width="${strokeWidth}"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          fill="none"
+                            });
+                            return html``;
+                          })()}
                         />
-                      </svg>
-                      ${accelerator.toUpperCase()}
-                    </label>
-                  `
-                )}
+                        <svg class="section--item--icon">
+                          <line
+                            x1="${strokeWidth / 2 + 3}"
+                            y1="${20 - strokeWidth / 2 - 3}"
+                            x2="${20 - strokeWidth / 2 - 3}"
+                            y2="${strokeWidth / 2 + 3}"
+                            stroke-width="${strokeWidth}"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            fill="none"
+                          />
+                        </svg>
+                        ${accelerator.toUpperCase()}
+                      </label>
+                    `
+                  )}
+                </div>
               </div>
 
               <hr class="separator" />
 
-              <div class="section--content">
-                $${[
-                  {
-                    tool: "pen",
-                    icon: "pen-fancy",
-                    accelerator: "a",
-                    isDefault: true,
-                  },
-                  {
-                    tool: "highlighter",
-                    icon: "highlighter",
-                    accelerator: "s",
-                  },
-                  {
-                    tool: "eraser",
-                    icon: "eraser",
-                    accelerator: "d",
-                  },
-                ].map(
-                  ({ tool, icon, accelerator, isDefault }) => html`
-                    <label class="section--item">
-                      <input
-                        type="radio"
-                        name="tool"
-                        value="${tool}"
-                        hidden
-                        $${isDefault ? html`checked` : html``}
-                        ${(() => {
-                          shortcuts.set(accelerator, () => {
-                            menu.webContents.executeJavaScript(javascript`
+              <div class="section">
+                <div class="section--heading"></div>
+                <div class="section--content">
+                  $${[
+                    {
+                      tool: "pen",
+                      icon: "pen-fancy",
+                      accelerator: "a",
+                      isDefault: true,
+                    },
+                    {
+                      tool: "highlighter",
+                      icon: "highlighter",
+                      accelerator: "s",
+                    },
+                    {
+                      tool: "eraser",
+                      icon: "eraser",
+                      accelerator: "d",
+                    },
+                  ].map(
+                    ({ tool, icon, accelerator, isDefault }) => html`
+                      <label class="section--item">
+                        <input
+                          type="radio"
+                          name="tool"
+                          value="${tool}"
+                          hidden
+                          $${isDefault ? html`checked` : html``}
+                          ${(() => {
+                            shortcuts.set(accelerator, () => {
+                              menu.webContents.executeJavaScript(javascript`
                               document.querySelector('[name="tool"][value="${tool}"]').click();
                             `);
-                          });
-                          return html``;
-                        })()}
-                      />
-                      <div class="section--item--icon">
-                        <i class="fas fa-${icon}"></i>
-                      </div>
-                      ${accelerator.toUpperCase()}
-                    </label>
-                  `
-                )}
+                            });
+                            return html``;
+                          })()}
+                        />
+                        <div class="section--item--icon">
+                          <i class="fas fa-${icon}"></i>
+                        </div>
+                        ${accelerator.toUpperCase()}
+                      </label>
+                    `
+                  )}
+                </div>
               </div>
 
               <hr class="separator" />
 
-              <div class="section--content">
-                $${[
-                  {
-                    fade: "false",
-                    accelerator: "z",
-                    isDefault: true,
-                  },
-                  {
-                    fade: "1500",
-                    gradient: 100,
-                    accelerator: "x",
-                  },
-                  {
-                    fade: "500",
-                    gradient: 60,
-                    accelerator: "c",
-                  },
-                ].map(
-                  ({ fade, gradient, accelerator, isDefault }) => html`
-                    <label class="section--item">
-                      <input
-                        type="radio"
-                        name="fade"
-                        value="${fade}"
-                        hidden
-                        $${isDefault ? html`checked` : html``}
-                        ${(() => {
-                          shortcuts.set(accelerator, () => {
-                            menu.webContents.executeJavaScript(javascript`
+              <div class="section">
+                <div class="section--heading"></div>
+                <div class="section--content">
+                  $${[
+                    {
+                      fade: "false",
+                      accelerator: "z",
+                      isDefault: true,
+                    },
+                    {
+                      fade: "1500",
+                      gradient: 100,
+                      accelerator: "x",
+                    },
+                    {
+                      fade: "500",
+                      gradient: 60,
+                      accelerator: "c",
+                    },
+                  ].map(
+                    ({ fade, gradient, accelerator, isDefault }) => html`
+                      <label class="section--item">
+                        <input
+                          type="radio"
+                          name="fade"
+                          value="${fade}"
+                          hidden
+                          $${isDefault ? html`checked` : html``}
+                          ${(() => {
+                            shortcuts.set(accelerator, () => {
+                              menu.webContents.executeJavaScript(javascript`
                               document.querySelector('[name="fade"][value="${fade}"]').click();
                             `);
-                          });
-                          return html``;
-                        })()}
-                      />
-                      <svg class="section--item--icon">
-                        $${gradient === undefined
-                          ? html``
-                          : html`
-                              <defs>
-                                <linearGradient
-                                  id="fade--${gradient}"
-                                  x1="0%"
-                                  y1="0%"
-                                  x2="100%"
-                                  y2="100%"
-                                >
-                                  <stop offset="0%" stop-color="currentColor" />
-                                  <stop
-                                    offset="${gradient}%"
-                                    stop-color="transparent"
-                                  />
-                                </linearGradient>
-                              </defs>
-                            `}
-                        <rect
-                          x="5"
-                          y="5"
-                          width="10"
-                          height="10"
-                          rx="3"
-                          style="${css`
-                            stroke: none;
-                            fill: ${gradient === undefined
-                              ? "currentColor"
-                              : `url('#fade--${gradient}')`};
-                          `}"
+                            });
+                            return html``;
+                          })()}
                         />
-                      </svg>
-                      ${accelerator.toUpperCase()}
-                    </label>
-                  `
-                )}
+                        <svg class="section--item--icon">
+                          $${gradient === undefined
+                            ? html``
+                            : html`
+                                <defs>
+                                  <linearGradient
+                                    id="fade--${gradient}"
+                                    x1="0%"
+                                    y1="0%"
+                                    x2="100%"
+                                    y2="100%"
+                                  >
+                                    <stop
+                                      offset="0%"
+                                      stop-color="currentColor"
+                                    />
+                                    <stop
+                                      offset="${gradient}%"
+                                      stop-color="transparent"
+                                    />
+                                  </linearGradient>
+                                </defs>
+                              `}
+                          <rect
+                            x="5"
+                            y="5"
+                            width="10"
+                            height="10"
+                            rx="3"
+                            style="${css`
+                              stroke: none;
+                              fill: ${gradient === undefined
+                                ? "currentColor"
+                                : `url('#fade--${gradient}')`};
+                            `}"
+                          />
+                        </svg>
+                        ${accelerator.toUpperCase()}
+                      </label>
+                    `
+                  )}
+                </div>
               </div>
             </form>
 
             <hr class="separator" />
 
-            <div class="section--content">
-              <label class="section--item">
-                $${(() => {
-                  ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
-                    drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
-                  });
-                  return html``;
-                })()}
-                <input
-                  type="radio"
-                  name="ignoreMouseEvents"
-                  value="false"
-                  checked
-                  hidden
-                  onchange="${javascript`
+            <div class="section">
+              <div class="section--heading"></div>
+              <div class="section--content">
+                <label class="section--item">
+                  $${(() => {
+                    ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
+                      drawing.setIgnoreMouseEvents(
+                        ignoreMouseEvents === "true"
+                      );
+                    });
+                    return html``;
+                  })()}
+                  <input
+                    type="radio"
+                    name="ignoreMouseEvents"
+                    value="false"
+                    checked
+                    hidden
+                    onchange="${javascript`
                     ipcRenderer.send(this.name, this.value);
                   `}"
-                />
-                <div class="section--item--icon">
-                  <i class="far fa-edit"></i>
-                </div>
-              </label>
-              <label class="section--item">
-                <input
-                  type="radio"
-                  name="ignoreMouseEvents"
-                  value="true"
-                  hidden
-                  onchange="${(() => {
-                    shortcuts.set("`", () => {
-                      menu.webContents.executeJavaScript(javascript`
+                  />
+                  <div class="section--item--icon">
+                    <i class="far fa-edit"></i>
+                  </div>
+                </label>
+                <label class="section--item">
+                  <input
+                    type="radio"
+                    name="ignoreMouseEvents"
+                    value="true"
+                    hidden
+                    onchange="${(() => {
+                      shortcuts.set("`", () => {
+                        menu.webContents.executeJavaScript(javascript`
                         document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
                       `);
-                      drawing.webContents.executeJavaScript(javascript`
+                        drawing.webContents.executeJavaScript(javascript`
                         document.querySelector(".cursor").hidden = true;
                       `);
-                    });
-                    return javascript`
+                      });
+                      return javascript`
                       ipcRenderer.send(this.name, this.value);
                     `;
-                  })()}"
-                />
-                <div class="section--item--icon">
-                  <i class="far fa-window-restore"></i>
-                </div>
-                ${"`"}
-              </label>
-              <button
-                class="section--item hide"
-                onclick="${(() => {
-                  ipcMain.on("hide", () => {
-                    drawing.hide();
-                  });
-                  shortcuts.set("esc", () => {
-                    menu.webContents.executeJavaScript(javascript`
+                    })()}"
+                  />
+                  <div class="section--item--icon">
+                    <i class="far fa-window-restore"></i>
+                  </div>
+                  ${"`"}
+                </label>
+                <button
+                  class="section--item hide"
+                  onclick="${(() => {
+                    ipcMain.on("hide", () => {
+                      drawing.hide();
+                    });
+                    shortcuts.set("esc", () => {
+                      menu.webContents.executeJavaScript(javascript`
                       document.querySelector(".hide").click();
                     `);
-                  });
-                  return javascript`
+                    });
+                    return javascript`
                     ipcRenderer.send("hide");
                   `;
-                })()}"
-              >
-                <div class="section--item--icon">
-                  <i class="far fa-window-close"></i>
-                </div>
-                ⎋
-              </button>
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="far fa-window-close"></i>
+                  </div>
+                  ⎋
+                </button>
+              </div>
             </div>
           </body>
         </html>
