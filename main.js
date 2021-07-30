@@ -434,110 +434,144 @@ const javascript = require("tagged-template-noop");
             >
               <div
                 style="${css`
-                  display: grid;
-                  grid-template-columns: 1fr 1fr;
+                  display: flex;
+                  flex-direction: column;
                   gap: var(--space--2);
-                  column-gap: var(--space--4);
-                  row-gap: var(--space--2);
                 `}"
               >
-                $${[
-                  {
-                    color: "var(--color--red--600)",
-                    borderColor: "var(--color--red--500)",
-                    accelerator: "1",
-                    isDefault: true,
-                  },
-                  {
-                    color: "var(--color--amber--600)",
-                    borderColor: "var(--color--amber--500)",
-                    accelerator: "2",
-                  },
-                  {
-                    color: "var(--color--lime--600)",
-                    borderColor: "var(--color--lime--500)",
-                    accelerator: "3",
-                  },
-                  {
-                    color: "var(--color--teal--600)",
-                    borderColor: "var(--color--teal--500)",
-                    accelerator: "4",
-                  },
-                  {
-                    color: "var(--color--sky--600)",
-                    borderColor: "var(--color--sky--500)",
-                    accelerator: "5",
-                  },
-                  {
-                    color: "var(--color--indigo--600)",
-                    borderColor: "var(--color--indigo--500)",
-                    accelerator: "6",
-                  },
-                  {
-                    color: "var(--color--purple--600)",
-                    borderColor: "var(--color--purple--500)",
-                    accelerator: "7",
-                  },
-                  {
-                    color: "var(--color--pink--600)",
-                    borderColor: "var(--color--pink--500)",
-                    accelerator: "8",
-                  },
-                  {
-                    color: "var(--color--gray--warm--900)",
-                    borderColor: "var(--color--gray--warm--700)",
-                    accelerator: "9",
-                  },
-                  {
-                    color: "var(--color--gray--warm--50)",
-                    borderColor: "var(--color--gray--warm--200)",
-                    checkedColor: "var(--color--gray--warm--600)",
-                    accelerator: "0",
-                  },
-                ].map(
-                  ({
-                    color,
-                    borderColor,
-                    checkedColor,
-                    accelerator,
-                    isDefault,
-                  }) => html`
-                    <label
-                      style="${css`
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                      `}"
-                    >
-                      <input
-                        type="radio"
-                        name="color"
-                        value="${color}"
-                        $${isDefault ? html`checked` : html``}
+                <div
+                  style="${css`
+                    font-size: var(--font-size--xs);
+                    line-height: var(--line-height--xs);
+                    font-weight: var(--font-weight--bold);
+                    color: var(--color--gray--warm--400);
+                    display: flex;
+                    justify-content: center;
+                    text-transform: uppercase;
+                    letter-spacing: var(--letter-spacing--widest);
+                  `}"
+                >
+                  Colors
+                </div>
+                <div
+                  style="${css`
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: var(--space--2);
+                    column-gap: var(--space--4);
+                    row-gap: var(--space--2);
+                  `}"
+                >
+                  $${[
+                    {
+                      color: "var(--color--red--600)",
+                      borderColor: "var(--color--red--500)",
+                      accelerator: "1",
+                      isDefault: true,
+                    },
+                    {
+                      color: "var(--color--amber--600)",
+                      borderColor: "var(--color--amber--500)",
+                      accelerator: "2",
+                    },
+                    {
+                      color: "var(--color--lime--600)",
+                      borderColor: "var(--color--lime--500)",
+                      accelerator: "3",
+                    },
+                    {
+                      color: "var(--color--teal--600)",
+                      borderColor: "var(--color--teal--500)",
+                      accelerator: "4",
+                    },
+                    {
+                      color: "var(--color--sky--600)",
+                      borderColor: "var(--color--sky--500)",
+                      accelerator: "5",
+                    },
+                    {
+                      color: "var(--color--indigo--600)",
+                      borderColor: "var(--color--indigo--500)",
+                      accelerator: "6",
+                    },
+                    {
+                      color: "var(--color--purple--600)",
+                      borderColor: "var(--color--purple--500)",
+                      accelerator: "7",
+                    },
+                    {
+                      color: "var(--color--pink--600)",
+                      borderColor: "var(--color--pink--500)",
+                      accelerator: "8",
+                    },
+                    {
+                      color: "var(--color--gray--warm--900)",
+                      borderColor: "var(--color--gray--warm--700)",
+                      accelerator: "9",
+                    },
+                    {
+                      color: "var(--color--gray--warm--50)",
+                      borderColor: "var(--color--gray--warm--200)",
+                      checkedColor: "var(--color--gray--warm--600)",
+                      accelerator: "0",
+                    },
+                  ].map(
+                    ({
+                      color,
+                      borderColor,
+                      checkedColor,
+                      accelerator,
+                      isDefault,
+                    }) => html`
+                      <label
                         style="${css`
-                          background-color: ${color};
-                          width: var(--font-size--xl);
-                          height: var(--font-size--xl);
-                          border: var(--border-width--1) solid ${borderColor};
-                          border-radius: var(--border-radius--circle);
                           display: flex;
-                          justify-content: center;
+                          justify-content: space-between;
                           align-items: center;
-                          &:hover {
-                            transform: scale(var(--scale--110));
-                          }
-                          &:active {
-                            transform: scale(var(--scale--90));
-                          }
-                          &::after {
-                            content: "";
-                            background-color: ${checkedColor ??
-                            "var(--color--gray--warm--50)"};
-                            display: block;
-                            width: var(--space--2);
-                            height: var(--space--2);
+                        `}"
+                      >
+                        <input
+                          type="radio"
+                          name="color"
+                          value="${color}"
+                          $${isDefault ? html`checked` : html``}
+                          style="${css`
+                            background-color: ${color};
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid ${borderColor};
                             border-radius: var(--border-radius--circle);
-                            transform: scale(var(--scale--0));
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            &:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                            &:active {
+                              transform: scale(var(--scale--90));
+                            }
+                            &::after {
+                              content: "";
+                              background-color: ${checkedColor ??
+                              "var(--color--gray--warm--50)"};
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                            &:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
                             transition-property: var(
                               --transition-property--transform
                             );
@@ -547,31 +581,21 @@ const javascript = require("tagged-template-noop");
                             transition-timing-function: var(
                               --transition-timing-function--in-out
                             );
-                          }
-                          &:checked::after {
-                            transform: scale(var(--scale--100));
-                          }
-                          transition-property: var(
-                            --transition-property--transform
-                          );
-                          transition-duration: var(--transition-duration--150);
-                          transition-timing-function: var(
-                            --transition-timing-function--in-out
-                          );
-                        `}"
-                        ${(() => {
-                          shortcuts.set(accelerator, () => {
-                            menu.webContents.executeJavaScript(javascript`
+                          `}"
+                          ${(() => {
+                            shortcuts.set(accelerator, () => {
+                              menu.webContents.executeJavaScript(javascript`
                               document.querySelector('[name="color"][value="${color}"]').click();
                             `);
-                          });
-                          return html``;
-                        })()}
-                      />
-                      ${accelerator}
-                    </label>
-                  `
-                )}
+                            });
+                            return html``;
+                          })()}
+                        />
+                        ${accelerator}
+                      </label>
+                    `
+                  )}
+                </div>
               </div>
 
               <hr class="separator" />
