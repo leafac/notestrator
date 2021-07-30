@@ -599,7 +599,7 @@ const javascript = require("tagged-template-noop");
               <hr class="separator" />
 
               <div class="section">
-                <div class="section--heading"></div>
+                <div class="section--heading">Stroke Width</div>
                 <div class="section--content">
                   $${[
                     {
@@ -655,7 +655,7 @@ const javascript = require("tagged-template-noop");
               <hr class="separator" />
 
               <div class="section">
-                <div class="section--heading"></div>
+                <div class="section--heading">Tool</div>
                 <div class="section--content">
                   $${[
                     {
@@ -705,7 +705,7 @@ const javascript = require("tagged-template-noop");
               <hr class="separator" />
 
               <div class="section">
-                <div class="section--heading"></div>
+                <div class="section--heading">Fade</div>
                 <div class="section--content">
                   $${[
                     {
@@ -789,7 +789,7 @@ const javascript = require("tagged-template-noop");
             <hr class="separator" />
 
             <div class="section">
-              <div class="section--heading"></div>
+              <div class="section--heading">??</div>
               <div class="section--content">
                 <label class="section--item">
                   $${(() => {
