@@ -1,6 +1,5 @@
 ### Backlog
 
-- Section headings.
 - Quit button on the menu.
 - Hide menu.
 - Reset drawing.
