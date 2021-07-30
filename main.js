@@ -859,6 +859,27 @@ const javascript = require("tagged-template-noop");
                   </div>
                   ⎋
                 </button>
+                <button
+                  class="section--item quit"
+                  onclick="${(() => {
+                    ipcMain.on("quit", () => {
+                      quit();
+                    });
+                    shortcuts.set("command+q", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".quit").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("quit");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="fas fa-power-off"></i>
+                  </div>
+                  ⌘Q
+                </button>
               </div>
             </div>
           </body>
@@ -884,10 +905,8 @@ const javascript = require("tagged-template-noop");
       },
       {
         label: "Quit",
-        click: () => {
-          drawing.destroy();
-          menu.destroy();
-        },
+        accelerator: "Command+Q",
+        click: quit,
       },
     ])
   );
@@ -907,6 +926,11 @@ const javascript = require("tagged-template-noop");
       },
     ])
   );
+
+  function quit() {
+    drawing.destroy();
+    menu.destroy();
+  }
 
   /*
   const OBSDrawing = new BrowserWindow({
