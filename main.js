@@ -350,6 +350,23 @@ const javascript = require("tagged-template-noop");
               -webkit-app-region: drag;
 
               @at-root {
+                .section {
+                  display: flex;
+                  flex-direction: column;
+                  gap: var(--space--2);
+                }
+
+                .section--heading {
+                  font-size: var(--font-size--xs);
+                  line-height: var(--line-height--xs);
+                  font-weight: var(--font-weight--bold);
+                  color: var(--color--gray--warm--400);
+                  display: flex;
+                  justify-content: center;
+                  text-transform: uppercase;
+                  letter-spacing: var(--letter-spacing--widest);
+                }
+
                 .section--content {
                   display: grid;
                   grid-template-columns: repeat(3, 1fr);
@@ -432,27 +449,8 @@ const javascript = require("tagged-template-noop");
                 `;
               })()}"
             >
-              <div
-                style="${css`
-                  display: flex;
-                  flex-direction: column;
-                  gap: var(--space--2);
-                `}"
-              >
-                <div
-                  style="${css`
-                    font-size: var(--font-size--xs);
-                    line-height: var(--line-height--xs);
-                    font-weight: var(--font-weight--bold);
-                    color: var(--color--gray--warm--400);
-                    display: flex;
-                    justify-content: center;
-                    text-transform: uppercase;
-                    letter-spacing: var(--letter-spacing--widest);
-                  `}"
-                >
-                  Colors
-                </div>
+              <div class="section">
+                <div class="section--heading">Colors</div>
                 <div
                   style="${css`
                     display: grid;
