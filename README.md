@@ -1,6 +1,5 @@
 ### Backlog
 
-- Custom cursor is behind the drawing.
 - Section headings.
 - Quit button on the menu.
 - Hide menu.
