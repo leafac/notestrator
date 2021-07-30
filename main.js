@@ -350,7 +350,7 @@ const javascript = require("tagged-template-noop");
               -webkit-app-region: drag;
 
               @at-root {
-                .section {
+                .section--content {
                   display: grid;
                   grid-template-columns: repeat(3, 1fr);
                   justify-content: space-between;
@@ -600,7 +600,7 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div class="section">
+              <div class="section--content">
                 $${[
                   {
                     strokeWidth: 1,
@@ -653,7 +653,7 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div class="section">
+              <div class="section--content">
                 $${[
                   {
                     tool: "pen",
@@ -700,7 +700,7 @@ const javascript = require("tagged-template-noop");
 
               <hr class="separator" />
 
-              <div class="section">
+              <div class="section--content">
                 $${[
                   {
                     fade: "false",
@@ -778,7 +778,7 @@ const javascript = require("tagged-template-noop");
 
             <hr class="separator" />
 
-            <div class="section">
+            <div class="section--content">
               <label class="section--item">
                 $${(() => {
                   ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
