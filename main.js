@@ -104,7 +104,7 @@ const javascript = require("tagged-template-noop");
                           "beforeend",
                           \`
                         <path
-                          d="M \${event.offsetX} \${event.offsetY}"
+                          d="M \${event.clientX} \${event.clientY}"
                           fill="none"
                           stroke="\${drawing.settings.color}"
                           stroke-width="\${
@@ -123,16 +123,16 @@ const javascript = require("tagged-template-noop");
                         );
                         const path = group.lastElementChild;
                         const t = 0.4;
-                        let x0 = { x: event.offsetX, y: event.offsetY };
-                        let x1 = { x: event.offsetX, y: event.offsetY };
-                        let x2 = { x: event.offsetX, y: event.offsetY };
-                        let p1 = { x: event.offsetX, y: event.offsetY };
-                        let p2 = { x: event.offsetX, y: event.offsetY };
+                        let x0 = { x: event.clientX, y: event.clientY };
+                        let x1 = { x: event.clientX, y: event.clientY };
+                        let x2 = { x: event.clientX, y: event.clientY };
+                        let p1 = { x: event.clientX, y: event.clientY };
+                        let p2 = { x: event.clientX, y: event.clientY };
                         handleMousemove = (event) => {
                           // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                          if (event.offsetX === x2.x && event.offsetY === x2.y)
+                          if (event.clientX === x2.x && event.clientY === x2.y)
                             return;
-                          x2 = { x: event.offsetX, y: event.offsetY };
+                          x2 = { x: event.clientX, y: event.clientY };
                           const x0_x1 = Math.sqrt(
                             (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
                           );
@@ -197,8 +197,8 @@ const javascript = require("tagged-template-noop");
                                   ))
                                   if (
                                     Math.sqrt(
-                                      (event.offsetX - x) ** 2 +
-                                        (event.offsetY - y) ** 2
+                                      (event.clientX - x) ** 2 +
+                                        (event.clientY - y) ** 2
                                     ) <
                                     drawing.settings.strokeWidth * 5
                                   )
@@ -246,8 +246,8 @@ const javascript = require("tagged-template-noop");
                   this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
                 }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
                 document.addEventListener("mousemove", (event) => {
-                  this.style.top = String(event.offsetY) + "px";
-                  this.style.left = String(event.offsetX) + "px";
+                  this.style.top = String(event.clientY) + "px";
+                  this.style.left = String(event.clientX) + "px";
                 });
                 ipcRenderer.on("settings", (_, settings) => {
                   this.style.color = settings.color;
@@ -1202,7 +1202,7 @@ const javascript = require("tagged-template-noop");
                       "beforeend",
                       \`
                     <path
-                      d="M \${event.offsetX} \${event.offsetY}"
+                      d="M \${event.clientX} \${event.clientY}"
                       fill="none"
                       stroke="\${menu.color}"
                       stroke-width="\${
@@ -1221,16 +1221,16 @@ const javascript = require("tagged-template-noop");
                     );
                     const path = group.lastElementChild;
                     const t = 0.4;
-                    let x0 = { x: event.offsetX, y: event.offsetY };
-                    let x1 = { x: event.offsetX, y: event.offsetY };
-                    let x2 = { x: event.offsetX, y: event.offsetY };
-                    let p1 = { x: event.offsetX, y: event.offsetY };
-                    let p2 = { x: event.offsetX, y: event.offsetY };
+                    let x0 = { x: event.clientX, y: event.clientY };
+                    let x1 = { x: event.clientX, y: event.clientY };
+                    let x2 = { x: event.clientX, y: event.clientY };
+                    let p1 = { x: event.clientX, y: event.clientY };
+                    let p2 = { x: event.clientX, y: event.clientY };
                     handleMousemove = (event) => {
                       // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                      if (event.offsetX === x2.x && event.offsetY === x2.y)
+                      if (event.clientX === x2.x && event.clientY === x2.y)
                         return;
-                      x2 = { x: event.offsetX, y: event.offsetY };
+                      x2 = { x: event.clientX, y: event.clientY };
                       const x0_x1 = Math.sqrt(
                         (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
                       );
@@ -1293,8 +1293,8 @@ const javascript = require("tagged-template-noop");
                               ))
                               if (
                                 Math.sqrt(
-                                  (event.offsetX - x) ** 2 +
-                                    (event.offsetY - y) ** 2
+                                  (event.clientX - x) ** 2 +
+                                    (event.clientY - y) ** 2
                                 ) <
                                 menu.strokeWidth * 5
                               )
