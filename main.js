@@ -844,7 +844,7 @@ const javascript = require("tagged-template-noop");
                     ipcMain.on("hide", () => {
                       drawing.hide();
                     });
-                    shortcuts.set("esc", () => {
+                    shortcuts.set("Esc", () => {
                       menu.webContents.executeJavaScript(javascript`
                       document.querySelector(".hide").click();
                     `);
@@ -865,7 +865,7 @@ const javascript = require("tagged-template-noop");
                     ipcMain.on("quit", () => {
                       quit();
                     });
-                    shortcuts.set("command+q", () => {
+                    shortcuts.set("Command+Q", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".quit").click();
                       `);
@@ -879,6 +879,28 @@ const javascript = require("tagged-template-noop");
                     <i class="fas fa-power-off"></i>
                   </div>
                   ⌘Q
+                </button>
+                <button
+                  class="section--item hide--menu"
+                  onclick="${(() => {
+                    ipcMain.on("hide--menu", () => {
+                      if (menu.isVisible()) menu.hide();
+                      else menu.show();
+                    });
+                    shortcuts.set("Command+Esc", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".hide--menu").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("hide--menu");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="far fa-eye-slash"></i>
+                  </div>
+                  ⌘⎋
                 </button>
               </div>
             </div>
