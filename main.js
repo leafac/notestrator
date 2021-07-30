@@ -429,7 +429,7 @@ const javascript = require("tagged-template-noop");
                   @media (prefers-color-scheme: dark) {
                     border-color: var(--color--gray--warm--800);
                   }
-                  margin: var(--space--2) var(--space--0);
+                  margin-top: var(--space--2);
                 }
               }
             `}"
@@ -449,7 +449,7 @@ const javascript = require("tagged-template-noop");
               })()}"
             >
               <div class="section">
-                <div class="section--heading">Colors</div>
+                <div class="section--heading">Color</div>
                 <div
                   style="${css`
                     display: grid;
