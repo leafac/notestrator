@@ -291,8 +291,8 @@ const javascript = require("tagged-template-noop");
   const menu = new BrowserWindow({
     parent: drawing,
     ...screen.getPrimaryDisplay().bounds,
-    width: 96, // var(--space--24)
-    height: 384, // var(--space--96)
+    width: 96, // var(--width--sm)
+    height: 512, // var(--width--lg)
     closable: false,
     minimizable: false,
     maximizable: false,
@@ -361,8 +361,7 @@ const javascript = require("tagged-template-noop");
                   line-height: var(--line-height--2xs);
                   font-weight: var(--font-weight--bold);
                   color: var(--color--gray--warm--400);
-                  display: flex;
-                  justify-content: center;
+                  text-align: center;
                   text-transform: uppercase;
                   letter-spacing: var(--letter-spacing--widest);
                 }
@@ -599,7 +598,7 @@ const javascript = require("tagged-template-noop");
               <hr class="separator" />
 
               <div class="section">
-                <div class="section--heading">Stroke Width</div>
+                <div class="section--heading">Width</div>
                 <div class="section--content">
                   $${[
                     {
