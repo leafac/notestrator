@@ -76,6 +76,11 @@ const javascript = require("tagged-template-noop");
                 this.settings = settings;
               });
               this.undoStack = [];
+              this.redoStack = [];
+              this.createUndoPoint = () => {
+                this.undoStack.push(this.querySelector("svg").innerHTML);
+                this.redoStack.length = 0;
+              }
               this.undo = () => {
                 const undoSVGInnerHTML = this.undoStack.pop();
                 if (undoSVGInnerHTML === undefined) return;
@@ -83,7 +88,6 @@ const javascript = require("tagged-template-noop");
                 this.redoStack.push(svg.innerHTML);
                 svg.innerHTML = undoSVGInnerHTML;
               };
-              this.redoStack = [];
               this.redo = () => {
                 const redoSVGInnerHTML = this.redoStack.pop();
                 if (redoSVGInnerHTML === undefined) return;
@@ -110,7 +114,7 @@ const javascript = require("tagged-template-noop");
                 data-ondomcontentloaded="${javascript`
                   const drawing = this.closest(".drawing");
                   window.addEventListener("mousedown", async (event) => {
-                    this.closest(".drawing").undoStack.push(this.innerHTML);
+                    this.closest(".drawing").createUndoPoint();
                     let handleMousemove;
                     let handleMouseup;
                     switch (drawing.settings.tool) {
