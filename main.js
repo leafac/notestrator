@@ -77,9 +77,9 @@ const javascript = require("tagged-template-noop");
               });
               this.undoStack = [];
               this.undo = () => {
-                const svg = this.undoStack.pop();
-                if (svg === undefined) return;
-                this.querySelector("svg").replaceWith(svg);
+                const svgInnerHTML = this.undoStack.pop();
+                if (svgInnerHTML === undefined) return;
+                this.querySelector("svg").innerHTML = svgInnerHTML;
               };
             `}"
           >
@@ -100,7 +100,7 @@ const javascript = require("tagged-template-noop");
                 data-ondomcontentloaded="${javascript`
                   const drawing = this.closest(".drawing");
                   window.addEventListener("mousedown", async (event) => {
-                    this.closest(".drawing").undoStack.push(this.cloneNode(true));
+                    this.closest(".drawing").undoStack.push(this.innerHTML);
                     let handleMousemove;
                     let handleMouseup;
                     switch (drawing.settings.tool) {
