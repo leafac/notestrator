@@ -907,9 +907,11 @@ const javascript = require("tagged-template-noop");
                   onclick="${(() => {
                     ipcMain.on("reset-drawing", () => {
                       drawing.webContents.executeJavaScript(javascript`
-                        const drawing = document.querySelector(".drawing");
-                        drawing.querySelector(".highlighter").replaceChildren();
-                        drawing.querySelector(".pen").replaceChildren();
+                        (() => {
+                          const drawing = document.querySelector(".drawing");
+                          drawing.querySelector(".highlighter").replaceChildren();
+                          drawing.querySelector(".pen").replaceChildren();
+                        })();
                       `);
                     });
                     shortcuts.set("Backspace", () => {
