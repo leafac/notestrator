@@ -77,9 +77,19 @@ const javascript = require("tagged-template-noop");
               });
               this.undoStack = [];
               this.undo = () => {
-                const svgInnerHTML = this.undoStack.pop();
-                if (svgInnerHTML === undefined) return;
-                this.querySelector("svg").innerHTML = svgInnerHTML;
+                const undoSVGInnerHTML = this.undoStack.pop();
+                if (undoSVGInnerHTML === undefined) return;
+                const svg = this.querySelector("svg");
+                this.redoStack.push(svg.innerHTML);
+                svg.innerHTML = undoSVGInnerHTML;
+              };
+              this.redoStack = [];
+              this.redo = () => {
+                const redoSVGInnerHTML = this.redoStack.pop();
+                if (redoSVGInnerHTML === undefined) return;
+                const svg = this.querySelector("svg");
+                this.undoStack.push(svg.innerHTML);
+                svg.innerHTML = redoSVGInnerHTML;
               };
             `}"
           >
@@ -958,6 +968,29 @@ const javascript = require("tagged-template-noop");
                     <i class="fas fa-undo-alt"></i>
                   </div>
                   ⌘Z
+                </button>
+                <button
+                  class="section--item redo"
+                  onclick="${(() => {
+                    ipcMain.on("redo", () => {
+                      drawing.webContents.executeJavaScript(javascript`
+                        document.querySelector(".drawing").redo();
+                      `);
+                    });
+                    shortcuts.set("Shift+Command+Z", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".redo").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("redo");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="fas fa-redo-alt"></i>
+                  </div>
+                  ⇧⌘Z
                 </button>
               </div>
             </div>
