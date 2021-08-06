@@ -929,6 +929,29 @@ const javascript = require("tagged-template-noop");
                   </div>
                   ⌫
                 </button>
+                <button
+                  class="section--item undo"
+                  onclick="${(() => {
+                    ipcMain.on("undo", () => {
+                      drawing.webContents.executeJavaScript(javascript`
+                        document.querySelector(".drawing").undo();
+                      `);
+                    });
+                    shortcuts.set("Command+Z", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".undo").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("undo");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="fas fa-undo-alt"></i>
+                  </div>
+                  ⌘Z
+                </button>
               </div>
             </div>
           </body>
