@@ -292,7 +292,7 @@ const javascript = require("tagged-template-noop");
     parent: drawing,
     ...screen.getPrimaryDisplay().bounds,
     width: 96, // var(--width--sm)
-    height: 512, // var(--width--lg)
+    height: 576, // var(--width--xl)
     closable: false,
     minimizable: false,
     maximizable: false,
