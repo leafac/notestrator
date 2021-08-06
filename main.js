@@ -75,6 +75,12 @@ const javascript = require("tagged-template-noop");
               ipcRenderer.on("settings", (_, settings) => {
                 this.settings = settings;
               });
+              this.undoStack = [];
+              this.undo = () => {
+                const svg = this.undoStack.pop();
+                if (svg === undefined) return;
+                this.querySelector("svg").replaceWith(svg);
+              };
             `}"
           >
             <div
@@ -94,6 +100,7 @@ const javascript = require("tagged-template-noop");
                 data-ondomcontentloaded="${javascript`
                   const drawing = this.closest(".drawing");
                   window.addEventListener("mousedown", async (event) => {
+                    this.closest(".drawing").undoStack.push(this.cloneNode(true));
                     let handleMousemove;
                     let handleMouseup;
                     switch (drawing.settings.tool) {
