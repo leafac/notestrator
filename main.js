@@ -902,6 +902,31 @@ const javascript = require("tagged-template-noop");
                   </div>
                   ⌘⎋
                 </button>
+                <button
+                  class="section--item reset-drawing"
+                  onclick="${(() => {
+                    ipcMain.on("reset-drawing", () => {
+                      drawing.webContents.executeJavaScript(javascript`
+                        const drawing = document.querySelector(".drawing");
+                        drawing.querySelector(".highlighter").replaceChildren();
+                        drawing.querySelector(".pen").replaceChildren();
+                      `);
+                    });
+                    shortcuts.set("Backspace", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".reset-drawing").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("reset-drawing");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="fas fa-backspace"></i>
+                  </div>
+                  ⌫
+                </button>
               </div>
             </div>
           </body>

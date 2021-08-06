@@ -1,6 +1,5 @@
 ### Backlog
 
-- Reset drawing.
 - Undo-redo.
 - Another styling pass on the menu.
 - Mouse modifiers:
