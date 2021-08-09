@@ -1,9 +1,9 @@
 ### Backlog
 
 - Another styling pass on the menu.
-  - Dark Mode.
-  - Refine the crosshair on the custom cursor.
+  - “??”
   - Revisit the “Fade” section.
+  - Refine the crosshair on the custom cursor.
 - Mouse modifiers:
   - Right-click to erase.
   - Scroll.
