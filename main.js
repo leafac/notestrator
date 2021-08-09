@@ -399,9 +399,13 @@ const javascript = require("tagged-template-noop");
                   flex-direction: column;
                   align-items: center;
                   gap: var(--space--1);
+                  &.section--item--row {
+                    flex-direction: row;
+                    justify-content: space-between;
+                  }
                 }
 
-                .section--item--row {
+                .section--item--label {
                   display: flex;
                   align-items: center;
                   gap: var(--space--1);
@@ -828,8 +832,8 @@ const javascript = require("tagged-template-noop");
                 });
                 return html``;
               })()}
-              <div class="section--item--row">
-                <label class="section--item--row">
+              <div class="section--item section--item--row">
+                <label class="section--item--label">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
@@ -846,8 +850,8 @@ const javascript = require("tagged-template-noop");
                   Draw
                 </label>
               </div>
-              <div class="section--item--row">
-                <label class="section--item--row">
+              <div class="section--item section--item--row">
+                <label class="section--item--label">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
