@@ -821,6 +821,7 @@ const javascript = require("tagged-template-noop");
             <hr class="separator" />
 
             <div class="section">
+              <div class="section--heading">Mode</div>
               $${(() => {
                 ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
                   drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
