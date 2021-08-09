@@ -118,6 +118,17 @@ const javascript = require("tagged-template-noop");
                     let handleMousemove;
                     let handleMouseup;
                     const isRightClick = event.button === 2;
+                    const currentTool = drawing.settings.tool;
+                    if (isRightClick) {
+                      ipcRenderer.invoke("executeJavascript", {
+                        browserWindow: "menu",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            document.querySelector('[value="eraser"]').click();
+                          `
+                        )}}
+                      );
+                    }
                     switch (isRightClick ? "eraser" : drawing.settings.tool) {
                       case "pen":
                       case "highlighter":
@@ -1041,6 +1052,18 @@ const javascript = require("tagged-template-noop");
         </html>
       `
     )
+  );
+
+  ipcMain.handle(
+    "executeJavascript",
+    async (_, { browserWindow, javascript }) => {
+      return await (browserWindow === "drawing"
+        ? drawing
+        : browserWindow === "menu"
+        ? menu
+        : null
+      ).webContents.executeJavaScript(javascript);
+    }
   );
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
