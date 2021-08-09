@@ -541,7 +541,7 @@ const javascript = require("tagged-template-noop");
                       accelerator,
                       isDefault,
                     }) => html`
-                      <label
+                      <div
                         style="${css`
                           display: flex;
                           justify-content: space-between;
@@ -610,7 +610,7 @@ const javascript = require("tagged-template-noop");
                           })()}
                         />
                         ${accelerator}
-                      </label>
+                      </div>
                     `
                   )}
                 </div>
@@ -637,36 +637,38 @@ const javascript = require("tagged-template-noop");
                     },
                   ].map(
                     ({ strokeWidth, accelerator, isDefault }) => html`
-                      <label class="section--item">
-                        <input
-                          type="radio"
-                          name="strokeWidth"
-                          value="${strokeWidth}"
-                          hidden
-                          $${isDefault ? html`checked` : html``}
-                          ${(() => {
-                            shortcuts.set(accelerator, () => {
-                              menu.webContents.executeJavaScript(javascript`
-                              document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
-                            `);
-                            });
-                            return html``;
-                          })()}
-                        />
-                        <svg class="section--item--icon">
-                          <line
-                            x1="${strokeWidth / 2 + 3}"
-                            y1="${20 - strokeWidth / 2 - 3}"
-                            x2="${20 - strokeWidth / 2 - 3}"
-                            y2="${strokeWidth / 2 + 3}"
-                            stroke-width="${strokeWidth}"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            fill="none"
+                      <div class="section--item">
+                        <label>
+                          <input
+                            type="radio"
+                            name="strokeWidth"
+                            value="${strokeWidth}"
+                            hidden
+                            $${isDefault ? html`checked` : html``}
+                            ${(() => {
+                              shortcuts.set(accelerator, () => {
+                                menu.webContents.executeJavaScript(javascript`
+                                  document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
+                                `);
+                              });
+                              return html``;
+                            })()}
                           />
-                        </svg>
+                          <svg class="section--item--icon">
+                            <line
+                              x1="${strokeWidth / 2 + 3}"
+                              y1="${20 - strokeWidth / 2 - 3}"
+                              x2="${20 - strokeWidth / 2 - 3}"
+                              y2="${strokeWidth / 2 + 3}"
+                              stroke-width="${strokeWidth}"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              fill="none"
+                            />
+                          </svg>
+                        </label>
                         ${accelerator.toUpperCase()}
-                      </label>
+                      </div>
                     `
                   )}
                 </div>
@@ -696,27 +698,29 @@ const javascript = require("tagged-template-noop");
                     },
                   ].map(
                     ({ tool, icon, accelerator, isDefault }) => html`
-                      <label class="section--item">
-                        <input
-                          type="radio"
-                          name="tool"
-                          value="${tool}"
-                          hidden
-                          $${isDefault ? html`checked` : html``}
-                          ${(() => {
-                            shortcuts.set(accelerator, () => {
-                              menu.webContents.executeJavaScript(javascript`
-                              document.querySelector('[name="tool"][value="${tool}"]').click();
-                            `);
-                            });
-                            return html``;
-                          })()}
-                        />
-                        <div class="section--item--icon">
-                          <i class="fas fa-${icon}"></i>
-                        </div>
+                      <div class="section--item">
+                        <label>
+                          <input
+                            type="radio"
+                            name="tool"
+                            value="${tool}"
+                            hidden
+                            $${isDefault ? html`checked` : html``}
+                            ${(() => {
+                              shortcuts.set(accelerator, () => {
+                                menu.webContents.executeJavaScript(javascript`
+                                  document.querySelector('[name="tool"][value="${tool}"]').click();
+                                `);
+                              });
+                              return html``;
+                            })()}
+                          />
+                          <div class="section--item--icon">
+                            <i class="fas fa-${icon}"></i>
+                          </div>
+                        </label>
                         ${accelerator.toUpperCase()}
-                      </label>
+                      </div>
                     `
                   )}
                 </div>
@@ -745,61 +749,63 @@ const javascript = require("tagged-template-noop");
                     },
                   ].map(
                     ({ fade, gradient, accelerator, isDefault }) => html`
-                      <label class="section--item">
-                        <input
-                          type="radio"
-                          name="fade"
-                          value="${fade}"
-                          hidden
-                          $${isDefault ? html`checked` : html``}
-                          ${(() => {
-                            shortcuts.set(accelerator, () => {
-                              menu.webContents.executeJavaScript(javascript`
-                              document.querySelector('[name="fade"][value="${fade}"]').click();
-                            `);
-                            });
-                            return html``;
-                          })()}
-                        />
-                        <svg class="section--item--icon">
-                          $${gradient === undefined
-                            ? html``
-                            : html`
-                                <defs>
-                                  <linearGradient
-                                    id="fade--${gradient}"
-                                    x1="0%"
-                                    y1="0%"
-                                    x2="100%"
-                                    y2="100%"
-                                  >
-                                    <stop
-                                      offset="0%"
-                                      stop-color="currentColor"
-                                    />
-                                    <stop
-                                      offset="${gradient}%"
-                                      stop-color="transparent"
-                                    />
-                                  </linearGradient>
-                                </defs>
-                              `}
-                          <rect
-                            x="5"
-                            y="5"
-                            width="10"
-                            height="10"
-                            rx="3"
-                            style="${css`
-                              stroke: none;
-                              fill: ${gradient === undefined
-                                ? "currentColor"
-                                : `url('#fade--${gradient}')`};
-                            `}"
+                      <div class="section--item">
+                        <label>
+                          <input
+                            type="radio"
+                            name="fade"
+                            value="${fade}"
+                            hidden
+                            $${isDefault ? html`checked` : html``}
+                            ${(() => {
+                              shortcuts.set(accelerator, () => {
+                                menu.webContents.executeJavaScript(javascript`
+                                  document.querySelector('[name="fade"][value="${fade}"]').click();
+                                `);
+                              });
+                              return html``;
+                            })()}
                           />
-                        </svg>
+                          <svg class="section--item--icon">
+                            $${gradient === undefined
+                              ? html``
+                              : html`
+                                  <defs>
+                                    <linearGradient
+                                      id="fade--${gradient}"
+                                      x1="0%"
+                                      y1="0%"
+                                      x2="100%"
+                                      y2="100%"
+                                    >
+                                      <stop
+                                        offset="0%"
+                                        stop-color="currentColor"
+                                      />
+                                      <stop
+                                        offset="${gradient}%"
+                                        stop-color="transparent"
+                                      />
+                                    </linearGradient>
+                                  </defs>
+                                `}
+                            <rect
+                              x="5"
+                              y="5"
+                              width="10"
+                              height="10"
+                              rx="3"
+                              style="${css`
+                                stroke: none;
+                                fill: ${gradient === undefined
+                                  ? "currentColor"
+                                  : `url('#fade--${gradient}')`};
+                              `}"
+                            />
+                          </svg>
+                        </label>
                         ${accelerator.toUpperCase()}
-                      </label>
+                      </div>
                     `
                   )}
                 </div>
