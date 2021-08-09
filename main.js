@@ -118,17 +118,16 @@ const javascript = require("tagged-template-noop");
                     let handleMousemove;
                     let handleMouseup;
                     const isRightClick = event.button === 2;
-                    const currentTool = drawing.settings.tool;
-                    if (isRightClick) {
+                    const originalTool = drawing.settings.tool;
+                    if (isRightClick)
                       ipcRenderer.invoke("executeJavascript", {
                         browserWindow: "menu",
                         javascript: ${JSON.stringify(
                           javascript`
                             document.querySelector('[value="eraser"]').click();
                           `
-                        )}}
-                      );
-                    }
+                        )}
+                      });
                     switch (isRightClick ? "eraser" : drawing.settings.tool) {
                       case "pen":
                       case "highlighter":
@@ -247,6 +246,13 @@ const javascript = require("tagged-template-noop");
                     window.addEventListener(
                       "mouseup",
                       () => {
+                        if (isRightClick)
+                          ipcRenderer.invoke("executeJavascript", {
+                            browserWindow: "menu",
+                            javascript: \`
+                              document.querySelector('[value="\${ originalTool }"]').click();
+                            \`
+                          });
                         window.removeEventListener("mousemove", handleMousemove);
                         if (handleMouseup !== undefined) handleMouseup();
                       },
