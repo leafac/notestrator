@@ -401,6 +401,12 @@ const javascript = require("tagged-template-noop");
                   gap: var(--space--1);
                 }
 
+                .section--item--row {
+                  display: flex;
+                  align-items: center;
+                  gap: var(--space--1);
+                }
+
                 .section--item--icon {
                   font-size: var(--font-size--sm);
                   line-height: var(--line-height--sm);
@@ -815,17 +821,14 @@ const javascript = require("tagged-template-noop");
             <hr class="separator" />
 
             <div class="section">
-              <div class="section--heading">??</div>
-              <div class="section--content">
-                <label class="section--item">
-                  $${(() => {
-                    ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
-                      drawing.setIgnoreMouseEvents(
-                        ignoreMouseEvents === "true"
-                      );
-                    });
-                    return html``;
-                  })()}
+              $${(() => {
+                ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
+                  drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
+                });
+                return html``;
+              })()}
+              <div class="section--item--row">
+                <label class="section--item--row">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
@@ -833,14 +836,17 @@ const javascript = require("tagged-template-noop");
                     checked
                     hidden
                     onchange="${javascript`
-                    ipcRenderer.send(this.name, this.value);
-                  `}"
+                      ipcRenderer.send(this.name, this.value);
+                    `}"
                   />
                   <div class="section--item--icon">
                     <i class="far fa-edit"></i>
                   </div>
+                  Draw
                 </label>
-                <label class="section--item">
+              </div>
+              <div class="section--item--row">
+                <label class="section--item--row">
                   <input
                     type="radio"
                     name="ignoreMouseEvents"
@@ -849,22 +855,30 @@ const javascript = require("tagged-template-noop");
                     onchange="${(() => {
                       shortcuts.set("`", () => {
                         menu.webContents.executeJavaScript(javascript`
-                        document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
-                      `);
+                          document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
+                        `);
                         drawing.webContents.executeJavaScript(javascript`
-                        document.querySelector(".cursor").hidden = true;
-                      `);
+                          document.querySelector(".cursor").hidden = true;
+                        `);
                       });
                       return javascript`
-                      ipcRenderer.send(this.name, this.value);
-                    `;
+                        ipcRenderer.send(this.name, this.value);
+                      `;
                     })()}"
                   />
                   <div class="section--item--icon">
                     <i class="far fa-window-restore"></i>
                   </div>
-                  ${"`"}
+                  Show
                 </label>
+                ${"`"}
+              </div>
+            </div>
+
+            <hr class="separator" />
+
+            <div class="section">
+              <div class="section--content">
                 <button
                   class="section--item hide"
                   onclick="${(() => {
