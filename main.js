@@ -117,7 +117,8 @@ const javascript = require("tagged-template-noop");
                     this.closest(".drawing").createUndoPoint();
                     let handleMousemove;
                     let handleMouseup;
-                    switch (drawing.settings.tool) {
+                    const isRightClick = event.button === 2;
+                    switch (isRightClick ? "eraser" : drawing.settings.tool) {
                       case "pen":
                       case "highlighter":
                         const group = this.querySelector(\`.\${drawing.settings.tool}\`);
