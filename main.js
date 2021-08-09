@@ -883,9 +883,10 @@ const javascript = require("tagged-template-noop");
             <hr class="separator" />
 
             <div class="section">
-              <div class="section--content">
+              <div class="section--heading">Hide</div>
+              <div class="section--item section--item--row">
                 <button
-                  class="section--item hide"
+                  class="section--item--label hide"
                   onclick="${(() => {
                     ipcMain.on("hide", () => {
                       drawing.hide();
@@ -903,8 +904,41 @@ const javascript = require("tagged-template-noop");
                   <div class="section--item--icon">
                     <i class="far fa-window-close"></i>
                   </div>
-                  ⎋
+                  Drawing
                 </button>
+                ⎋
+              </div>
+              <div class="section--item section--item--row">
+                <button
+                  class="section--item--label hide--menu"
+                  onclick="${(() => {
+                    ipcMain.on("hide--menu", () => {
+                      if (menu.isVisible()) menu.hide();
+                      else menu.show();
+                    });
+                    shortcuts.set("Command+Esc", () => {
+                      menu.webContents.executeJavaScript(javascript`
+                        document.querySelector(".hide--menu").click();
+                      `);
+                    });
+                    return javascript`
+                      ipcRenderer.send("hide--menu");
+                    `;
+                  })()}"
+                >
+                  <div class="section--item--icon">
+                    <i class="far fa-eye-slash"></i>
+                  </div>
+                  Menu
+                </button>
+                ⌘⎋
+              </div>
+            </div>
+
+            <hr class="separator" />
+
+            <div class="section">
+              <div class="section--content">
                 <button
                   class="section--item quit"
                   onclick="${(() => {
@@ -926,28 +960,7 @@ const javascript = require("tagged-template-noop");
                   </div>
                   ⌘Q
                 </button>
-                <button
-                  class="section--item hide--menu"
-                  onclick="${(() => {
-                    ipcMain.on("hide--menu", () => {
-                      if (menu.isVisible()) menu.hide();
-                      else menu.show();
-                    });
-                    shortcuts.set("Command+Esc", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".hide--menu").click();
-                      `);
-                    });
-                    return javascript`
-                      ipcRenderer.send("hide--menu");
-                    `;
-                  })()}"
-                >
-                  <div class="section--item--icon">
-                    <i class="far fa-eye-slash"></i>
-                  </div>
-                  ⌘⎋
-                </button>
+
                 <button
                   class="section--item reset-drawing"
                   onclick="${(() => {
