@@ -1,7 +1,12 @@
 {
+  "name": "notestrator",
+  "description": "Draw on top of your computer screen",
+  "version": "0.0.0",
+  "author": "Leandro Facchinetti <notestrator@leafac.com> (https://leafac.com)",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
@@ -12,6 +17,10 @@
     "tagged-template-noop": "^2.1.1"
   },
   "devDependencies": {
-    "electron": "^13.1.1"
+    "electron": "^13.1.1",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "com.leafac.notestrator"
   }
 }
