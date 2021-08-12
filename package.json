@@ -3,9 +3,6 @@
   "scripts": {
     "start": "electron ."
   },
-  "devDependencies": {
-    "electron": "^13.1.1"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@leafac/css": "^0.2.8",
@@ -13,5 +10,8 @@
     "express": "^4.17.1",
     "obs-websocket-js": "^4.0.2",
     "tagged-template-noop": "^2.1.1"
+  },
+  "devDependencies": {
+    "electron": "^13.1.1"
   }
 }
