@@ -120,8 +120,8 @@ const javascript = require("tagged-template-noop");
                     const isRightClick = event.button === 2;
                     const originalTool = drawing.settings.tool;
                     if (isRightClick)
-                      ipcRenderer.invoke("executeJavascript", {
-                        browserWindow: "menu",
+                      ipcRenderer.invoke("eval", {
+                        target: "menu",
                         javascript: ${JSON.stringify(
                           javascript`
                             document.querySelector('[value="eraser"]').click();
@@ -247,8 +247,8 @@ const javascript = require("tagged-template-noop");
                       "mouseup",
                       () => {
                         if (isRightClick)
-                          ipcRenderer.invoke("executeJavascript", {
-                            browserWindow: "menu",
+                          ipcRenderer.invoke("eval", {
+                            target: "menu",
                             javascript: \`
                               document.querySelector('[value="\${ originalTool }"]').click();
                             \`
@@ -1060,17 +1060,18 @@ const javascript = require("tagged-template-noop");
     )
   );
 
-  ipcMain.handle(
-    "executeJavascript",
-    async (_, { browserWindow, javascript }) => {
-      return await (browserWindow === "drawing"
-        ? drawing
-        : browserWindow === "menu"
-        ? menu
-        : null
-      ).webContents.executeJavaScript(javascript);
+  ipcMain.handle("eval", async (_, { target, javascript }) => {
+    switch (target) {
+      case "main":
+        return eval(javascript);
+      case "drawing":
+        return await drawing.webContents.executeJavaScript(javascript);
+      case "menu":
+        return await menu.webContents.executeJavaScript(javascript);
+      default:
+        throw new Error(`Failed to eval with target ${target}.`);
     }
-  );
+  });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
     drawing.show();
