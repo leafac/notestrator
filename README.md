@@ -12,8 +12,6 @@
 
 ### Notes About Packaging
 
-main.js -> index.js
-
 - electron-packager
   - Low-level tool for packing your app into a .app, .exe, etc.
 - electron-forge

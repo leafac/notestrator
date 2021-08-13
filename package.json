@@ -16,6 +16,7 @@
   "bugs": "https://github.com/leafac/notestrator/issues",
   "homepage": "https://github.com/leafac/notestrator#readme",
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "build": "electron-builder"
   },
