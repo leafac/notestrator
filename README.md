@@ -1,5 +1,8 @@
 ### Backlog
 
+- Use the `executeJavaScript` event throughout the application.
+- Only build the HTML, CSS, and client-side JavaScript in development.
+
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
@@ -36,13 +39,3 @@
   - The blockmap stuff from electron-builder looks great!
 - Code signing
   - https://www.electronjs.org/docs/latest/tutorial/code-signing
-
-
-  "name": "notestrator",
-  "description": "Draw on top of your computer screen",
-  "version": "0.0.0",
-  "author": "Leandro Facchinetti <notestrator@leafac.com> (https://leafac.com)",
-
-
-  "postinstall": "electron-builder install-app-deps"
-  
