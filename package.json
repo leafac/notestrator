@@ -1,12 +1,23 @@
 {
   "name": "notestrator",
-  "description": "Draw on top of your computer screen",
+  "productName": "Notestrator",
   "version": "0.0.0",
+  "description": "Draw on top of your computer screen & your OBS stream",
+  "main": "index.js",
+  "repository": "leafac/notestrator",
+  "keywords": [
+    "drawing",
+    "obs",
+    "note-taking",
+    "electron"
+  ],
   "author": "Leandro Facchinetti <notestrator@leafac.com> (https://leafac.com)",
-  "main": "main.js",
+  "license": "MIT",
+  "bugs": "https://github.com/leafac/notestrator/issues",
+  "homepage": "https://github.com/leafac/notestrator#readme",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "build": "electron-builder"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
