@@ -23,12 +23,12 @@ const javascript = require("tagged-template-noop");
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
     closable: false,
-    minimizable: false, // TODO: Breaks in Windows.
+    // minimizable: false, // TODO: Breaks in Windows.
     maximizable: false,
     movable: false,
     resizable: false,
     frame: false,
-    transparent: true, // TODO: Breaks in Windows.
+    // transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     roundedCorners: false,
     skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
@@ -72,9 +72,6 @@ const javascript = require("tagged-template-noop");
               left: 0;
             `}"
             data-ondomcontentloaded="${javascript`
-              ipcRenderer.on("settings", (_, settings) => {
-                this.settings = settings;
-              });
               this.undoStack = [];
               this.redoStack = [];
               this.createUndoPoint = () => {
@@ -288,7 +285,7 @@ const javascript = require("tagged-template-noop");
                   this.style.top = String(event.clientY) + "px";
                   this.style.left = String(event.clientX) + "px";
                 });
-                ipcRenderer.on("settings", (_, settings) => {
+                this.update = (settings) => {
                   this.style.color = settings.color;
                   const circle = this.querySelector(".circle circle");
                   circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
@@ -302,7 +299,7 @@ const javascript = require("tagged-template-noop");
                     "fade": "false",
                   }
                   */
-                });
+                };
               `}"
             >
               <div class="circle">
@@ -484,18 +481,22 @@ const javascript = require("tagged-template-noop");
             `}"
           >
             <form
-              data-ondomcontentloaded="${(() => {
-                ipcMain.on("settings", (_, settings) => {
-                  drawing.webContents.send("settings", settings);
-                });
-                return javascript`
-                  const settings = () => {
-                    ipcRenderer.send("settings", Object.fromEntries(new URLSearchParams(new FormData(this))));
-                  };
-                  settings();
-                  this.addEventListener("change", settings);
-                `;
-              })()}"
+              data-ondomcontentloaded="${javascript`
+                alert("THIS IS BROKEN");
+                const settings = () => {
+                  ipcRenderer.invoke("eval", {
+                    target: "drawing",
+                    javascript: \`
+                      const settings = \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))};
+                      const drawing = document.querySelector(".drawing");
+                      drawing.settings = settings;
+                      drawing.querySelector(".cursor").update(settings);
+                    \`
+                  });
+                };
+                settings();
+                this.addEventListener("change", settings);
+            `}"
             >
               <div class="section">
                 <div class="section--heading">Color</div>
