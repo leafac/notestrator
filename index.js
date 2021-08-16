@@ -482,20 +482,21 @@ const javascript = require("tagged-template-noop");
           >
             <form
               data-ondomcontentloaded="${javascript`
-                alert("THIS IS BROKEN");
-                const settings = () => {
-                  ipcRenderer.invoke("eval", {
-                    target: "drawing",
-                    javascript: \`
+              const settings = () => {
+                ipcRenderer.invoke("eval", {
+                  target: "drawing",
+                  javascript: \`
+                    (() => {
                       const settings = \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))};
                       const drawing = document.querySelector(".drawing");
                       drawing.settings = settings;
                       drawing.querySelector(".cursor").update(settings);
-                    \`
-                  });
-                };
-                settings();
-                this.addEventListener("change", settings);
+                    })();
+                  \`
+                });
+              };
+              settings();
+              this.addEventListener("change", settings);
             `}"
             >
               <div class="section">
