@@ -946,17 +946,21 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item--label hide--menu"
                   onclick="${(() => {
-                    ipcMain.on("hide--menu", () => {
-                      if (menu.isVisible()) menu.hide();
-                      else menu.show();
-                    });
                     shortcuts.set("Command+Esc", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".hide--menu").click();
                       `);
                     });
                     return javascript`
-                      ipcRenderer.send("hide--menu");
+                      ipcRenderer.invoke("eval", {
+                        target: "main",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            if (menu.isVisible()) menu.hide();
+                            else menu.show();
+                          `
+                        )}
+                      });
                     `;
                   })()}"
                 >
