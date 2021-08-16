@@ -918,17 +918,21 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item--label hide"
                   onclick="${(() => {
-                    ipcMain.on("hide", () => {
-                      drawing.hide();
-                    });
                     shortcuts.set("Esc", () => {
                       menu.webContents.executeJavaScript(javascript`
-                      document.querySelector(".hide").click();
-                    `);
+                        document.querySelector(".hide").click();
+                      `);
                     });
                     return javascript`
-                    ipcRenderer.send("hide");
-                  `;
+                      ipcRenderer.invoke("eval", {
+                        target: "main",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            drawing.hide();
+                          `
+                        )}
+                      });
+                    `;
                   })()}"
                 >
                   <div class="section--item--icon">
