@@ -72,6 +72,11 @@ const javascript = require("tagged-template-noop");
               left: 0;
             `}"
             data-ondomcontentloaded="${javascript`
+              this.setSettings = (settings) => {
+                this.settings = settings;
+                this.querySelector(".cursor").update(settings);
+              };
+
               this.undoStack = [];
               this.redoStack = [];
               this.createUndoPoint = () => {
@@ -486,12 +491,9 @@ const javascript = require("tagged-template-noop");
                   ipcRenderer.invoke("eval", {
                     target: "drawing",
                     javascript: \`
-                      (() => {
-                        const settings = \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))};
-                        const drawing = document.querySelector(".drawing");
-                        drawing.settings = settings;
-                        drawing.querySelector(".cursor").update(settings);
-                      })();
+                      document.querySelector(".drawing").setSettings(
+                        \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
+                      );
                     \`
                   });
                 };
