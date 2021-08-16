@@ -980,16 +980,20 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item quit"
                   onclick="${(() => {
-                    ipcMain.on("quit", () => {
-                      quit();
-                    });
                     shortcuts.set("Command+Q", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".quit").click();
                       `);
                     });
                     return javascript`
-                      ipcRenderer.send("quit");
+                      ipcRenderer.invoke("eval", {
+                        target: "main",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            quit();
+                          `
+                        )}
+                      });
                     `;
                   })()}"
                 >
@@ -1002,22 +1006,24 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item reset-drawing"
                   onclick="${(() => {
-                    ipcMain.on("reset-drawing", () => {
-                      drawing.webContents.executeJavaScript(javascript`
-                        (() => {
-                          const drawing = document.querySelector(".drawing");
-                          drawing.querySelector(".highlighter").replaceChildren();
-                          drawing.querySelector(".pen").replaceChildren();
-                        })();
-                      `);
-                    });
                     shortcuts.set("Backspace", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".reset-drawing").click();
                       `);
                     });
                     return javascript`
-                      ipcRenderer.send("reset-drawing");
+                      ipcRenderer.invoke("eval", {
+                        target: "drawing",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            (() => {
+                              const drawing = document.querySelector(".drawing");
+                              drawing.querySelector(".highlighter").replaceChildren();
+                              drawing.querySelector(".pen").replaceChildren();
+                            })();
+                          `
+                        )}
+                      });
                     `;
                   })()}"
                 >
