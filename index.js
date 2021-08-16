@@ -23,12 +23,12 @@ const javascript = require("tagged-template-noop");
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
     closable: false,
-    // minimizable: false, // TODO: Breaks in Windows.
+    minimizable: false, // TODO: Breaks in Windows.
     maximizable: false,
     movable: false,
     resizable: false,
     frame: false,
-    // transparent: true, // TODO: Breaks in Windows.
+    transparent: true, // TODO: Breaks in Windows.
     hasShadow: false,
     roundedCorners: false,
     skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
