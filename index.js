@@ -848,12 +848,6 @@ const javascript = require("tagged-template-noop");
 
             <div class="section">
               <div class="section--heading">Mode</div>
-              $${(() => {
-                ipcMain.on("ignoreMouseEvents", (_, ignoreMouseEvents) => {
-                  drawing.setIgnoreMouseEvents(ignoreMouseEvents === "true");
-                });
-                return html``;
-              })()}
               <div class="section--item section--item--row">
                 <label class="section--item--label">
                   <input
@@ -863,7 +857,14 @@ const javascript = require("tagged-template-noop");
                     checked
                     hidden
                     onchange="${javascript`
-                      ipcRenderer.send(this.name, this.value);
+                      ipcRenderer.invoke("eval", {
+                        target: "main",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            drawing.setIgnoreMouseEvents(false);
+                          `
+                        )}
+                      });
                     `}"
                   />
                   <div class="section--item--icon">
@@ -889,7 +890,14 @@ const javascript = require("tagged-template-noop");
                         `);
                       });
                       return javascript`
-                        ipcRenderer.send(this.name, this.value);
+                        ipcRenderer.invoke("eval", {
+                          target: "main",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              drawing.setIgnoreMouseEvents(true);
+                            `
+                          )}
+                        });
                       `;
                     })()}"
                   />
