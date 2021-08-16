@@ -1036,18 +1036,20 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item undo"
                   onclick="${(() => {
-                    ipcMain.on("undo", () => {
-                      drawing.webContents.executeJavaScript(javascript`
-                        document.querySelector(".drawing").undo();
-                      `);
-                    });
                     shortcuts.set("Command+Z", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".undo").click();
                       `);
                     });
                     return javascript`
-                      ipcRenderer.send("undo");
+                      ipcRenderer.invoke("eval", {
+                        target: "drawing",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            document.querySelector(".drawing").undo();
+                          `
+                        )}
+                      });
                     `;
                   })()}"
                 >
@@ -1059,18 +1061,20 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item redo"
                   onclick="${(() => {
-                    ipcMain.on("redo", () => {
-                      drawing.webContents.executeJavaScript(javascript`
-                        document.querySelector(".drawing").redo();
-                      `);
-                    });
                     shortcuts.set("Shift+Command+Z", () => {
                       menu.webContents.executeJavaScript(javascript`
                         document.querySelector(".redo").click();
                       `);
                     });
                     return javascript`
-                      ipcRenderer.send("redo");
+                      ipcRenderer.invoke("eval", {
+                        target: "drawing",
+                        javascript: ${JSON.stringify(
+                          javascript`
+                            document.querySelector(".drawing").redo();
+                          `
+                        )}
+                      });
                     `;
                   })()}"
                 >
