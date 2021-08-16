@@ -77,6 +77,11 @@ const javascript = require("tagged-template-noop");
                 this.querySelector(".cursor").update(settings);
               };
 
+              this.reset = () => {
+                this.querySelector(".highlighter").replaceChildren();
+                this.querySelector(".pen").replaceChildren();
+              };
+
               this.undoStack = [];
               this.redoStack = [];
               this.createUndoPoint = () => {
@@ -1016,11 +1021,7 @@ const javascript = require("tagged-template-noop");
                         target: "drawing",
                         javascript: ${JSON.stringify(
                           javascript`
-                            (() => {
-                              const drawing = document.querySelector(".drawing");
-                              drawing.querySelector(".highlighter").replaceChildren();
-                              drawing.querySelector(".pen").replaceChildren();
-                            })();
+                            document.querySelector(".drawing").reset();
                           `
                         )}
                       });
