@@ -1149,21 +1149,22 @@ const javascript = require("tagged-template-noop");
     )
   );
 
-  async function evaluate({ target, javascript }) {
-    switch (target) {
-      case "main":
-        return eval(javascript);
-      case "drawing":
-        return await drawing.webContents.executeJavaScript(javascript);
-      case "menu":
-        return await menu.webContents.executeJavaScript(javascript);
-      default:
-        throw new Error(`Failed to eval with target ${target}.`);
-    }
+  async function evaluate(configurations) {
+    for (const configuration of configurations)
+      switch (configuration.target) {
+        case "main":
+          return eval(configuration.javascript);
+        case "drawing":
+          return await drawing.webContents.executeJavaScript(configuration.javascript);
+        case "menu":
+          return await menu.webContents.executeJavaScript(configuration.javascript);
+        default:
+          throw new Error(`Failed to eval with target ${configuration.target}.`);
+      }
   }
 
-  ipcMain.handle("evaluate", async (_, evalArguments) => {
-    return await evaluate(evalArguments);
+  ipcMain.handle("evaluate", async (_, configurations) => {
+    return await evaluate(configurations);
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
