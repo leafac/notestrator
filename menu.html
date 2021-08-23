@@ -42,6 +42,7 @@
             -moz-osx-font-smoothing: grayscale;
             color: inherit;
             background-color: transparent;
+            opacity: 1;
             box-sizing: border-box;
             padding: 0;
             border: 0;
@@ -751,7 +752,8 @@
             https://github.com/twbs/bootstrap/issues/25686
             https://accessibility.18f.gov/hidden-content/
           */
-          .visually-hidden:not(:focus):not(:focus-within):not(:active) {
+          .visually-hidden,
+          .visually-hidden--interactive:not(:focus):not(:focus-within):not(:active) {
             width: 1px;
             height: 1px;
             padding: 0;
