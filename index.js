@@ -9,13 +9,14 @@ const {
 } = require("electron");
 const path = require("path");
 const express = require("express");
-const { html } = require("@leafac/html");
-const { css, extractInlineStyles } = require("@leafac/css");
-const javascript = require("tagged-template-noop");
 const fs = require("fs/promises");
 
 (async () => {
   if (!app.isPackaged) {
+    const { html } = require("@leafac/html");
+    const { css, extractInlineStyles } = require("@leafac/css");
+    const javascript = require("tagged-template-noop");
+
     const shortcuts = new Map();
 
     await fs.writeFile(
