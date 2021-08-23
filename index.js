@@ -638,11 +638,14 @@ const javascript = require("tagged-template-noop");
                             );
                           `}"
                           ${(() => {
-                            shortcuts.set(accelerator, () => {
-                              menu.webContents.executeJavaScript(javascript`
-                                document.querySelector('[name="color"][value="${color}"]').click();
-                              `);
-                            });
+                            shortcuts.set(accelerator, [
+                              {
+                                target: "menu",
+                                javascript: javascript`
+                                  document.querySelector('[name="color"][value="${color}"]').click();
+                                `,
+                              },
+                            ]);
                             return html``;
                           })()}
                         />
@@ -683,11 +686,14 @@ const javascript = require("tagged-template-noop");
                             hidden
                             $${isDefault ? html`checked` : html``}
                             ${(() => {
-                              shortcuts.set(accelerator, () => {
-                                menu.webContents.executeJavaScript(javascript`
-                                  document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
-                                `);
-                              });
+                              shortcuts.set(accelerator, [
+                                {
+                                  target: "menu",
+                                  javascript: javascript`
+                                    document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
+                                  `,
+                                },
+                              ]);
                               return html``;
                             })()}
                           />
@@ -744,11 +750,14 @@ const javascript = require("tagged-template-noop");
                             hidden
                             $${isDefault ? html`checked` : html``}
                             ${(() => {
-                              shortcuts.set(accelerator, () => {
-                                menu.webContents.executeJavaScript(javascript`
-                                  document.querySelector('[name="tool"][value="${tool}"]').click();
-                                `);
-                              });
+                              shortcuts.set(accelerator, [
+                                {
+                                  target: "menu",
+                                  javascript: javascript`
+                                    document.querySelector('[name="tool"][value="${tool}"]').click();
+                                  `,
+                                },
+                              ]);
                               return html``;
                             })()}
                           />
@@ -795,11 +804,14 @@ const javascript = require("tagged-template-noop");
                             hidden
                             $${isDefault ? html`checked` : html``}
                             ${(() => {
-                              shortcuts.set(accelerator, () => {
-                                menu.webContents.executeJavaScript(javascript`
-                                  document.querySelector('[name="fade"][value="${fade}"]').click();
-                                `);
-                              });
+                              shortcuts.set(accelerator, [
+                                {
+                                  target: "menu",
+                                  javascript: javascript`
+                                    document.querySelector('[name="fade"][value="${fade}"]').click();
+                                  `,
+                                },
+                              ]);
                               return html``;
                             })()}
                           />
@@ -886,14 +898,20 @@ const javascript = require("tagged-template-noop");
                     value="true"
                     hidden
                     onchange="${(() => {
-                      shortcuts.set("`", () => {
-                        menu.webContents.executeJavaScript(javascript`
-                          document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
-                        `);
-                        drawing.webContents.executeJavaScript(javascript`
-                          document.querySelector(".cursor").hidden = true;
-                        `);
-                      });
+                      shortcuts.set("`", [
+                        {
+                          target: "menu",
+                          javascript: javascript`
+                            document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
+                          `,
+                        },
+                        {
+                          target: "drawing",
+                          javascript: javascript`
+                            document.querySelector(".cursor").hidden = true;
+                          `,
+                        },
+                      ]);
                       return javascript`
                         ipcRenderer.invoke("eval", {
                           target: "main",
@@ -923,11 +941,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item--label hide"
                   onclick="${(() => {
-                    shortcuts.set("Esc", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".hide").click();
-                      `);
-                    });
+                    shortcuts.set("Esc", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".hide").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "main",
@@ -951,11 +972,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item--label hide--menu"
                   onclick="${(() => {
-                    shortcuts.set("Command+Esc", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".hide--menu").click();
-                      `);
-                    });
+                    shortcuts.set("Command+Esc", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".hide--menu").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "main",
@@ -985,11 +1009,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item quit"
                   onclick="${(() => {
-                    shortcuts.set("Command+Q", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".quit").click();
-                      `);
-                    });
+                    shortcuts.set("Command+Q", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".quit").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "main",
@@ -1011,11 +1038,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item reset-drawing"
                   onclick="${(() => {
-                    shortcuts.set("Backspace", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".reset-drawing").click();
-                      `);
-                    });
+                    shortcuts.set("Backspace", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".reset-drawing").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "drawing",
@@ -1036,11 +1066,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item undo"
                   onclick="${(() => {
-                    shortcuts.set("Command+Z", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".undo").click();
-                      `);
-                    });
+                    shortcuts.set("Command+Z", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".undo").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "drawing",
@@ -1061,11 +1094,14 @@ const javascript = require("tagged-template-noop");
                 <button
                   class="section--item redo"
                   onclick="${(() => {
-                    shortcuts.set("Shift+Command+Z", () => {
-                      menu.webContents.executeJavaScript(javascript`
-                        document.querySelector(".redo").click();
-                      `);
-                    });
+                    shortcuts.set("Shift+Command+Z", [
+                      {
+                        target: "menu",
+                        javascript: javascript`
+                          document.querySelector(".redo").click();
+                        `,
+                      },
+                    ]);
                     return javascript`
                       ipcRenderer.invoke("eval", {
                         target: "drawing",
@@ -1091,7 +1127,7 @@ const javascript = require("tagged-template-noop");
     )
   );
 
-  ipcMain.handle("eval", async (_, { target, javascript }) => {
+  async function evalHandler({ target, javascript }) {
     switch (target) {
       case "main":
         return eval(javascript);
@@ -1102,6 +1138,9 @@ const javascript = require("tagged-template-noop");
       default:
         throw new Error(`Failed to eval with target ${target}.`);
     }
+  }
+  ipcMain.handle("eval", async (_, evalArguments) => {
+    return await evalHandler(evalArguments);
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
@@ -1134,11 +1173,16 @@ const javascript = require("tagged-template-noop");
     Menu.buildFromTemplate([
       {
         label: "Shortcuts",
-        submenu: [...shortcuts.entries()].map(([accelerator, click]) => ({
-          label: `Shortcut ${accelerator}`,
-          accelerator,
-          click,
-        })),
+        submenu: [...shortcuts.entries()].map(
+          ([accelerator, evalsArguments]) => ({
+            label: `Shortcut ${accelerator}`,
+            accelerator,
+            click: () => {
+              for (const evalArguments of evalsArguments)
+                evalHandler(evalArguments);
+            },
+          })
+        ),
       },
     ])
   );
