@@ -1193,6 +1193,7 @@ const fs = require("fs/promises");
         label: "Shortcuts",
         submenu: [
           ...Object.entries(
+            // TODO: Check that this relative path works when the application has been packaged.
             JSON.parse(await fs.readFile("shortcuts.json", "utf8"))
           ),
         ].map(([accelerator, configurations]) => ({
