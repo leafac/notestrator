@@ -22,15 +22,15 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "@leafac/css": "^0.2.8",
-    "@leafac/html": "^3.0.0",
     "express": "^4.17.1",
-    "obs-websocket-js": "^4.0.2",
-    "tagged-template-noop": "^2.1.1"
+    "obs-websocket-js": "^4.0.2"
   },
   "devDependencies": {
+    "@leafac/css": "^0.2.11",
+    "@leafac/html": "^3.0.0",
     "electron": "^13.1.1",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^22.11.7",
+    "tagged-template-noop": "^2.1.1"
   },
   "build": {
     "appId": "com.leafac.notestrator"
