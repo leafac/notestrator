@@ -127,7 +127,7 @@ const javascript = require("tagged-template-noop");
                     const isRightClick = event.button === 2;
                     const originalTool = drawing.settings.tool;
                     if (isRightClick)
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "menu",
                           javascript: ${JSON.stringify(
@@ -256,7 +256,7 @@ const javascript = require("tagged-template-noop");
                       "mouseup",
                       () => {
                         if (isRightClick)
-                          ipcRenderer.invoke("eval", [
+                          ipcRenderer.invoke("evaluate", [
                             {
                               target: "menu",
                               javascript: \`
@@ -497,7 +497,7 @@ const javascript = require("tagged-template-noop");
             <form
               data-ondomcontentloaded="${javascript`
                 const settings = () => {
-                  ipcRenderer.invoke("eval", [
+                  ipcRenderer.invoke("evaluate", [
                     {
                       target: "drawing",
                       javascript: \`
@@ -880,7 +880,7 @@ const javascript = require("tagged-template-noop");
                     checked
                     hidden
                     onchange="${javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "main",
                           javascript: ${JSON.stringify(
@@ -921,7 +921,7 @@ const javascript = require("tagged-template-noop");
                         },
                       ]);
                       return javascript`
-                        ipcRenderer.invoke("eval", [
+                        ipcRenderer.invoke("evaluate", [
                           {
                             target: "main",
                             javascript: ${JSON.stringify(
@@ -960,7 +960,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "main",
                           javascript: ${JSON.stringify(
@@ -993,7 +993,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "main",
                           javascript: ${JSON.stringify(
@@ -1032,7 +1032,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "main",
                           javascript: ${JSON.stringify(
@@ -1063,7 +1063,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "drawing",
                           javascript: ${JSON.stringify(
@@ -1093,7 +1093,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "drawing",
                           javascript: ${JSON.stringify(
@@ -1123,7 +1123,7 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", [
+                      ipcRenderer.invoke("evaluate", [
                         {
                           target: "drawing",
                           javascript: ${JSON.stringify(
@@ -1162,7 +1162,7 @@ const javascript = require("tagged-template-noop");
     }
   }
 
-  ipcMain.handle("eval", async (_, evalArguments) => {
+  ipcMain.handle("evaluate", async (_, evalArguments) => {
     return await evalHandler(evalArguments);
   });
 
