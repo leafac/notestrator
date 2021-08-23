@@ -1149,7 +1149,7 @@ const javascript = require("tagged-template-noop");
     )
   );
 
-  async function evalHandler({ target, javascript }) {
+  async function evaluate({ target, javascript }) {
     switch (target) {
       case "main":
         return eval(javascript);
@@ -1163,7 +1163,7 @@ const javascript = require("tagged-template-noop");
   }
 
   ipcMain.handle("evaluate", async (_, evalArguments) => {
-    return await evalHandler(evalArguments);
+    return await evaluate(evalArguments);
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
@@ -1202,7 +1202,7 @@ const javascript = require("tagged-template-noop");
             accelerator,
             click: () => {
               for (const evalArguments of evalsArguments)
-                evalHandler(evalArguments);
+                evaluate(evalArguments);
             },
           })
         ),
