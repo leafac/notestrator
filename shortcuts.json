@@ -1,0 +1,162 @@
+{
+  "0": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--50)\"]').click();\n                                  "
+    }
+  ],
+  "1": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--red--600)\"]').click();\n                                  "
+    }
+  ],
+  "2": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--amber--600)\"]').click();\n                                  "
+    }
+  ],
+  "3": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--lime--600)\"]').click();\n                                  "
+    }
+  ],
+  "4": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--teal--600)\"]').click();\n                                  "
+    }
+  ],
+  "5": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--sky--600)\"]').click();\n                                  "
+    }
+  ],
+  "6": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--indigo--600)\"]').click();\n                                  "
+    }
+  ],
+  "7": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--purple--600)\"]').click();\n                                  "
+    }
+  ],
+  "8": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--pink--600)\"]').click();\n                                  "
+    }
+  ],
+  "9": [
+    {
+      "target": "menu",
+      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--900)\"]').click();\n                                  "
+    }
+  ],
+  "q": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"1\"]').click();\n                                    "
+    }
+  ],
+  "w": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"3\"]').click();\n                                    "
+    }
+  ],
+  "e": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"5\"]').click();\n                                    "
+    }
+  ],
+  "a": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"pen\"]').click();\n                                    "
+    }
+  ],
+  "s": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"highlighter\"]').click();\n                                    "
+    }
+  ],
+  "d": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"eraser\"]').click();\n                                    "
+    }
+  ],
+  "z": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"false\"]').click();\n                                    "
+    }
+  ],
+  "x": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"1500\"]').click();\n                                    "
+    }
+  ],
+  "c": [
+    {
+      "target": "menu",
+      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"500\"]').click();\n                                    "
+    }
+  ],
+  "`": [
+    {
+      "target": "menu",
+      "javascript": "\n                              document.querySelector('[name=\"ignoreMouseEvents\"][value=\"true\"]').click();\n                            "
+    },
+    {
+      "target": "drawing",
+      "javascript": "\n                              document.querySelector(\".cursor\").hidden = true;\n                            "
+    }
+  ],
+  "Esc": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".hide\").click();\n                          "
+    }
+  ],
+  "Command+Esc": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".hide--menu\").click();\n                          "
+    }
+  ],
+  "Command+Q": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".quit\").click();\n                          "
+    }
+  ],
+  "Backspace": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".reset-drawing\").click();\n                          "
+    }
+  ],
+  "Command+Z": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".undo\").click();\n                          "
+    }
+  ],
+  "Shift+Command+Z": [
+    {
+      "target": "menu",
+      "javascript": "\n                            document.querySelector(\".redo\").click();\n                          "
+    }
+  ]
+}
