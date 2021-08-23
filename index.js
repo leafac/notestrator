@@ -127,14 +127,16 @@ const javascript = require("tagged-template-noop");
                     const isRightClick = event.button === 2;
                     const originalTool = drawing.settings.tool;
                     if (isRightClick)
-                      ipcRenderer.invoke("eval", {
-                        target: "menu",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            document.querySelector('[value="eraser"]').click();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "menu",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              document.querySelector('[value="eraser"]').click();
+                            `
+                          )}
+                        }
+                      ]);
                     switch (isRightClick ? "eraser" : drawing.settings.tool) {
                       case "pen":
                       case "highlighter":
@@ -254,12 +256,14 @@ const javascript = require("tagged-template-noop");
                       "mouseup",
                       () => {
                         if (isRightClick)
-                          ipcRenderer.invoke("eval", {
-                            target: "menu",
-                            javascript: \`
-                              document.querySelector('[value="\${ originalTool }"]').click();
-                            \`
-                          });
+                          ipcRenderer.invoke("eval", [
+                            {
+                              target: "menu",
+                              javascript: \`
+                                document.querySelector('[value="\${ originalTool }"]').click();
+                              \`
+                            }
+                          ]);
                         window.removeEventListener("mousemove", handleMousemove);
                         if (handleMouseup !== undefined) handleMouseup();
                       },
@@ -493,14 +497,16 @@ const javascript = require("tagged-template-noop");
             <form
               data-ondomcontentloaded="${javascript`
                 const settings = () => {
-                  ipcRenderer.invoke("eval", {
-                    target: "drawing",
-                    javascript: \`
-                      document.querySelector(".drawing").setSettings(
-                        \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
-                      );
-                    \`
-                  });
+                  ipcRenderer.invoke("eval", [
+                    {
+                      target: "drawing",
+                      javascript: \`
+                        document.querySelector(".drawing").setSettings(
+                          \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
+                        );
+                      \`
+                    }
+                  ]);
                 };
                 settings();
                 this.addEventListener("change", settings);
@@ -874,14 +880,16 @@ const javascript = require("tagged-template-noop");
                     checked
                     hidden
                     onchange="${javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "main",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            drawing.setIgnoreMouseEvents(false);
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "main",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              drawing.setIgnoreMouseEvents(false);
+                            `
+                          )}
+                        }
+                      ]);
                     `}"
                   />
                   <div class="section--item--icon">
@@ -913,14 +921,16 @@ const javascript = require("tagged-template-noop");
                         },
                       ]);
                       return javascript`
-                        ipcRenderer.invoke("eval", {
-                          target: "main",
-                          javascript: ${JSON.stringify(
-                            javascript`
-                              drawing.setIgnoreMouseEvents(true);
-                            `
-                          )}
-                        });
+                        ipcRenderer.invoke("eval", [
+                          {
+                            target: "main",
+                            javascript: ${JSON.stringify(
+                              javascript`
+                                drawing.setIgnoreMouseEvents(true);
+                              `
+                            )}
+                          }
+                        ]);
                       `;
                     })()}"
                   />
@@ -950,14 +960,16 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "main",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            drawing.hide();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "main",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              drawing.hide();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -981,15 +993,17 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "main",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            if (menu.isVisible()) menu.hide();
-                            else menu.show();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "main",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              if (menu.isVisible()) menu.hide();
+                              else menu.show();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -1018,14 +1032,16 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "main",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            quit();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "main",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              quit();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -1047,14 +1063,16 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "drawing",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            document.querySelector(".drawing").reset();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "drawing",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              document.querySelector(".drawing").reset();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -1075,14 +1093,16 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "drawing",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            document.querySelector(".drawing").undo();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "drawing",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              document.querySelector(".drawing").undo();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -1103,14 +1123,16 @@ const javascript = require("tagged-template-noop");
                       },
                     ]);
                     return javascript`
-                      ipcRenderer.invoke("eval", {
-                        target: "drawing",
-                        javascript: ${JSON.stringify(
-                          javascript`
-                            document.querySelector(".drawing").redo();
-                          `
-                        )}
-                      });
+                      ipcRenderer.invoke("eval", [
+                        {
+                          target: "drawing",
+                          javascript: ${JSON.stringify(
+                            javascript`
+                              document.querySelector(".drawing").redo();
+                            `
+                          )}
+                        }
+                      ]);
                     `;
                   })()}"
                 >
@@ -1139,6 +1161,7 @@ const javascript = require("tagged-template-noop");
         throw new Error(`Failed to eval with target ${target}.`);
     }
   }
+
   ipcMain.handle("eval", async (_, evalArguments) => {
     return await evalHandler(evalArguments);
   });
