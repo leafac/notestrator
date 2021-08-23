@@ -640,8 +640,8 @@ const javascript = require("tagged-template-noop");
                           ${(() => {
                             shortcuts.set(accelerator, () => {
                               menu.webContents.executeJavaScript(javascript`
-                              document.querySelector('[name="color"][value="${color}"]').click();
-                            `);
+                                document.querySelector('[name="color"][value="${color}"]').click();
+                              `);
                             });
                             return html``;
                           })()}
