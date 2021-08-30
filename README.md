@@ -1,5 +1,9 @@
 ### Backlog
 
+- Undo/redo.
+  - Reset drawing should create an undo point.
+  - Don’t create undo point if used eraser and nothing changed
+  - What happens if you control z in the middle of drawing?
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
@@ -9,9 +13,6 @@
   - Scroll.
   - Shift to keep line straight.
 - Save the drawing: SVG & PNG with transparent background.
-
-- Don’t create undo point if used eraser and nothing changed
-- What happens if you control z in the middle of drawing?
 
 - [ ] touchbar
 - [ ] Menubar icons should be 32x32
