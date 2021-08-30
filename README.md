@@ -15,6 +15,33 @@
   - Shift to keep line straight.
 - Save the drawing: SVG & PNG with transparent background.
 
+- Don’t create undo point if used eraser and nothing changed
+- What happens if you control z in the middle of drawing?
+
+- [ ] touchbar
+- [ ] Menubar icons should be 32x32
+- [ ] Start at login
+
+- [ ] 
+    - [ ] TLDraw
+    - [ ] excalidraw
+    - [ ] Smooth drawing
+        - [ ] http://paperjs.org/tutorials/paths/smoothing-simplifying-flattening/
+        - [ ] Smooth
+            - [ ] https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path
+            - [ ] https://github.com/paperjs/paper.js/blob/develop/src/path/Path.js#L1288
+        - [ ] Simplify
+            - [ ] http://paperjs.org/examples/path-simplification/
+                - [ ] https://github.com/paperjs/paper.js/blob/3ef3ca66d5a615df53f001331081396ae701c276/src/path/PathFitter.js
+            - [ ] https://github.com/soswow/fit-curve
+            - [ ] https://github.com/odiak/fit-curve
+    - [ ] A bookmarklet to annotate any web page
+
+
+    - [ ] 
+    - [ ] https://github.com/serge-rgb/milton
+- [ ] https://discuss.atom.io/t/advice-on-creating-a-draw-on-screen-app/49401/15
+
 ### Notes About Packaging
 
 - electron-packager
