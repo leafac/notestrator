@@ -111,7 +111,7 @@ const fs = require("fs/promises");
                   const originalTool = drawing.settings.tool;
                   if (isRightClick)
                     ipcRenderer.invoke("evaluate", {
-                      target: "menu",
+                      process: "menu",
                       javascript: ${JSON.stringify(
                         javascript`
                           document.querySelector('[value="eraser"]').click();
@@ -238,7 +238,7 @@ const fs = require("fs/promises");
                     () => {
                       if (isRightClick)
                         ipcRenderer.invoke("evaluate", {
-                          target: "menu",
+                          process: "menu",
                           javascript: \`
                             document.querySelector('[value="\${ originalTool }"]').click();
                           \`
@@ -460,7 +460,7 @@ const fs = require("fs/promises");
                 data-ondomcontentloaded="${javascript`
                   const settings = () => {
                     ipcRenderer.invoke("evaluate", {
-                      target: "drawing",
+                      process: "drawing",
                       javascript: \`
                         document.querySelector(".drawing").setSettings(
                           \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
@@ -607,7 +607,7 @@ const fs = require("fs/promises");
                             ${(() => {
                               shortcuts[accelerator] = [
                                 {
-                                  target: "menu",
+                                  process: "menu",
                                   javascript: javascript`
                                     document.querySelector('[name="color"][value="${color}"]').click();
                                   `,
@@ -655,7 +655,7 @@ const fs = require("fs/promises");
                               ${(() => {
                                 shortcuts[accelerator] = [
                                   {
-                                    target: "menu",
+                                    process: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
                                     `,
@@ -719,7 +719,7 @@ const fs = require("fs/promises");
                               ${(() => {
                                 shortcuts[accelerator] = [
                                   {
-                                    target: "menu",
+                                    process: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="tool"][value="${tool}"]').click();
                                     `,
@@ -773,7 +773,7 @@ const fs = require("fs/promises");
                               ${(() => {
                                 shortcuts[accelerator] = [
                                   {
-                                    target: "menu",
+                                    process: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="fade"][value="${fade}"]').click();
                                     `,
@@ -842,7 +842,7 @@ const fs = require("fs/promises");
                       hidden
                       onchange="${javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "main",
+                          process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
                               drawing.setIgnoreMouseEvents(false);
@@ -867,13 +867,13 @@ const fs = require("fs/promises");
                       onchange="${(() => {
                         shortcuts["`"] = [
                           {
-                            target: "menu",
+                            process: "menu",
                             javascript: javascript`
                               document.querySelector('[name="ignoreMouseEvents"][value="true"]').click();
                             `,
                           },
                           {
-                            target: "drawing",
+                            process: "drawing",
                             javascript: javascript`
                               document.querySelector(".cursor").hidden = true;
                             `,
@@ -881,7 +881,7 @@ const fs = require("fs/promises");
                         ];
                         return javascript`
                           ipcRenderer.invoke("evaluate", {
-                            target: "main",
+                            process: "main",
                             javascript: ${JSON.stringify(
                               javascript`
                                 drawing.setIgnoreMouseEvents(true);
@@ -910,7 +910,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Esc"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".hide").click();
                           `,
@@ -918,7 +918,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "main",
+                          process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
                               drawing.hide();
@@ -941,7 +941,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Command+Esc"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".hide--menu").click();
                           `,
@@ -949,7 +949,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "main",
+                          process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
                               if (menu.isVisible()) menu.hide();
@@ -978,7 +978,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Command+Q"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".quit").click();
                           `,
@@ -986,7 +986,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "main",
+                          process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
                               quit();
@@ -1007,7 +1007,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Backspace"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".reset-drawing").click();
                           `,
@@ -1015,7 +1015,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "drawing",
+                          process: "drawing",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").reset();
@@ -1035,7 +1035,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Command+Z"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".undo").click();
                           `,
@@ -1043,7 +1043,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "drawing",
+                          process: "drawing",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").undo();
@@ -1063,7 +1063,7 @@ const fs = require("fs/promises");
                     onclick="${(() => {
                       shortcuts["Shift+Command+Z"] = [
                         {
-                          target: "menu",
+                          process: "menu",
                           javascript: javascript`
                             document.querySelector(".redo").click();
                           `,
@@ -1071,7 +1071,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          target: "drawing",
+                          process: "drawing",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").redo();
@@ -1143,8 +1143,8 @@ const fs = require("fs/promises");
   });
   menu.loadFile(path.join(__dirname, "menu.html"));
 
-  async function evaluate({ target, javascript }) {
-    switch (target) {
+  async function evaluate({ process, javascript }) {
+    switch (process) {
       case "main":
         return eval(javascript);
       case "drawing":
@@ -1152,7 +1152,7 @@ const fs = require("fs/promises");
       case "menu":
         return await menu.webContents.executeJavaScript(javascript);
       default:
-        throw new Error(`Failed to eval with target ${target}.`);
+        throw new Error(`Process not found: ‘${process}’`);
     }
   }
 
