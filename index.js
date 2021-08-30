@@ -17,7 +17,7 @@ const fs = require("fs/promises");
     const { css, extractInlineStyles } = require("@leafac/css");
     const javascript = require("tagged-template-noop");
 
-    const shortcuts = new Map();
+    const shortcuts = {};
 
     await fs.writeFile(
       "drawing.html",
@@ -605,14 +605,14 @@ const fs = require("fs/promises");
                               );
                             `}"
                             ${(() => {
-                              shortcuts.set(accelerator, [
+                              shortcuts[accelerator] = [
                                 {
                                   target: "menu",
                                   javascript: javascript`
                                     document.querySelector('[name="color"][value="${color}"]').click();
                                   `,
                                 },
-                              ]);
+                              ];
                               return html``;
                             })()}
                           />
@@ -653,14 +653,14 @@ const fs = require("fs/promises");
                               hidden
                               $${isDefault ? html`checked` : html``}
                               ${(() => {
-                                shortcuts.set(accelerator, [
+                                shortcuts[accelerator] = [
                                   {
                                     target: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="strokeWidth"][value="${strokeWidth}"]').click();
                                     `,
                                   },
-                                ]);
+                                ];
                                 return html``;
                               })()}
                             />
@@ -717,14 +717,14 @@ const fs = require("fs/promises");
                               hidden
                               $${isDefault ? html`checked` : html``}
                               ${(() => {
-                                shortcuts.set(accelerator, [
+                                shortcuts[accelerator] = [
                                   {
                                     target: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="tool"][value="${tool}"]').click();
                                     `,
                                   },
-                                ]);
+                                ];
                                 return html``;
                               })()}
                             />
@@ -771,14 +771,14 @@ const fs = require("fs/promises");
                               hidden
                               $${isDefault ? html`checked` : html``}
                               ${(() => {
-                                shortcuts.set(accelerator, [
+                                shortcuts[accelerator] = [
                                   {
                                     target: "menu",
                                     javascript: javascript`
                                       document.querySelector('[name="fade"][value="${fade}"]').click();
                                     `,
                                   },
-                                ]);
+                                ];
                                 return html``;
                               })()}
                             />
@@ -865,7 +865,7 @@ const fs = require("fs/promises");
                       value="true"
                       hidden
                       onchange="${(() => {
-                        shortcuts.set("`", [
+                        shortcuts["`"] = [
                           {
                             target: "menu",
                             javascript: javascript`
@@ -878,7 +878,7 @@ const fs = require("fs/promises");
                               document.querySelector(".cursor").hidden = true;
                             `,
                           },
-                        ]);
+                        ];
                         return javascript`
                           ipcRenderer.invoke("evaluate", {
                             target: "main",
@@ -908,14 +908,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item--label hide"
                     onclick="${(() => {
-                      shortcuts.set("Esc", [
+                      shortcuts["Esc"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".hide").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "main",
@@ -939,14 +939,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item--label hide--menu"
                     onclick="${(() => {
-                      shortcuts.set("Command+Esc", [
+                      shortcuts["Command+Esc"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".hide--menu").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "main",
@@ -976,14 +976,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item quit"
                     onclick="${(() => {
-                      shortcuts.set("Command+Q", [
+                      shortcuts["Command+Q"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".quit").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "main",
@@ -1005,14 +1005,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item reset-drawing"
                     onclick="${(() => {
-                      shortcuts.set("Backspace", [
+                      shortcuts["Backspace"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".reset-drawing").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "drawing",
@@ -1033,14 +1033,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item undo"
                     onclick="${(() => {
-                      shortcuts.set("Command+Z", [
+                      shortcuts["Command+Z"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".undo").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "drawing",
@@ -1061,14 +1061,14 @@ const fs = require("fs/promises");
                   <button
                     class="section--item redo"
                     onclick="${(() => {
-                      shortcuts.set("Shift+Command+Z", [
+                      shortcuts["Shift+Command+Z"] = [
                         {
                           target: "menu",
                           javascript: javascript`
                             document.querySelector(".redo").click();
                           `,
                         },
-                      ]);
+                      ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
                           target: "drawing",
@@ -1095,7 +1095,7 @@ const fs = require("fs/promises");
     );
     await fs.writeFile(
       "shortcuts.json",
-      JSON.stringify(Object.fromEntries(shortcuts.entries()), undefined, 2)
+      JSON.stringify(shortcuts, undefined, 2)
     );
   }
 
