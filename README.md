@@ -1,7 +1,9 @@
 ### Backlog
 
-- Improve on the `primaryDrawing` hack.
-- Rename `"drawing"` to `"drawings"` in `evaluate()`.
+- Multiple displays.
+  - Improve on the `primaryDrawing` hack.
+  - Rename `"drawing"` to `"drawings"` in `evaluate()`.
+  - Undo/redo across displays.
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
