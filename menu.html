@@ -1548,7 +1548,7 @@
               <form data-ondomcontentloaded="
                   const settings = () => {
                     ipcRenderer.invoke(&quot;evaluate&quot;, {
-                      target: &quot;drawing&quot;,
+                      process: &quot;drawing&quot;,
                       javascript: `
                         document.querySelector(&quot;.drawing&quot;).setSettings(
                           ${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
@@ -1759,7 +1759,7 @@
                   <label class="section--item--label">
                     <input type="radio" name="ignoreMouseEvents" value="false" checked="" hidden="" onchange="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;main&quot;,
+                          process: &quot;main&quot;,
                           javascript: &quot;\n                              drawing.setIgnoreMouseEvents(false);\n                            &quot;
                         });
                       ">
@@ -1773,7 +1773,7 @@
                   <label class="section--item--label">
                     <input type="radio" name="ignoreMouseEvents" value="true" hidden="" onchange="
                           ipcRenderer.invoke(&quot;evaluate&quot;, {
-                            target: &quot;main&quot;,
+                            process: &quot;main&quot;,
                             javascript: &quot;\n                                drawing.setIgnoreMouseEvents(true);\n                              &quot;
                           });
                         ">
@@ -1793,7 +1793,7 @@
                 <div class="section--item section--item--row">
                   <button class="section--item--label hide" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;main&quot;,
+                          process: &quot;main&quot;,
                           javascript: &quot;\n                              drawing.hide();\n                            &quot;
                         });
                       ">
@@ -1807,7 +1807,7 @@
                 <div class="section--item section--item--row">
                   <button class="section--item--label hide--menu" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;main&quot;,
+                          process: &quot;main&quot;,
                           javascript: &quot;\n                              if (menu.isVisible()) menu.hide();\n                              else menu.show();\n                            &quot;
                         });
                       ">
@@ -1826,7 +1826,7 @@
                 <div class="section--content">
                   <button class="section--item quit" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;main&quot;,
+                          process: &quot;main&quot;,
                           javascript: &quot;\n                              quit();\n                            &quot;
                         });
                       ">
@@ -1838,7 +1838,7 @@
 
                   <button class="section--item reset-drawing" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;drawing&quot;,
+                          process: &quot;drawing&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).reset();\n                            &quot;
                         });
                       ">
@@ -1849,7 +1849,7 @@
                   </button>
                   <button class="section--item undo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;drawing&quot;,
+                          process: &quot;drawing&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).undo();\n                            &quot;
                         });
                       ">
@@ -1860,7 +1860,7 @@
                   </button>
                   <button class="section--item redo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;drawing&quot;,
+                          process: &quot;drawing&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).redo();\n                            &quot;
                         });
                       ">

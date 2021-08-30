@@ -854,7 +854,7 @@
                   const originalTool = drawing.settings.tool;
                   if (isRightClick)
                     ipcRenderer.invoke(&quot;evaluate&quot;, {
-                      target: &quot;menu&quot;,
+                      process: &quot;menu&quot;,
                       javascript: &quot;\n                          document.querySelector('[value=\&quot;eraser\&quot;]').click();\n                        &quot;
                     });
                   switch (isRightClick ? &quot;eraser&quot; : drawing.settings.tool) {
@@ -977,7 +977,7 @@
                     () => {
                       if (isRightClick)
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          target: &quot;menu&quot;,
+                          process: &quot;menu&quot;,
                           javascript: `
                             document.querySelector('[value=&quot;${ originalTool }&quot;]').click();
                           `
