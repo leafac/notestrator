@@ -1,7 +1,5 @@
 ### Backlog
 
-- Undo/redo.
-  - What happens if you control z in the middle of drawing?
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
