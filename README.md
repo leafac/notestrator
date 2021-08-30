@@ -1,7 +1,5 @@
 ### Backlog
 
-- Only build the HTML, CSS, and client-side JavaScript in development.
-
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
