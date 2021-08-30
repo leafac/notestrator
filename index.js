@@ -1122,8 +1122,7 @@ const fs = require("fs/promises");
   });
   drawing.setAlwaysOnTop(true, "screen-saver", 1);
   drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-  // TODO: Check that this relative path works when the application has been packaged.
-  drawing.loadFile("drawing.html");
+  drawing.loadFile(path.join(__dirname, "drawing.html"));
 
   const menu = new BrowserWindow({
     parent: drawing,
@@ -1142,8 +1141,7 @@ const fs = require("fs/promises");
       contextIsolation: false,
     },
   });
-  // TODO: Check that this relative path works when the application has been packaged.
-  menu.loadFile("menu.html");
+  menu.loadFile(path.join(__dirname, "menu.html"));
 
   async function evaluate({ target, javascript }) {
     switch (target) {
@@ -1194,8 +1192,9 @@ const fs = require("fs/promises");
         label: "Shortcuts",
         submenu: [
           ...Object.entries(
-            // TODO: Check that this relative path works when the application has been packaged.
-            JSON.parse(await fs.readFile("shortcuts.json", "utf8"))
+            JSON.parse(
+              await fs.readFile(path.join(__dirname, "shortcuts.json"), "utf8")
+            )
           ),
         ].map(([accelerator, configurations]) => ({
           label: `Shortcut ${accelerator}`,
