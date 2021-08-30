@@ -108,7 +108,7 @@ const fs = require("fs/promises");
                   const isRightClick = event.button === 2;
                   const originalTool = drawing.settings.tool;
                   if (isRightClick)
-                    ipcRenderer.invoke("evaluate", {
+                    await ipcRenderer.invoke("evaluate", {
                       process: "menu",
                       javascript: ${JSON.stringify(
                         javascript`
@@ -119,8 +119,8 @@ const fs = require("fs/promises");
                   if (drawing.settings.tool !== "eraser" && drawing.settings.fade === "false")
                     this.closest(".drawing").createUndoPoint();
                   let handleMousemove;
-                  let handleMouseup;  
-                  switch (isRightClick ? "eraser" : drawing.settings.tool) {
+                  let handleMouseup;
+                  switch (drawing.settings.tool) {
                     case "pen":
                     case "highlighter":
                       const group = this.querySelector(\`.\${drawing.settings.tool}\`);
