@@ -1,7 +1,5 @@
 ### Backlog
 
-- `shortcuts` should be an object, not a `Map`.
-
 - Use the `executeJavaScript` event throughout the application.
 - Only build the HTML, CSS, and client-side JavaScript in development.
 
