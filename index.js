@@ -70,7 +70,7 @@ const fs = require("fs/promises");
             this.createUndoPoint = () => {
               this.undoStack.push(this.querySelector("svg").innerHTML);
               this.redoStack.length = 0;
-            }
+            };
             this.undo = () => {
               const undoSVGInnerHTML = this.undoStack.pop();
               if (undoSVGInnerHTML === undefined) return;
