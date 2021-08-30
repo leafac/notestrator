@@ -105,10 +105,6 @@ const fs = require("fs/promises");
                   data-ondomcontentloaded="${javascript`
                 const drawing = this.closest(".drawing");
                 window.addEventListener("mousedown", async (event) => {
-                  if (drawing.settings.fade === "false")
-                    this.closest(".drawing").createUndoPoint();
-                  let handleMousemove;
-                  let handleMouseup;
                   const isRightClick = event.button === 2;
                   const originalTool = drawing.settings.tool;
                   if (isRightClick)
@@ -120,6 +116,10 @@ const fs = require("fs/promises");
                         `
                       )}
                     });
+                  if (drawing.settings.tool !== "eraser" && drawing.settings.fade === "false")
+                    this.closest(".drawing").createUndoPoint();
+                  let handleMousemove;
+                  let handleMouseup;  
                   switch (isRightClick ? "eraser" : drawing.settings.tool) {
                     case "pen":
                     case "highlighter":
