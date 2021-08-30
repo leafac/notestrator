@@ -61,6 +61,7 @@ const fs = require("fs/promises");
             };
 
             this.reset = () => {
+              this.createUndoPoint();
               this.querySelector(".highlighter").replaceChildren();
               this.querySelector(".pen").replaceChildren();
             };
