@@ -848,7 +848,8 @@
                 <svg data-ondomcontentloaded="
                 const drawing = this.closest(&quot;.drawing&quot;);
                 window.addEventListener(&quot;mousedown&quot;, async (event) => {
-                  this.closest(&quot;.drawing&quot;).createUndoPoint();
+                  if (drawing.settings.fade === &quot;false&quot;)
+                    this.closest(&quot;.drawing&quot;).createUndoPoint();
                   let handleMousemove;
                   let handleMouseup;
                   const isRightClick = event.button === 2;

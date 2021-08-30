@@ -3,7 +3,6 @@
 - Undo/redo.
   - Don’t create undo point:
     - Used eraser and nothing changed.
-    - Lines that fade.
   - What happens if you control z in the middle of drawing?
 - Another styling pass on the menu.
   - “??”

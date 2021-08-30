@@ -105,7 +105,8 @@ const fs = require("fs/promises");
                   data-ondomcontentloaded="${javascript`
                 const drawing = this.closest(".drawing");
                 window.addEventListener("mousedown", async (event) => {
-                  this.closest(".drawing").createUndoPoint();
+                  if (drawing.settings.fade === "false")
+                    this.closest(".drawing").createUndoPoint();
                   let handleMousemove;
                   let handleMouseup;
                   const isRightClick = event.button === 2;
