@@ -851,7 +851,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              drawing.setIgnoreMouseEvents(false);
+                              for (const drawing of drawings) drawing.setIgnoreMouseEvents(false);
                             `
                           )}
                         });
@@ -890,7 +890,7 @@ const fs = require("fs/promises");
                             process: "main",
                             javascript: ${JSON.stringify(
                               javascript`
-                                drawing.setIgnoreMouseEvents(true);
+                              for (const drawing of drawings) drawing.setIgnoreMouseEvents(true);
                               `
                             )}
                           });
@@ -927,7 +927,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              drawing.hide();
+                              for (const drawing of drawings) drawing.hide();
                             `
                           )}
                         });
@@ -1107,30 +1107,35 @@ const fs = require("fs/promises");
 
   await app.whenReady();
 
-  const drawing = new BrowserWindow({
-    ...screen.getPrimaryDisplay().bounds,
-    enableLargerThanScreen: true,
-    closable: false,
-    minimizable: false, // TODO: Breaks in Windows.
-    maximizable: false,
-    movable: false,
-    resizable: false,
-    frame: false,
-    transparent: true, // TODO: Breaks in Windows.
-    hasShadow: false,
-    roundedCorners: false,
-    skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
+  let primaryDrawing;
+  const drawings = screen.getAllDisplays().map((display, index) => {
+    const drawing = new BrowserWindow({
+      ...display.bounds,
+      enableLargerThanScreen: true,
+      closable: false,
+      minimizable: false, // TODO: Breaks in Windows.
+      maximizable: false,
+      movable: false,
+      resizable: false,
+      frame: false,
+      transparent: true, // TODO: Breaks in Windows.
+      hasShadow: false,
+      roundedCorners: false,
+      skipTaskbar: true, // TODO: Probably necessary to hide the app in Windows.
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+    });
+    drawing.setAlwaysOnTop(true, "screen-saver", 1);
+    drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    drawing.loadFile(path.join(__dirname, "drawing.html"));
+    if (index === 0) primaryDrawing = drawing;
+    return drawing;
   });
-  drawing.setAlwaysOnTop(true, "screen-saver", 1);
-  drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-  drawing.loadFile(path.join(__dirname, "drawing.html"));
 
   const menu = new BrowserWindow({
-    parent: drawing,
+    parent: primaryDrawing,
     ...screen.getPrimaryDisplay().bounds,
     width: 96, // var(--width--sm)
     height: 576, // var(--width--xl)
@@ -1153,7 +1158,10 @@ const fs = require("fs/promises");
       case "main":
         return eval(javascript);
       case "drawing":
-        return await drawing.webContents.executeJavaScript(javascript);
+        const returns = [];
+        for (const drawing of drawings)
+          returns.push(await drawing.webContents.executeJavaScript(javascript));
+        return returns;
       case "menu":
         return await menu.webContents.executeJavaScript(javascript);
       default:
@@ -1166,7 +1174,7 @@ const fs = require("fs/promises");
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
-    drawing.show();
+    for (const drawing of drawings) drawing.show();
   });
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
@@ -1177,7 +1185,7 @@ const fs = require("fs/promises");
         label: "Draw",
         accelerator: "Control+Alt+Command+Space",
         click: () => {
-          drawing.show();
+          for (const drawing of drawings) drawing.show();
         },
       },
       {
@@ -1213,7 +1221,7 @@ const fs = require("fs/promises");
   );
 
   function quit() {
-    drawing.destroy();
+    for (const drawing of drawings) drawing.destroy();
     menu.destroy();
   }
 

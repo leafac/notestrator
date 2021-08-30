@@ -1,6 +1,7 @@
 ### Backlog
 
-- Multiple displays (multiple BrowserWindows).
+- Improve on the `primaryDrawing` hack.
+- Rename `"drawing"` to `"drawings"` in `evaluate()`.
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.
