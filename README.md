@@ -1,5 +1,6 @@
 ### Backlog
 
+- Multiple displays (multiple BrowserWindows).
 - Another styling pass on the menu.
   - “??”
   - Revisit the “Fade” section.

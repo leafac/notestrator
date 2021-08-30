@@ -1107,7 +1107,6 @@ const fs = require("fs/promises");
 
   await app.whenReady();
 
-  // FIXME: Deal with multiple displays.
   const drawing = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
     enableLargerThanScreen: true,
