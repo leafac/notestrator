@@ -855,13 +855,12 @@
                       process: &quot;menu&quot;,
                       javascript: &quot;\n                          document.querySelector('[value=\&quot;eraser\&quot;]').click();\n                        &quot;
                     });
-                  if (drawing.settings.tool !== &quot;eraser&quot; &amp;&amp; drawing.settings.fade === &quot;false&quot;)
-                    drawing.createUndoPoint();
                   let handleMousemove;
                   let handleMouseup;
                   switch (drawing.settings.tool) {
                     case &quot;pen&quot;:
                     case &quot;highlighter&quot;:
+                      if (drawing.settings.fade === &quot;false&quot;) drawing.createUndoPoint();
                       const group = this.querySelector(`.${drawing.settings.tool}`);
                       group.insertAdjacentHTML(
                         &quot;beforeend&quot;,

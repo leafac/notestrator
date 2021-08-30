@@ -116,13 +116,12 @@ const fs = require("fs/promises");
                         `
                       )}
                     });
-                  if (drawing.settings.tool !== "eraser" && drawing.settings.fade === "false")
-                    drawing.createUndoPoint();
                   let handleMousemove;
                   let handleMouseup;
                   switch (drawing.settings.tool) {
                     case "pen":
                     case "highlighter":
+                      if (drawing.settings.fade === "false") drawing.createUndoPoint();
                       const group = this.querySelector(\`.\${drawing.settings.tool}\`);
                       group.insertAdjacentHTML(
                         "beforeend",
