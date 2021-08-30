@@ -117,7 +117,7 @@ const fs = require("fs/promises");
                       )}
                     });
                   if (drawing.settings.tool !== "eraser" && drawing.settings.fade === "false")
-                    this.closest(".drawing").createUndoPoint();
+                    drawing.createUndoPoint();
                   let handleMousemove;
                   let handleMouseup;
                   switch (drawing.settings.tool) {
@@ -202,6 +202,7 @@ const fs = require("fs/promises");
                       };
                       break;
                     case "eraser":
+                      let undoPointCreated = false;
                       handleMousemove = (event) => {
                         const elementsToRemove = new Set();
                         for (const element of this.querySelectorAll("*"))
@@ -230,6 +231,10 @@ const fs = require("fs/promises");
                               break;
                           }
 
+                        if (!undoPointCreated && elementsToRemove.size > 0) {
+                          undoPointCreated = true;
+                          drawing.createUndoPoint();
+                        }
                         for (const element of elementsToRemove) element.remove();
                       };
                       break;
