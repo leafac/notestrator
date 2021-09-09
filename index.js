@@ -1107,7 +1107,7 @@ const fs = require("fs/promises");
   await app.whenReady();
 
   let primaryDrawing;
-  const drawings = screen.getAllDisplays().map((display, index) => {
+  const drawings = screen.getAllDisplays().map((display) => {
     const drawing = new BrowserWindow({
       ...display.bounds,
       enableLargerThanScreen: true,
@@ -1130,7 +1130,7 @@ const fs = require("fs/promises");
     drawing.setAlwaysOnTop(true, "screen-saver", 1);
     drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     drawing.loadFile(path.join(__dirname, "drawing.html"));
-    if (index === 0) primaryDrawing = drawing;
+    if (display.id === screen.getPrimaryDisplay().id) primaryDrawing = drawing;
     return drawing;
   });
 
