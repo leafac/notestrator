@@ -1,5 +1,12 @@
+- Switch from Fontawesome to Bootstrap Icons or something custom-made.
+- Update Electron.
+- Flesh out the metadata for electron-builder.
+
+
+
 ### Backlog
 
+- Custom cursor doesn’t go away on click-through mode.
 - Multiple displays.
   - Improve on the `primaryDrawing` hack.
   - Rename `"drawing"` to `"drawings"` in `evaluate()`.

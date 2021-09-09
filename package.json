@@ -2,7 +2,7 @@
   "name": "notestrator",
   "productName": "Notestrator",
   "version": "0.0.0",
-  "description": "Draw on top of your computer screen & your OBS stream",
+  "description": "Draw on top of your computer screen",
   "main": "index.js",
   "repository": "leafac/notestrator",
   "keywords": [
@@ -21,9 +21,7 @@
     "build": "electron-builder"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3",
-    "express": "^4.17.1",
-    "obs-websocket-js": "^4.0.2"
+    "@fortawesome/fontawesome-free": "^5.15.3"
   },
   "devDependencies": {
     "@leafac/css": "^0.2.11",
