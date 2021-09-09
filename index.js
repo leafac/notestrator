@@ -1179,6 +1179,7 @@ const fs = require("fs/promises");
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
     for (const drawing of drawings) drawing.show();
+    menu.show();
   });
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
