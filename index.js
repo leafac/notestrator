@@ -465,7 +465,7 @@ const fs = require("fs/promises");
                 data-ondomcontentloaded="${javascript`
                   const settings = () => {
                     ipcRenderer.invoke("evaluate", {
-                      process: "drawing",
+                      process: "drawings",
                       javascript: \`
                         document.querySelector(".drawing").setSettings(
                           \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
@@ -878,7 +878,7 @@ const fs = require("fs/promises");
                             `,
                           },
                           {
-                            process: "drawing",
+                            process: "drawings",
                             javascript: javascript`
                               document.querySelector(".cursor").hidden = true;
                             `,
@@ -1020,7 +1020,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawing",
+                          process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").reset();
@@ -1048,7 +1048,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawing",
+                          process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").undo();
@@ -1076,7 +1076,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawing",
+                          process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing").redo();
@@ -1159,10 +1159,12 @@ const fs = require("fs/promises");
     switch (process) {
       case "main":
         return eval(javascript);
-      case "drawing":
+      case "drawings":
         const evaluationResults = [];
         for (const drawing of drawings)
-          evaluationResults.push(await drawing.webContents.executeJavaScript(javascript));
+          evaluationResults.push(
+            await drawing.webContents.executeJavaScript(javascript)
+          );
         return evaluationResults;
       case "menu":
         return await menu.webContents.executeJavaScript(javascript);
