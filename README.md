@@ -1,4 +1,5 @@
 - Since the Electron 14 update, the menu isn’t clickable.
+- Full-screen applications aren’t working anymore.
 - Switch from Fontawesome to Bootstrap Icons or something custom-made.
 - Flesh out the metadata for electron-builder.
 

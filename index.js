@@ -1152,6 +1152,7 @@ const fs = require("fs/promises");
       nativeWindowOpen: true,
     },
   });
+  menu.setAlwaysOnTop(true, "screen-saver", 2); // FIXME: Apple recommends that you don’t go over screen-saver 1.
   menu.loadFile(path.join(__dirname, "menu.html"));
 
   async function evaluate({ process, javascript }) {
