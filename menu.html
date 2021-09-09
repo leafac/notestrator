@@ -1548,7 +1548,7 @@
               <form data-ondomcontentloaded="
                   const settings = () => {
                     ipcRenderer.invoke(&quot;evaluate&quot;, {
-                      process: &quot;drawing&quot;,
+                      process: &quot;drawings&quot;,
                       javascript: `
                         document.querySelector(&quot;.drawing&quot;).setSettings(
                           ${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
@@ -1838,7 +1838,7 @@
 
                   <button class="section--item reset-drawing" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawing&quot;,
+                          process: &quot;drawings&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).reset();\n                            &quot;
                         });
                       ">
@@ -1849,7 +1849,7 @@
                   </button>
                   <button class="section--item undo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawing&quot;,
+                          process: &quot;drawings&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).undo();\n                            &quot;
                         });
                       ">
@@ -1860,7 +1860,7 @@
                   </button>
                   <button class="section--item redo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawing&quot;,
+                          process: &quot;drawings&quot;,
                           javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).redo();\n                            &quot;
                         });
                       ">
