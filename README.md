@@ -1,5 +1,4 @@
 - Switch from Fontawesome to Bootstrap Icons or something custom-made.
-- Update Electron.
 - Flesh out the metadata for electron-builder.
 
 

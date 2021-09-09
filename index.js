@@ -1124,6 +1124,7 @@ const fs = require("fs/promises");
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
+        nativeWindowOpen: true
       },
     });
     drawing.setAlwaysOnTop(true, "screen-saver", 1);
@@ -1148,6 +1149,7 @@ const fs = require("fs/promises");
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      nativeWindowOpen: true
     },
   });
   menu.loadFile(path.join(__dirname, "menu.html"));
