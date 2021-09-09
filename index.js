@@ -1160,10 +1160,10 @@ const fs = require("fs/promises");
       case "main":
         return eval(javascript);
       case "drawing":
-        const returns = [];
+        const evaluationResults = [];
         for (const drawing of drawings)
-          returns.push(await drawing.webContents.executeJavaScript(javascript));
-        return returns;
+          evaluationResults.push(await drawing.webContents.executeJavaScript(javascript));
+        return evaluationResults;
       case "menu":
         return await menu.webContents.executeJavaScript(javascript);
       default:
