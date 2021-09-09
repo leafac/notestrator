@@ -1174,9 +1174,7 @@ const fs = require("fs/promises");
     return await evaluate(configuration);
   });
 
-  globalShortcut.register("Control+Alt+Command+Space", () => {
-    show();
-  });
+  globalShortcut.register("Control+Alt+Command+Space", show);
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
   tray.setToolTip("Notestrator");
