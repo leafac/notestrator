@@ -1162,9 +1162,9 @@ const fs = require("fs/promises");
       case "main":
         return eval(javascript);
       case "drawings":
-        const evaluationResults = [];
+        const evaluationResults = new Set();
         for (const drawing of drawings)
-          evaluationResults.push(
+          evaluationResults.add(
             await drawing.webContents.executeJavaScript(javascript)
           );
         return evaluationResults;
