@@ -2,6 +2,8 @@
 - Full-screen applications aren’t working anymore.
 - Switch from Fontawesome to Bootstrap Icons or something custom-made.
 - Flesh out the metadata for electron-builder.
+- Menu is flashing in weird ways. Maybe bring back the child-parent relationship?
+- Test that the logo on the tray works on 1x displays.
 
 
 

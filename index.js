@@ -1175,8 +1175,7 @@ const fs = require("fs/promises");
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
-    for (const drawing of drawings) drawing.show();
-    menu.show();
+    show();
   });
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
@@ -1186,9 +1185,7 @@ const fs = require("fs/promises");
       {
         label: "Draw",
         accelerator: "Control+Alt+Command+Space",
-        click: () => {
-          for (const drawing of drawings) drawing.show();
-        },
+        click: show,
       },
       {
         label: "Quit",
@@ -1221,6 +1218,11 @@ const fs = require("fs/promises");
       },
     ])
   );
+
+  function show() {
+    for (const drawing of drawings) drawing.show();
+    menu.show();
+  }
 
   function quit() {
     for (const drawing of drawings) drawing.destroy();
