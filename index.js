@@ -1198,9 +1198,6 @@ const fs = require("fs/promises");
       },
     ])
   );
-  app.addListener("accessibility-support-changed", () => {
-    tray;
-  });
 
   Menu.setApplicationMenu(
     Menu.buildFromTemplate([
