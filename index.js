@@ -1170,8 +1170,8 @@ const fs = require("fs/promises");
     }
   }
 
-  ipcMain.handle("evaluate", async (_, configuration) => {
-    return await evaluate(configuration);
+  ipcMain.handle("evaluate", async (_, evaluationConfiguration) => {
+    return await evaluate(evaluationConfiguration);
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
@@ -1209,11 +1209,12 @@ const fs = require("fs/promises");
               await fs.readFile(path.join(__dirname, "shortcuts.json"), "utf8")
             )
           ),
-        ].map(([accelerator, configurations]) => ({
+        ].map(([accelerator, evaluationConfigurations]) => ({
           label: `Shortcut ${accelerator}`,
           accelerator,
           click: () => {
-            for (const configuration of configurations) evaluate(configuration);
+            for (const evaluationConfiguration of evaluationConfigurations)
+              evaluate(evaluationConfiguration);
           },
         })),
       },
