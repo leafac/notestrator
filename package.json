@@ -26,7 +26,7 @@
   "devDependencies": {
     "@leafac/css": "^0.2.11",
     "@leafac/html": "^3.0.0",
-    "electron": "^13.1.1",
+    "electron": "^14.0.0",
     "electron-builder": "^22.11.7",
     "tagged-template-noop": "^2.1.1"
   },
