@@ -926,7 +926,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              for (const drawing of drawings) drawing.hide();
+                              hide();
                             `
                           )}
                         });
@@ -1225,6 +1225,11 @@ const fs = require("fs/promises");
   function show() {
     for (const drawing of drawings) drawing.show();
     menu.show();
+  }
+
+  function hide() {
+    for (const drawing of drawings) drawing.hide();
+    menu.hide();
   }
 
   function quit() {
