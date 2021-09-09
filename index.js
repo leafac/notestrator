@@ -1174,7 +1174,9 @@ const fs = require("fs/promises");
     return await evaluate(configuration);
   });
 
-  globalShortcut.register("Control+Alt+Command+Space", show);
+  globalShortcut.register("Control+Alt+Command+Space", () => {
+    show();
+  });
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
   tray.setToolTip("Notestrator");
@@ -1183,12 +1185,16 @@ const fs = require("fs/promises");
       {
         label: "Draw",
         accelerator: "Control+Alt+Command+Space",
-        click: show,
+        click: () => {
+          show();
+        },
       },
       {
         label: "Quit",
         accelerator: "Command+Q",
-        click: quit,
+        click: () => {
+          quit();
+        },
       },
     ])
   );
