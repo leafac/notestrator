@@ -889,7 +889,7 @@ const fs = require("fs/promises");
                             process: "main",
                             javascript: ${JSON.stringify(
                               javascript`
-                              for (const drawing of drawings) drawing.setIgnoreMouseEvents(true);
+                                for (const drawing of drawings) drawing.setIgnoreMouseEvents(true);
                               `
                             )}
                           });
@@ -1106,7 +1106,9 @@ const fs = require("fs/promises");
 
   await app.whenReady();
 
-  const drawings = screen.getAllDisplays().map((display) => {
+  const browserWindows = new Set();
+  const drawings = new Set();
+  for (const display of screen.getAllDisplays()) {
     const drawing = new BrowserWindow({
       ...display.bounds,
       enableLargerThanScreen: true,
@@ -1129,8 +1131,9 @@ const fs = require("fs/promises");
     drawing.setAlwaysOnTop(true, "screen-saver", 1);
     drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     drawing.loadFile(path.join(__dirname, "drawing.html"));
-    return drawing;
-  });
+    browserWindows.add(drawing);
+    drawings.add(drawings);
+  }
 
   const menu = new BrowserWindow({
     ...screen.getPrimaryDisplay().bounds,
@@ -1152,6 +1155,7 @@ const fs = require("fs/promises");
   menu.setAlwaysOnTop(true, "screen-saver", 2); // FIXME: Apple recommends that you don’t go over screen-saver 1.
   menu.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   menu.loadFile(path.join(__dirname, "menu.html"));
+  browserWindows.add(menu);
 
   async function evaluate({ process, javascript }) {
     switch (process) {
@@ -1223,17 +1227,14 @@ const fs = require("fs/promises");
   );
 
   function show() {
-    for (const drawing of drawings) drawing.show();
-    menu.show();
+    for (const browserWindow of browserWindows) browserWindow.show();
   }
 
   function hide() {
-    for (const drawing of drawings) drawing.hide();
-    menu.hide();
+    for (const browserWindow of browserWindows) browserWindow.hide();
   }
 
   function quit() {
-    for (const drawing of drawings) drawing.destroy();
-    menu.destroy();
+    for (const browserWindow of browserWindows) browserWindow.destroy();
   }
 })();
