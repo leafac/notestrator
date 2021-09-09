@@ -1132,7 +1132,7 @@ const fs = require("fs/promises");
     drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     drawing.loadFile(path.join(__dirname, "drawing.html"));
     browserWindows.add(drawing);
-    drawings.add(drawings);
+    drawings.add(drawing);
   }
 
   const menu = new BrowserWindow({
