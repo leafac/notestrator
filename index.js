@@ -8,7 +8,6 @@ const {
   Menu,
 } = require("electron");
 const path = require("path");
-const express = require("express");
 const fs = require("fs/promises");
 
 (async () => {
