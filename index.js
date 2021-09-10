@@ -58,12 +58,14 @@ const fs = require("fs/promises");
                   this.querySelector(".cursor").update();
                 };
 
+                // TODO: Push this down into the drawing canvas.
                 this.reset = () => {
                   this.createUndoPoint();
                   this.querySelector(".highlighter").replaceChildren();
                   this.querySelector(".pen").replaceChildren();
                 };
 
+                // TODO: Push this code up to the Electron process, to handle multiple windows.
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
