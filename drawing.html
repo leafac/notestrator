@@ -813,15 +813,17 @@
             <div class="drawing style--kum4fg" data-ondomcontentloaded="
                 this.setSettings = (settings) => {
                   this.settings = settings;
-                  this.querySelector(&quot;.cursor&quot;).update();
+                  this.querySelector(&quot;.drawing-editor--cursor&quot;).update();
                 };
 
+                // TODO: Push this down into the drawing canvas.
                 this.reset = () => {
                   this.createUndoPoint();
                   this.querySelector(&quot;.highlighter&quot;).replaceChildren();
                   this.querySelector(&quot;.pen&quot;).replaceChildren();
                 };
 
+                // TODO: Push this code up to the Electron process, to handle multiple windows.
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
@@ -998,37 +1000,37 @@
                   <g class="pen"></g>
                 </svg>
               </div>
-              <div class="cursor style--aok8hm" data-ondomcontentloaded="
-              document.addEventListener(&quot;mouseenter&quot;, (event) => {
-                this.hidden = false;
-              });
-              document.addEventListener(&quot;mouseleave&quot;, (event) => {
-                this.hidden = true;
-              });
-              new MutationObserver(() => {
-                this.closest(&quot;.drawing&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
-              }).observe(this, { attributes: true, attributeFilter: [&quot;hidden&quot;] });
-              document.addEventListener(&quot;mousemove&quot;, (event) => {
-                this.style.top = String(event.clientY) + &quot;px&quot;;
-                this.style.left = String(event.clientX) + &quot;px&quot;;
-              });
-              this.update = () => {
-                const settings = this.closest(&quot;.drawing&quot;).settings;
-                this.style.color = settings.color;
-                const circle = this.querySelector(&quot;.circle circle&quot;);
-                circle.setAttribute(&quot;r&quot;, settings.strokeWidth / 2 * (settings.tool === &quot;highlighter&quot; ? 3 : 1));
-                circle.style.opacity = settings.tool === &quot;highlighter&quot; ? 0.5 : 1;
-                this.querySelector(&quot;.circle&quot;).hidden = settings.tool === &quot;eraser&quot;;
-                const eraser = this.querySelector(&quot;.eraser&quot;);
-                eraser.hidden = settings.tool !== &quot;eraser&quot;;
-                /*
-                TODO: Do we change the cursor on fade?
-                {
-                  &quot;fade&quot;: &quot;false&quot;,
-                }
-                */
-              };
-            ">
+              <div class="drawing-editor--cursor style--aok8hm" data-ondomcontentloaded="
+                  document.addEventListener(&quot;mouseenter&quot;, (event) => {
+                    this.hidden = false;
+                  });
+                  document.addEventListener(&quot;mouseleave&quot;, (event) => {
+                    this.hidden = true;
+                  });
+                  new MutationObserver(() => {
+                    this.closest(&quot;.drawing&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
+                  }).observe(this, { attributes: true, attributeFilter: [&quot;hidden&quot;] });
+                  document.addEventListener(&quot;mousemove&quot;, (event) => {
+                    this.style.top = String(event.clientY) + &quot;px&quot;;
+                    this.style.left = String(event.clientX) + &quot;px&quot;;
+                  });
+                  this.update = () => {
+                    const settings = this.closest(&quot;.drawing&quot;).settings;
+                    this.style.color = settings.color;
+                    const circle = this.querySelector(&quot;.circle circle&quot;);
+                    circle.setAttribute(&quot;r&quot;, settings.strokeWidth / 2 * (settings.tool === &quot;highlighter&quot; ? 3 : 1));
+                    circle.style.opacity = settings.tool === &quot;highlighter&quot; ? 0.5 : 1;
+                    this.querySelector(&quot;.circle&quot;).hidden = settings.tool === &quot;eraser&quot;;
+                    const eraser = this.querySelector(&quot;.eraser&quot;);
+                    eraser.hidden = settings.tool !== &quot;eraser&quot;;
+                    /*
+                    TODO: Do we change the cursor on fade?
+                    {
+                      &quot;fade&quot;: &quot;false&quot;,
+                    }
+                    */
+                  };
+                ">
                 <div class="circle">
                   <svg viewBox="-7.5 -7.5, 15 15">
                     <circle cx="0" cy="0" r="1.5" fill="currentColor"></circle>

@@ -55,7 +55,7 @@ const fs = require("fs/promises");
               data-ondomcontentloaded="${javascript`
                 this.setSettings = (settings) => {
                   this.settings = settings;
-                  this.querySelector(".cursor").update();
+                  this.querySelector(".drawing-editor--cursor").update();
                 };
 
                 // TODO: Push this down into the drawing canvas.
@@ -262,7 +262,7 @@ const fs = require("fs/promises");
                 </svg>
               </div>
               <div
-                class="cursor"
+                class="drawing-editor--cursor"
                 style="${css`
                   position: absolute;
                   width: 15px;
@@ -881,7 +881,7 @@ const fs = require("fs/promises");
                           {
                             process: "drawings",
                             javascript: javascript`
-                              document.querySelector(".cursor").hidden = true;
+                              document.querySelector(".drawing-editor--cursor").hidden = true;
                             `,
                           },
                         ];

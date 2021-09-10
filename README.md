@@ -1,6 +1,6 @@
-drawingEditor
-  drawing
-  cursor
+drawing -> drawing-editor
+  ??? (canvas) -> drawing-editor--drawing
+  cursor -> drawing-editor--cursor 👍
 
 
 

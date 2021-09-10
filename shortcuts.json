@@ -120,7 +120,7 @@
     },
     {
       "process": "drawings",
-      "javascript": "\n                              document.querySelector(\".cursor\").hidden = true;\n                            "
+      "javascript": "\n                              document.querySelector(\".drawing-editor--cursor\").hidden = true;\n                            "
     }
   ],
   "Esc": [
