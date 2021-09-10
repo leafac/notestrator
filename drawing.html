@@ -816,7 +816,7 @@
                   this.querySelector(&quot;.drawing-editor--cursor&quot;).update();
                 };
 
-                // TODO: Push this down into the drawing canvas.
+                // TODO: Push this down into the drawing-editor--drawing.
                 this.reset = () => {
                   this.createUndoPoint();
                   this.querySelector(&quot;.highlighter&quot;).replaceChildren();
@@ -827,26 +827,26 @@
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
-                  this.undoStack.push(this.querySelector(&quot;svg&quot;).innerHTML);
+                  this.undoStack.push(this.querySelector(&quot;.drawing-editor--drawing&quot;).innerHTML);
                   this.redoStack.length = 0;
                 };
                 this.undo = () => {
-                  const undoSVGInnerHTML = this.undoStack.pop();
-                  if (undoSVGInnerHTML === undefined) return;
-                  const svg = this.querySelector(&quot;svg&quot;);
-                  this.redoStack.push(svg.innerHTML);
-                  svg.innerHTML = undoSVGInnerHTML;
+                  const undoDrawingInnerHTML = this.undoStack.pop();
+                  if (undoDrawingInnerHTML === undefined) return;
+                  const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+                  this.redoStack.push(drawing.innerHTML);
+                  drawing.innerHTML = undoDrawingInnerHTML;
                 };
                 this.redo = () => {
-                  const redoSVGInnerHTML = this.redoStack.pop();
-                  if (redoSVGInnerHTML === undefined) return;
-                  const svg = this.querySelector(&quot;svg&quot;);
-                  this.undoStack.push(svg.innerHTML);
-                  svg.innerHTML = redoSVGInnerHTML;
+                  const redoDrawingInnerHTML = this.redoStack.pop();
+                  if (redoDrawingInnerHTML === undefined) return;
+                  const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+                  this.undoStack.push(drawing.innerHTML);
+                  drawing.innerHTML = redoDrawingInnerHTML;
                 };
               ">
               <div class="style--2lawew">
-                <svg data-ondomcontentloaded="
+                <svg class="drawing-editor--drawing style--1yhxxdn" data-ondomcontentloaded="
                 const drawing = this.closest(&quot;.drawing&quot;);
                 window.addEventListener(&quot;mousedown&quot;, async (event) => {
                   const isRightClick = event.button === 2;
@@ -995,7 +995,7 @@
                     { once: true }
                   );
                 });
-              " class="style--1yhxxdn">
+              ">
                   <g class="highlighter"></g>
                   <g class="pen"></g>
                 </svg>

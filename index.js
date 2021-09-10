@@ -58,7 +58,7 @@ const fs = require("fs/promises");
                   this.querySelector(".drawing-editor--cursor").update();
                 };
 
-                // TODO: Push this down into the drawing canvas.
+                // TODO: Push this down into the drawing-editor--drawing.
                 this.reset = () => {
                   this.createUndoPoint();
                   this.querySelector(".highlighter").replaceChildren();
@@ -69,22 +69,22 @@ const fs = require("fs/promises");
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
-                  this.undoStack.push(this.querySelector("svg").innerHTML);
+                  this.undoStack.push(this.querySelector(".drawing-editor--drawing").innerHTML);
                   this.redoStack.length = 0;
                 };
                 this.undo = () => {
-                  const undoSVGInnerHTML = this.undoStack.pop();
-                  if (undoSVGInnerHTML === undefined) return;
-                  const svg = this.querySelector("svg");
-                  this.redoStack.push(svg.innerHTML);
-                  svg.innerHTML = undoSVGInnerHTML;
+                  const undoDrawingInnerHTML = this.undoStack.pop();
+                  if (undoDrawingInnerHTML === undefined) return;
+                  const drawing = this.querySelector(".drawing-editor--drawing");
+                  this.redoStack.push(drawing.innerHTML);
+                  drawing.innerHTML = undoDrawingInnerHTML;
                 };
                 this.redo = () => {
-                  const redoSVGInnerHTML = this.redoStack.pop();
-                  if (redoSVGInnerHTML === undefined) return;
-                  const svg = this.querySelector("svg");
-                  this.undoStack.push(svg.innerHTML);
-                  svg.innerHTML = redoSVGInnerHTML;
+                  const redoDrawingInnerHTML = this.redoStack.pop();
+                  if (redoDrawingInnerHTML === undefined) return;
+                  const drawing = this.querySelector(".drawing-editor--drawing");
+                  this.undoStack.push(drawing.innerHTML);
+                  drawing.innerHTML = redoDrawingInnerHTML;
                 };
               `}"
             >
@@ -98,6 +98,7 @@ const fs = require("fs/promises");
                 `}"
               >
                 <svg
+                  class="drawing-editor--drawing"
                   style="${css`
                     width: 100%;
                     height: 100%;
