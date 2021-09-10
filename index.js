@@ -55,7 +55,7 @@ const fs = require("fs/promises");
               data-ondomcontentloaded="${javascript`
                 this.setSettings = (settings) => {
                   this.settings = settings;
-                  this.querySelector(".cursor").update(settings);
+                  this.querySelector(".cursor").update();
                 };
 
                 this.reset = () => {
@@ -282,7 +282,8 @@ const fs = require("fs/promises");
                 this.style.top = String(event.clientY) + "px";
                 this.style.left = String(event.clientX) + "px";
               });
-              this.update = (settings) => {
+              this.update = () => {
+                const settings = this.closest(".drawing").settings;
                 this.style.color = settings.color;
                 const circle = this.querySelector(".circle circle");
                 circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));

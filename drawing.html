@@ -811,38 +811,38 @@
     </head>
           <body>
             <div class="drawing style--kum4fg" data-ondomcontentloaded="
-            this.setSettings = (settings) => {
-              this.settings = settings;
-              this.querySelector(&quot;.cursor&quot;).update(settings);
-            };
+                this.setSettings = (settings) => {
+                  this.settings = settings;
+                  this.querySelector(&quot;.cursor&quot;).update();
+                };
 
-            this.reset = () => {
-              this.createUndoPoint();
-              this.querySelector(&quot;.highlighter&quot;).replaceChildren();
-              this.querySelector(&quot;.pen&quot;).replaceChildren();
-            };
+                this.reset = () => {
+                  this.createUndoPoint();
+                  this.querySelector(&quot;.highlighter&quot;).replaceChildren();
+                  this.querySelector(&quot;.pen&quot;).replaceChildren();
+                };
 
-            this.undoStack = [];
-            this.redoStack = [];
-            this.createUndoPoint = () => {
-              this.undoStack.push(this.querySelector(&quot;svg&quot;).innerHTML);
-              this.redoStack.length = 0;
-            };
-            this.undo = () => {
-              const undoSVGInnerHTML = this.undoStack.pop();
-              if (undoSVGInnerHTML === undefined) return;
-              const svg = this.querySelector(&quot;svg&quot;);
-              this.redoStack.push(svg.innerHTML);
-              svg.innerHTML = undoSVGInnerHTML;
-            };
-            this.redo = () => {
-              const redoSVGInnerHTML = this.redoStack.pop();
-              if (redoSVGInnerHTML === undefined) return;
-              const svg = this.querySelector(&quot;svg&quot;);
-              this.undoStack.push(svg.innerHTML);
-              svg.innerHTML = redoSVGInnerHTML;
-            };
-          ">
+                this.undoStack = [];
+                this.redoStack = [];
+                this.createUndoPoint = () => {
+                  this.undoStack.push(this.querySelector(&quot;svg&quot;).innerHTML);
+                  this.redoStack.length = 0;
+                };
+                this.undo = () => {
+                  const undoSVGInnerHTML = this.undoStack.pop();
+                  if (undoSVGInnerHTML === undefined) return;
+                  const svg = this.querySelector(&quot;svg&quot;);
+                  this.redoStack.push(svg.innerHTML);
+                  svg.innerHTML = undoSVGInnerHTML;
+                };
+                this.redo = () => {
+                  const redoSVGInnerHTML = this.redoStack.pop();
+                  if (redoSVGInnerHTML === undefined) return;
+                  const svg = this.querySelector(&quot;svg&quot;);
+                  this.undoStack.push(svg.innerHTML);
+                  svg.innerHTML = redoSVGInnerHTML;
+                };
+              ">
               <div class="style--2lawew">
                 <svg data-ondomcontentloaded="
                 const drawing = this.closest(&quot;.drawing&quot;);
@@ -1012,7 +1012,8 @@
                 this.style.top = String(event.clientY) + &quot;px&quot;;
                 this.style.left = String(event.clientX) + &quot;px&quot;;
               });
-              this.update = (settings) => {
+              this.update = () => {
+                const settings = this.closest(&quot;.drawing&quot;).settings;
                 this.style.color = settings.color;
                 const circle = this.querySelector(&quot;.circle circle&quot;);
                 circle.setAttribute(&quot;r&quot;, settings.strokeWidth / 2 * (settings.tool === &quot;highlighter&quot; ? 3 : 1));
