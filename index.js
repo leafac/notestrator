@@ -269,36 +269,36 @@ const fs = require("fs/promises");
                   color: var(--color--red--600);
                 `}"
                 data-ondomcontentloaded="${javascript`
-              document.addEventListener("mouseenter", (event) => {
-                this.hidden = false;
-              });
-              document.addEventListener("mouseleave", (event) => {
-                this.hidden = true;
-              });
-              new MutationObserver(() => {
-                this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
-              }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
-              document.addEventListener("mousemove", (event) => {
-                this.style.top = String(event.clientY) + "px";
-                this.style.left = String(event.clientX) + "px";
-              });
-              this.update = () => {
-                const settings = this.closest(".drawing").settings;
-                this.style.color = settings.color;
-                const circle = this.querySelector(".circle circle");
-                circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
-                circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
-                this.querySelector(".circle").hidden = settings.tool === "eraser";
-                const eraser = this.querySelector(".eraser");
-                eraser.hidden = settings.tool !== "eraser";
-                /*
-                TODO: Do we change the cursor on fade?
-                {
-                  "fade": "false",
-                }
-                */
-              };
-            `}"
+                  document.addEventListener("mouseenter", (event) => {
+                    this.hidden = false;
+                  });
+                  document.addEventListener("mouseleave", (event) => {
+                    this.hidden = true;
+                  });
+                  new MutationObserver(() => {
+                    this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
+                  }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
+                  document.addEventListener("mousemove", (event) => {
+                    this.style.top = String(event.clientY) + "px";
+                    this.style.left = String(event.clientX) + "px";
+                  });
+                  this.update = () => {
+                    const settings = this.closest(".drawing").settings;
+                    this.style.color = settings.color;
+                    const circle = this.querySelector(".circle circle");
+                    circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
+                    circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
+                    this.querySelector(".circle").hidden = settings.tool === "eraser";
+                    const eraser = this.querySelector(".eraser");
+                    eraser.hidden = settings.tool !== "eraser";
+                    /*
+                    TODO: Do we change the cursor on fade?
+                    {
+                      "fade": "false",
+                    }
+                    */
+                  };
+                `}"
               >
                 <div class="circle">
                   <svg viewBox="-7.5 -7.5, 15 15">
