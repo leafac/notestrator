@@ -53,38 +53,38 @@ const fs = require("fs/promises");
                 left: 0;
               `}"
               data-ondomcontentloaded="${javascript`
-            this.setSettings = (settings) => {
-              this.settings = settings;
-              this.querySelector(".cursor").update(settings);
-            };
+                this.setSettings = (settings) => {
+                  this.settings = settings;
+                  this.querySelector(".cursor").update(settings);
+                };
 
-            this.reset = () => {
-              this.createUndoPoint();
-              this.querySelector(".highlighter").replaceChildren();
-              this.querySelector(".pen").replaceChildren();
-            };
+                this.reset = () => {
+                  this.createUndoPoint();
+                  this.querySelector(".highlighter").replaceChildren();
+                  this.querySelector(".pen").replaceChildren();
+                };
 
-            this.undoStack = [];
-            this.redoStack = [];
-            this.createUndoPoint = () => {
-              this.undoStack.push(this.querySelector("svg").innerHTML);
-              this.redoStack.length = 0;
-            };
-            this.undo = () => {
-              const undoSVGInnerHTML = this.undoStack.pop();
-              if (undoSVGInnerHTML === undefined) return;
-              const svg = this.querySelector("svg");
-              this.redoStack.push(svg.innerHTML);
-              svg.innerHTML = undoSVGInnerHTML;
-            };
-            this.redo = () => {
-              const redoSVGInnerHTML = this.redoStack.pop();
-              if (redoSVGInnerHTML === undefined) return;
-              const svg = this.querySelector("svg");
-              this.undoStack.push(svg.innerHTML);
-              svg.innerHTML = redoSVGInnerHTML;
-            };
-          `}"
+                this.undoStack = [];
+                this.redoStack = [];
+                this.createUndoPoint = () => {
+                  this.undoStack.push(this.querySelector("svg").innerHTML);
+                  this.redoStack.length = 0;
+                };
+                this.undo = () => {
+                  const undoSVGInnerHTML = this.undoStack.pop();
+                  if (undoSVGInnerHTML === undefined) return;
+                  const svg = this.querySelector("svg");
+                  this.redoStack.push(svg.innerHTML);
+                  svg.innerHTML = undoSVGInnerHTML;
+                };
+                this.redo = () => {
+                  const redoSVGInnerHTML = this.redoStack.pop();
+                  if (redoSVGInnerHTML === undefined) return;
+                  const svg = this.querySelector("svg");
+                  this.undoStack.push(svg.innerHTML);
+                  svg.innerHTML = redoSVGInnerHTML;
+                };
+              `}"
             >
               <div
                 style="${css`
