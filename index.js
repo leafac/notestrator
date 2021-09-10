@@ -66,7 +66,6 @@ const fs = require("fs/promises");
                 };
 
                 // TODO: Push this code up to the Electron process, to handle multiple windows.
-                // TODO: Assign a name to the SVG: “canvas”
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
