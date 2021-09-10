@@ -20,9 +20,6 @@
     "start": "electron .",
     "build": "electron-builder"
   },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3"
-  },
   "devDependencies": {
     "@leafac/css": "^0.2.11",
     "@leafac/html": "^3.0.0",
