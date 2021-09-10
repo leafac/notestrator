@@ -43,7 +43,7 @@ const fs = require("fs/promises");
           </head>
           <body>
             <div
-              class="drawing"
+              class="drawing-editor"
               style="${css`
                 cursor: none;
                 position: absolute;
@@ -104,10 +104,10 @@ const fs = require("fs/promises");
                     height: 100%;
                   `}"
                   data-ondomcontentloaded="${javascript`
-                const drawing = this.closest(".drawing");
+                const drawingEditor = this.closest(".drawing-editor");
                 window.addEventListener("mousedown", async (event) => {
                   const isRightClick = event.button === 2;
-                  const originalTool = drawing.settings.tool;
+                  const originalTool = drawingEditor.settings.tool;
                   if (isRightClick)
                     await ipcRenderer.invoke("evaluate", {
                       process: "menu",
@@ -119,28 +119,28 @@ const fs = require("fs/promises");
                     });
                   let handleMousemove;
                   let handleMouseup;
-                  switch (drawing.settings.tool) {
+                  switch (drawingEditor.settings.tool) {
                     case "pen":
                     case "highlighter":
-                      if (drawing.settings.fade === "false") drawing.createUndoPoint();
-                      const group = this.querySelector(\`.\${drawing.settings.tool}\`);
+                      if (drawingEditor.settings.fade === "false") drawingEditor.createUndoPoint();
+                      const group = this.querySelector(\`.\${drawingEditor.settings.tool}\`);
                       group.insertAdjacentHTML(
                         "beforeend",
                         \`
                       <path
                         d="M \${event.clientX} \${event.clientY}"
                         fill="none"
-                        stroke="\${drawing.settings.color}"
+                        stroke="\${drawingEditor.settings.color}"
                         stroke-width="\${
-                          drawing.settings.strokeWidth * (drawing.settings.tool === "highlighter" ? 3 : 1)
+                          drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === "highlighter" ? 3 : 1)
                         }"
-                        stroke-opacity="\${drawing.settings.tool === "highlighter" ? 0.5 : 1}"
+                        stroke-opacity="\${drawingEditor.settings.tool === "highlighter" ? 0.5 : 1}"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         style="\${
-                          drawing.settings.fade === "false"
+                          drawingEditor.settings.fade === "false"
                             ? \`\`
-                            : \`transition: opacity \${drawing.settings.fade}ms ease-in;\`
+                            : \`transition: opacity \${drawingEditor.settings.fade}ms ease-in;\`
                         }"
                       />
                     \`
@@ -194,7 +194,7 @@ const fs = require("fs/promises");
                             \`\${d} C \${x} \${y}, \${x} \${y}, \${x} \${y}\`
                           );
                         }
-                        if (drawing.settings.fade === "false") return;
+                        if (drawingEditor.settings.fade === "false") return;
                         path.style.opacity = 0;
                         path.addEventListener("transitionend", () => {
                           path.remove();
@@ -225,7 +225,7 @@ const fs = require("fs/promises");
                                     (event.clientX - x) ** 2 +
                                       (event.clientY - y) ** 2
                                   ) <
-                                  drawing.settings.strokeWidth * 5
+                                  drawingEditor.settings.strokeWidth * 5
                                 )
                                   elementsToRemove.add(element);
                               break;
@@ -233,7 +233,7 @@ const fs = require("fs/promises");
 
                         if (!undoPointCreated && elementsToRemove.size > 0) {
                           undoPointCreated = true;
-                          drawing.createUndoPoint();
+                          drawingEditor.createUndoPoint();
                         }
                         for (const element of elementsToRemove) element.remove();
                       };
@@ -279,14 +279,14 @@ const fs = require("fs/promises");
                     this.hidden = true;
                   });
                   new MutationObserver(() => {
-                    this.closest(".drawing").style.cursor = this.hidden ? "default" : "none";
+                    this.closest(".drawing-editor").style.cursor = this.hidden ? "default" : "none";
                   }).observe(this, { attributes: true, attributeFilter: ["hidden"] });
                   document.addEventListener("mousemove", (event) => {
                     this.style.top = String(event.clientY) + "px";
                     this.style.left = String(event.clientX) + "px";
                   });
                   this.update = () => {
-                    const settings = this.closest(".drawing").settings;
+                    const settings = this.closest(".drawing-editor").settings;
                     this.style.color = settings.color;
                     const circle = this.querySelector(".circle circle");
                     circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
@@ -469,7 +469,7 @@ const fs = require("fs/promises");
                     ipcRenderer.invoke("evaluate", {
                       process: "drawings",
                       javascript: \`
-                        document.querySelector(".drawing").setSettings(
+                        document.querySelector(".drawing-editor").setSettings(
                           \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
                         );
                       \`
@@ -1025,7 +1025,7 @@ const fs = require("fs/promises");
                           process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
-                              document.querySelector(".drawing").reset();
+                              document.querySelector(".drawing-editor").reset();
                             `
                           )}
                         });
@@ -1053,7 +1053,7 @@ const fs = require("fs/promises");
                           process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
-                              document.querySelector(".drawing").undo();
+                              document.querySelector(".drawing-editor").undo();
                             `
                           )}
                         });
@@ -1081,7 +1081,7 @@ const fs = require("fs/promises");
                           process: "drawings",
                           javascript: ${JSON.stringify(
                             javascript`
-                              document.querySelector(".drawing").redo();
+                              document.querySelector(".drawing-editor").redo();
                             `
                           )}
                         });

@@ -810,7 +810,7 @@
       </style>
     </head>
           <body>
-            <div class="drawing style--kum4fg" data-ondomcontentloaded="
+            <div class="drawing-editor style--kum4fg" data-ondomcontentloaded="
                 this.setSettings = (settings) => {
                   this.settings = settings;
                   this.querySelector(&quot;.drawing-editor--cursor&quot;).update();
@@ -847,10 +847,10 @@
               ">
               <div class="style--2lawew">
                 <svg class="drawing-editor--drawing style--1yhxxdn" data-ondomcontentloaded="
-                const drawing = this.closest(&quot;.drawing&quot;);
+                const drawingEditor = this.closest(&quot;.drawing-editor&quot;);
                 window.addEventListener(&quot;mousedown&quot;, async (event) => {
                   const isRightClick = event.button === 2;
-                  const originalTool = drawing.settings.tool;
+                  const originalTool = drawingEditor.settings.tool;
                   if (isRightClick)
                     await ipcRenderer.invoke(&quot;evaluate&quot;, {
                       process: &quot;menu&quot;,
@@ -858,28 +858,28 @@
                     });
                   let handleMousemove;
                   let handleMouseup;
-                  switch (drawing.settings.tool) {
+                  switch (drawingEditor.settings.tool) {
                     case &quot;pen&quot;:
                     case &quot;highlighter&quot;:
-                      if (drawing.settings.fade === &quot;false&quot;) drawing.createUndoPoint();
-                      const group = this.querySelector(`.${drawing.settings.tool}`);
+                      if (drawingEditor.settings.fade === &quot;false&quot;) drawingEditor.createUndoPoint();
+                      const group = this.querySelector(`.${drawingEditor.settings.tool}`);
                       group.insertAdjacentHTML(
                         &quot;beforeend&quot;,
                         `
                       <path
                         d=&quot;M ${event.clientX} ${event.clientY}&quot;
                         fill=&quot;none&quot;
-                        stroke=&quot;${drawing.settings.color}&quot;
+                        stroke=&quot;${drawingEditor.settings.color}&quot;
                         stroke-width=&quot;${
-                          drawing.settings.strokeWidth * (drawing.settings.tool === &quot;highlighter&quot; ? 3 : 1)
+                          drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === &quot;highlighter&quot; ? 3 : 1)
                         }&quot;
-                        stroke-opacity=&quot;${drawing.settings.tool === &quot;highlighter&quot; ? 0.5 : 1}&quot;
+                        stroke-opacity=&quot;${drawingEditor.settings.tool === &quot;highlighter&quot; ? 0.5 : 1}&quot;
                         stroke-linecap=&quot;round&quot;
                         stroke-linejoin=&quot;round&quot;
                         style=&quot;${
-                          drawing.settings.fade === &quot;false&quot;
+                          drawingEditor.settings.fade === &quot;false&quot;
                             ? ``
-                            : `transition: opacity ${drawing.settings.fade}ms ease-in;`
+                            : `transition: opacity ${drawingEditor.settings.fade}ms ease-in;`
                         }&quot;
                       />
                     `
@@ -933,7 +933,7 @@
                             `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`
                           );
                         }
-                        if (drawing.settings.fade === &quot;false&quot;) return;
+                        if (drawingEditor.settings.fade === &quot;false&quot;) return;
                         path.style.opacity = 0;
                         path.addEventListener(&quot;transitionend&quot;, () => {
                           path.remove();
@@ -964,7 +964,7 @@
                                     (event.clientX - x) ** 2 +
                                       (event.clientY - y) ** 2
                                   ) <
-                                  drawing.settings.strokeWidth * 5
+                                  drawingEditor.settings.strokeWidth * 5
                                 )
                                   elementsToRemove.add(element);
                               break;
@@ -972,7 +972,7 @@
 
                         if (!undoPointCreated &amp;&amp; elementsToRemove.size > 0) {
                           undoPointCreated = true;
-                          drawing.createUndoPoint();
+                          drawingEditor.createUndoPoint();
                         }
                         for (const element of elementsToRemove) element.remove();
                       };
@@ -1008,14 +1008,14 @@
                     this.hidden = true;
                   });
                   new MutationObserver(() => {
-                    this.closest(&quot;.drawing&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
+                    this.closest(&quot;.drawing-editor&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
                   }).observe(this, { attributes: true, attributeFilter: [&quot;hidden&quot;] });
                   document.addEventListener(&quot;mousemove&quot;, (event) => {
                     this.style.top = String(event.clientY) + &quot;px&quot;;
                     this.style.left = String(event.clientX) + &quot;px&quot;;
                   });
                   this.update = () => {
-                    const settings = this.closest(&quot;.drawing&quot;).settings;
+                    const settings = this.closest(&quot;.drawing-editor&quot;).settings;
                     this.style.color = settings.color;
                     const circle = this.querySelector(&quot;.circle circle&quot;);
                     circle.setAttribute(&quot;r&quot;, settings.strokeWidth / 2 * (settings.tool === &quot;highlighter&quot; ? 3 : 1));

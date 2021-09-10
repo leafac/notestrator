@@ -1549,7 +1549,7 @@
                     ipcRenderer.invoke(&quot;evaluate&quot;, {
                       process: &quot;drawings&quot;,
                       javascript: `
-                        document.querySelector(&quot;.drawing&quot;).setSettings(
+                        document.querySelector(&quot;.drawing-editor&quot;).setSettings(
                           ${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
                         );
                       `
@@ -1838,7 +1838,7 @@
                   <button class="section--item reset-drawing" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;drawings&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).reset();\n                            &quot;
+                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor\&quot;).reset();\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">
@@ -1849,7 +1849,7 @@
                   <button class="section--item undo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;drawings&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).undo();\n                            &quot;
+                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor\&quot;).undo();\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">
@@ -1860,7 +1860,7 @@
                   <button class="section--item redo" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;drawings&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing\&quot;).redo();\n                            &quot;
+                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor\&quot;).redo();\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">

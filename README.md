@@ -1,7 +1,4 @@
-drawing -> drawing-editor
-  ??? (canvas) -> drawing-editor--drawing
-  cursor -> drawing-editor--cursor 👍
-
+drawing browser windows -> drawingEditor browser windows
 
 
 - Since the Electron 14 update, the menu isn’t clickable.
