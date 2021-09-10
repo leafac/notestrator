@@ -31,7 +31,6 @@ const fs = require("fs/promises");
             />
             <script>
               const { ipcRenderer } = require("electron");
-              require("@fortawesome/fontawesome-free/js/all.js");
               window.addEventListener("DOMContentLoaded", () => {
                 for (const element of document.querySelectorAll(
                   "[data-ondomcontentloaded]"
@@ -335,7 +334,6 @@ const fs = require("fs/promises");
               />
               <script>
                 const { ipcRenderer } = require("electron");
-                require("@fortawesome/fontawesome-free/js/all.js");
                 window.addEventListener("DOMContentLoaded", () => {
                   for (const element of document.querySelectorAll(
                     "[data-ondomcontentloaded]"
