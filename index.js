@@ -89,6 +89,7 @@ const fs = require("fs/promises");
                 `}"
                 data-ondomcontentloaded="${javascript`
                   const drawingEditor = this.closest(".drawing-editor");
+
                   window.addEventListener("mousedown", async (event) => {
                     const isRightClick = event.button === 2;
                     const originalTool = drawingEditor.settings.tool;
@@ -115,23 +116,23 @@ const fs = require("fs/promises");
                         group.insertAdjacentHTML(
                           "beforeend",
                           \`
-                        <path
-                          d="M \${event.clientX} \${event.clientY}"
-                          fill="none"
-                          stroke="\${drawingEditor.settings.color}"
-                          stroke-width="\${
-                            drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === "highlighter" ? 3 : 1)
-                          }"
-                          stroke-opacity="\${drawingEditor.settings.tool === "highlighter" ? 0.5 : 1}"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          style="\${
-                            drawingEditor.settings.fade === "false"
-                              ? \`\`
-                              : \`transition: opacity \${drawingEditor.settings.fade}ms ease-in;\`
-                          }"
-                        />
-                      \`
+                            <path
+                              d="M \${event.clientX} \${event.clientY}"
+                              fill="none"
+                              stroke="\${drawingEditor.settings.color}"
+                              stroke-width="\${
+                                drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === "highlighter" ? 5 : 1)
+                              }"
+                              stroke-opacity="\${drawingEditor.settings.tool === "highlighter" ? 0.5 : 1}"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              style="\${
+                                drawingEditor.settings.fade === "false"
+                                  ? \`\`
+                                  : \`transition: opacity \${drawingEditor.settings.fade}ms ease-in;\`
+                              }"
+                            />
+                          \`
                         );
                         const path = group.lastElementChild;
                         const t = 0.4;
@@ -285,7 +286,7 @@ const fs = require("fs/promises");
                     const settings = this.closest(".drawing-editor").settings;
                     this.style.color = settings.color;
                     const circle = this.querySelector(".circle circle");
-                    circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 3 : 1));
+                    circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 5 : 1));
                     circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
                     this.querySelector(".circle").hidden = settings.tool === "eraser";
                     const eraser = this.querySelector(".eraser");
