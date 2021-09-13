@@ -65,18 +65,18 @@ const fs = require("fs/promises");
                   this.redoStack.length = 0;
                 };
                 this.undo = () => {
-                  const undoDrawingInnerHTML = this.undoStack.pop();
-                  if (undoDrawingInnerHTML === undefined) return;
+                  const undoPoint = this.undoStack.pop();
+                  if (undoPoint === undefined) return;
                   const drawing = this.querySelector(".drawing-editor--drawing");
                   this.redoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = undoDrawingInnerHTML;
+                  drawing.innerHTML = undoPoint;
                 };
                 this.redo = () => {
-                  const redoDrawingInnerHTML = this.redoStack.pop();
-                  if (redoDrawingInnerHTML === undefined) return;
+                  const redoPoint = this.redoStack.pop();
+                  if (redoPoint === undefined) return;
                   const drawing = this.querySelector(".drawing-editor--drawing");
                   this.undoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = redoDrawingInnerHTML;
+                  drawing.innerHTML = redoPoint;
                 };
               `}"
             >
