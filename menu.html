@@ -1793,7 +1793,7 @@
                   <button class="section--item--label hide" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;main&quot;,
-                          javascript: &quot;\n                              hide();\n                            &quot;
+                          javascript: &quot;\n                              for (const browserWindow of browserWindows) browserWindow.hide();\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">
@@ -1826,7 +1826,7 @@
                   <button class="section--item quit" onclick="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;main&quot;,
-                          javascript: &quot;\n                              quit();\n                            &quot;
+                          javascript: &quot;\n                              for (const browserWindow of browserWindows) browserWindow.destroy();\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">

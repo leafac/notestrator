@@ -917,7 +917,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              hide();
+                              for (const browserWindow of browserWindows) browserWindow.hide();
                             `
                           )}
                         });
@@ -985,7 +985,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              quit();
+                              for (const browserWindow of browserWindows) browserWindow.destroy();
                             `
                           )}
                         });
@@ -1173,7 +1173,7 @@ const fs = require("fs/promises");
   });
 
   globalShortcut.register("Control+Alt+Command+Space", () => {
-    show();
+    for (const browserWindow of browserWindows) browserWindow.show();
   });
 
   const tray = new Tray(path.join(__dirname, "logo@2x.png"));
@@ -1184,14 +1184,14 @@ const fs = require("fs/promises");
         label: "Draw",
         accelerator: "Control+Alt+Command+Space",
         click: () => {
-          show();
+          for (const browserWindow of browserWindows) browserWindow.show();
         },
       },
       {
         label: "Quit",
         accelerator: "Command+Q",
         click: () => {
-          quit();
+          for (const browserWindow of browserWindows) browserWindow.destroy();
         },
       },
     ])
@@ -1218,16 +1218,4 @@ const fs = require("fs/promises");
       },
     ])
   );
-
-  function show() {
-    for (const browserWindow of browserWindows) browserWindow.show();
-  }
-
-  function hide() {
-    for (const browserWindow of browserWindows) browserWindow.hide();
-  }
-
-  function quit() {
-    for (const browserWindow of browserWindows) browserWindow.destroy();
-  }
 })();
