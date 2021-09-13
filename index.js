@@ -19,7 +19,7 @@ const fs = require("fs/promises");
     const shortcuts = {};
 
     await fs.writeFile(
-      "drawing.html",
+      "drawing-editor.html",
       extractInlineStyles(html`
         <!DOCTYPE html>
         <html lang="en">
@@ -1134,7 +1134,7 @@ const fs = require("fs/promises");
     drawingEditor.setVisibleOnAllWorkspaces(true, {
       visibleOnFullScreen: true,
     });
-    drawingEditor.loadFile(path.join(__dirname, "drawing.html"));
+    drawingEditor.loadFile(path.join(__dirname, "drawing-editor.html"));
     browserWindows.add(drawingEditor);
     drawingEditors.add(drawingEditor);
   }

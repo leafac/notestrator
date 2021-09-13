@@ -1759,7 +1759,7 @@
                     <input type="radio" name="ignoreMouseEvents" value="false" checked="" hidden="" onchange="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;main&quot;,
-                          javascript: &quot;\n                              for (const drawing of drawings) drawing.setIgnoreMouseEvents(false);\n                            &quot;
+                          javascript: &quot;\n                              for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(false);\n                            &quot;
                         });
                       ">
                     <div class="section--item--icon">
@@ -1773,7 +1773,7 @@
                     <input type="radio" name="ignoreMouseEvents" value="true" hidden="" onchange="
                           ipcRenderer.invoke(&quot;evaluate&quot;, {
                             process: &quot;main&quot;,
-                            javascript: &quot;\n                                for (const drawing of drawings) drawing.setIgnoreMouseEvents(true);\n                              &quot;
+                            javascript: &quot;\n                                for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(true);\n                              &quot;
                           });
                         ">
                     <div class="section--item--icon">
