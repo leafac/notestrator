@@ -1131,7 +1131,9 @@ const fs = require("fs/promises");
       },
     });
     drawingEditor.setAlwaysOnTop(true, "screen-saver", 1);
-    drawingEditor.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    drawingEditor.setVisibleOnAllWorkspaces(true, {
+      visibleOnFullScreen: true,
+    });
     drawingEditor.loadFile(path.join(__dirname, "drawing.html"));
     browserWindows.add(drawingEditor);
     drawingEditors.add(drawingEditor);
