@@ -58,13 +58,6 @@ const fs = require("fs/promises");
                   this.querySelector(".drawing-editor--cursor").update();
                 };
 
-                // TODO: Push this down into the drawing-editor--drawing.
-                this.reset = () => {
-                  this.createUndoPoint();
-                  this.querySelector(".highlighter").replaceChildren();
-                  this.querySelector(".pen").replaceChildren();
-                };
-
                 // TODO: Push this code up to the Electron process, to handle multiple windows.
                 this.undoStack = [];
                 this.redoStack = [];
@@ -247,6 +240,12 @@ const fs = require("fs/promises");
                   { once: true }
                 );
               });
+
+              this.reset = () => {
+                drawingEditor.createUndoPoint();
+                this.querySelector(".highlighter").replaceChildren();
+                this.querySelector(".pen").replaceChildren();
+              };
             `}"
               >
                 <g class="highlighter"></g>
@@ -1015,7 +1014,7 @@ const fs = require("fs/promises");
                           process: "drawingEditors",
                           javascript: ${JSON.stringify(
                             javascript`
-                              document.querySelector(".drawing-editor").reset();
+                              document.querySelector(".drawing-editor--drawing").reset();
                             `
                           )}
                         });

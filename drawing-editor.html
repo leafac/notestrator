@@ -806,13 +806,6 @@
                   this.querySelector(&quot;.drawing-editor--cursor&quot;).update();
                 };
 
-                // TODO: Push this down into the drawing-editor--drawing.
-                this.reset = () => {
-                  this.createUndoPoint();
-                  this.querySelector(&quot;.highlighter&quot;).replaceChildren();
-                  this.querySelector(&quot;.pen&quot;).replaceChildren();
-                };
-
                 // TODO: Push this code up to the Electron process, to handle multiple windows.
                 this.undoStack = [];
                 this.redoStack = [];
@@ -984,6 +977,12 @@
                   { once: true }
                 );
               });
+
+              this.reset = () => {
+                drawingEditor.createUndoPoint();
+                this.querySelector(&quot;.highlighter&quot;).replaceChildren();
+                this.querySelector(&quot;.pen&quot;).replaceChildren();
+              };
             ">
                 <g class="highlighter"></g>
                 <g class="pen"></g>
