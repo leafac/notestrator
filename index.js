@@ -248,10 +248,7 @@ const fs = require("fs/promises");
               });
 
               this.reset = () => {
-                ipcRenderer.invoke("evaluate", {
-                  process: "drawingEditors",
-                  javascript: \`document.querySelector(".drawing-editor").createUndoPoint();\`
-                });
+                drawingEditor.createUndoPoint();
                 this.querySelector(".highlighter").replaceChildren();
                 this.querySelector(".pen").replaceChildren();
               };

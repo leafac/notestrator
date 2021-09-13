@@ -985,10 +985,7 @@
               });
 
               this.reset = () => {
-                ipcRenderer.invoke(&quot;evaluate&quot;, {
-                  process: &quot;drawingEditors&quot;,
-                  javascript: `document.querySelector(&quot;.drawing-editor&quot;).createUndoPoint();`
-                });
+                drawingEditor.createUndoPoint();
                 this.querySelector(&quot;.highlighter&quot;).replaceChildren();
                 this.querySelector(&quot;.pen&quot;).replaceChildren();
               };
