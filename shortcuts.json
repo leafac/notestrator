@@ -119,7 +119,7 @@
       "javascript": "\n                              document.querySelector('[name=\"ignoreMouseEvents\"][value=\"true\"]').click();\n                            "
     },
     {
-      "process": "drawings",
+      "process": "drawingEditors",
       "javascript": "\n                              document.querySelector(\".drawing-editor--cursor\").hidden = true;\n                            "
     }
   ],

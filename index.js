@@ -467,7 +467,7 @@ const fs = require("fs/promises");
                 data-ondomcontentloaded="${javascript`
                   const settings = () => {
                     ipcRenderer.invoke("evaluate", {
-                      process: "drawings",
+                      process: "drawingEditors",
                       javascript: \`
                         document.querySelector(".drawing-editor").setSettings(
                           \${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
@@ -880,7 +880,7 @@ const fs = require("fs/promises");
                             `,
                           },
                           {
-                            process: "drawings",
+                            process: "drawingEditors",
                             javascript: javascript`
                               document.querySelector(".drawing-editor--cursor").hidden = true;
                             `,
@@ -1022,7 +1022,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawings",
+                          process: "drawingEditors",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing-editor").reset();
@@ -1050,7 +1050,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawings",
+                          process: "drawingEditors",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing-editor").undo();
@@ -1078,7 +1078,7 @@ const fs = require("fs/promises");
                       ];
                       return javascript`
                         ipcRenderer.invoke("evaluate", {
-                          process: "drawings",
+                          process: "drawingEditors",
                           javascript: ${JSON.stringify(
                             javascript`
                               document.querySelector(".drawing-editor").redo();
@@ -1163,7 +1163,7 @@ const fs = require("fs/promises");
     switch (process) {
       case "main":
         return eval(javascript);
-      case "drawings":
+      case "drawingEditors":
         const evaluationResults = new Set();
         for (const drawing of drawings)
           evaluationResults.add(
