@@ -801,9 +801,12 @@
     </head>
           <body>
             <div class="drawing-editor style--kum4fg" data-ondomcontentloaded="
+                const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+                const cursor = this.querySelector(&quot;.drawing-editor--cursor&quot;);
+
                 this.setSettings = (settings) => {
                   this.settings = settings;
-                  this.querySelector(&quot;.drawing-editor--cursor&quot;).update();
+                  cursor.update();
                 };
 
                 this.undoStack = [];
@@ -813,18 +816,16 @@
                   this.redoStack.length = 0;
                 };
                 this.undo = () => {
-                  const undoDrawingInnerHTML = this.undoStack.pop();
-                  if (undoDrawingInnerHTML === undefined) return;
-                  const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+                  const undoPoint = this.undoStack.pop();
+                  if (undoPoint === undefined) return;
                   this.redoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = undoDrawingInnerHTML;
+                  drawing.innerHTML = undoPoint;
                 };
                 this.redo = () => {
-                  const redoDrawingInnerHTML = this.redoStack.pop();
-                  if (redoDrawingInnerHTML === undefined) return;
-                  const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+                  const redoPoint = this.redoStack.pop();
+                  if (redoPoint === undefined) return;
                   this.undoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = redoDrawingInnerHTML;
+                  drawing.innerHTML = redoPoint;
                 };
               ">
               <svg class="drawing-editor--drawing style--uzkrjh" data-ondomcontentloaded="
