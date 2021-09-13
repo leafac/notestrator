@@ -58,7 +58,6 @@ const fs = require("fs/promises");
                   this.querySelector(".drawing-editor--cursor").update();
                 };
 
-                // TODO: Push this code up to the Electron process, to handle multiple windows.
                 this.undoStack = [];
                 this.redoStack = [];
                 this.createUndoPoint = () => {
@@ -106,7 +105,11 @@ const fs = require("fs/promises");
                 switch (drawingEditor.settings.tool) {
                   case "pen":
                   case "highlighter":
-                    if (drawingEditor.settings.fade === "false") drawingEditor.createUndoPoint();
+                    if (drawingEditor.settings.fade === "false")
+                      ipcRenderer.invoke("evaluate", {
+                        process: "drawingEditors",
+                        javascript: \`document.querySelector(".drawing-editor").createUndoPoint();\`
+                      });
                     const group = this.querySelector(\`.\${drawingEditor.settings.tool}\`);
                     group.insertAdjacentHTML(
                       "beforeend",
@@ -217,7 +220,10 @@ const fs = require("fs/promises");
 
                       if (!undoPointCreated && elementsToRemove.size > 0) {
                         undoPointCreated = true;
-                        drawingEditor.createUndoPoint();
+                        ipcRenderer.invoke("evaluate", {
+                          process: "drawingEditors",
+                          javascript: \`document.querySelector(".drawing-editor").createUndoPoint();\`
+                        });
                       }
                       for (const element of elementsToRemove) element.remove();
                     };
@@ -242,7 +248,10 @@ const fs = require("fs/promises");
               });
 
               this.reset = () => {
-                drawingEditor.createUndoPoint();
+                ipcRenderer.invoke("evaluate", {
+                  process: "drawingEditors",
+                  javascript: \`document.querySelector(".drawing-editor").createUndoPoint();\`
+                });
                 this.querySelector(".highlighter").replaceChildren();
                 this.querySelector(".pen").replaceChildren();
               };
