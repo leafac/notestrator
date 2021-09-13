@@ -852,7 +852,7 @@ const fs = require("fs/promises");
                           process: "main",
                           javascript: ${JSON.stringify(
                             javascript`
-                              for (const drawing of drawings) drawing.setIgnoreMouseEvents(false);
+                              for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(false);
                             `
                           )}
                         });
@@ -891,7 +891,7 @@ const fs = require("fs/promises");
                             process: "main",
                             javascript: ${JSON.stringify(
                               javascript`
-                                for (const drawing of drawings) drawing.setIgnoreMouseEvents(true);
+                                for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(true);
                               `
                             )}
                           });
@@ -1109,9 +1109,9 @@ const fs = require("fs/promises");
   await app.whenReady();
 
   const browserWindows = new Set();
-  const drawings = new Set();
+  const drawingEditors = new Set();
   for (const display of screen.getAllDisplays()) {
-    const drawing = new BrowserWindow({
+    const drawingEditor = new BrowserWindow({
       ...display.bounds,
       enableLargerThanScreen: true,
       closable: false,
@@ -1130,11 +1130,11 @@ const fs = require("fs/promises");
         nativeWindowOpen: true,
       },
     });
-    drawing.setAlwaysOnTop(true, "screen-saver", 1);
-    drawing.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-    drawing.loadFile(path.join(__dirname, "drawing.html"));
-    browserWindows.add(drawing);
-    drawings.add(drawing);
+    drawingEditor.setAlwaysOnTop(true, "screen-saver", 1);
+    drawingEditor.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    drawingEditor.loadFile(path.join(__dirname, "drawing.html"));
+    browserWindows.add(drawingEditor);
+    drawingEditors.add(drawingEditor);
   }
 
   const menu = new BrowserWindow({
@@ -1165,9 +1165,9 @@ const fs = require("fs/promises");
         return eval(javascript);
       case "drawingEditors":
         const evaluationResults = new Set();
-        for (const drawing of drawings)
+        for (const drawingEditor of drawingEditors)
           evaluationResults.add(
-            await drawing.webContents.executeJavaScript(javascript)
+            await drawingEditor.webContents.executeJavaScript(javascript)
           );
         return evaluationResults;
       case "menu":
