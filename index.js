@@ -53,9 +53,12 @@ const fs = require("fs/promises");
                 left: 0;
               `}"
               data-ondomcontentloaded="${javascript`
+                const drawing = this.querySelector(".drawing-editor--drawing");
+                const cursor = this.querySelector(".drawing-editor--cursor");
+
                 this.setSettings = (settings) => {
                   this.settings = settings;
-                  this.querySelector(".drawing-editor--cursor").update();
+                  cursor.update();
                 };
 
                 this.undoStack = [];
@@ -67,14 +70,12 @@ const fs = require("fs/promises");
                 this.undo = () => {
                   const undoPoint = this.undoStack.pop();
                   if (undoPoint === undefined) return;
-                  const drawing = this.querySelector(".drawing-editor--drawing");
                   this.redoStack.push(drawing.innerHTML);
                   drawing.innerHTML = undoPoint;
                 };
                 this.redo = () => {
                   const redoPoint = this.redoStack.pop();
                   if (redoPoint === undefined) return;
-                  const drawing = this.querySelector(".drawing-editor--drawing");
                   this.undoStack.push(drawing.innerHTML);
                   drawing.innerHTML = redoPoint;
                 };
