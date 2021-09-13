@@ -135,6 +135,7 @@ const fs = require("fs/promises");
                           \`
                         );
                         const path = group.lastElementChild;
+                        // http://scaledinnovation.com/analytics/splines/aboutSplines.html
                         const t = 0.4;
                         let x0 = { x: event.clientX, y: event.clientY };
                         let x1 = { x: event.clientX, y: event.clientY };
@@ -142,7 +143,6 @@ const fs = require("fs/promises");
                         let p1 = { x: event.clientX, y: event.clientY };
                         let p2 = { x: event.clientX, y: event.clientY };
                         handleMousemove = (event) => {
-                          // http://scaledinnovation.com/analytics/splines/aboutSplines.html
                           if (event.clientX === x2.x && event.clientY === x2.y)
                             return;
                           x2 = { x: event.clientX, y: event.clientY };
@@ -285,24 +285,13 @@ const fs = require("fs/promises");
                   this.update = () => {
                     const settings = this.closest(".drawing-editor").settings;
                     this.style.color = settings.color;
-                    const circle = this.querySelector(".circle circle");
-                    circle.setAttribute("r", settings.strokeWidth / 2 * (settings.tool === "highlighter" ? 5 : 1));
-                    circle.style.opacity = settings.tool === "highlighter" ? 0.5 : 1;
-                    this.querySelector(".circle").hidden = settings.tool === "eraser";
-                    const eraser = this.querySelector(".eraser");
-                    eraser.hidden = settings.tool !== "eraser";
-                    /*
-                    TODO: Do we change the cursor on fade?
-                    {
-                      "fade": "false",
-                    }
-                    */
+                    this.querySelector(".crosshair").hidden = settings.tool === "eraser";
+                    this.querySelector(".eraser").hidden = settings.tool !== "eraser";
                   };
                 `}"
               >
-                <div class="circle">
+                <div class="crosshair">
                   <svg viewBox="-7.5 -7.5, 15 15">
-                    <circle cx="0" cy="0" r="1.5" fill="currentColor" />
                     <path
                       d="M -6 0 L 6 0 M 0 -6 L 0 6"
                       stroke="currentColor"
@@ -313,7 +302,18 @@ const fs = require("fs/promises");
                   </svg>
                 </div>
                 <div class="eraser" hidden>
-                  <i class="fas fa-eraser"></i>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-eraser-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
