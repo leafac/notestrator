@@ -20,6 +20,9 @@
     "start": "electron .",
     "build": "electron-builder"
   },
+  "dependencies": {
+    "@fontsource/public-sans": "^4.5.0"
+  },
   "devDependencies": {
     "@leafac/css": "^0.2.11",
     "@leafac/html": "^3.0.0",

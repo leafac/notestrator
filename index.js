@@ -29,6 +29,10 @@ const fs = require("fs/promises");
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
               />
+              <link
+                rel="stylesheet"
+                href="node_modules/@fontsource/public-sans/latin.css"
+              />
               <script>
                 const { ipcRenderer } = require("electron");
                 window.addEventListener("DOMContentLoaded", () => {
@@ -336,7 +340,7 @@ const fs = require("fs/promises");
         body: html`
           <div
             style="${css`
-              font-family: var(--font-family--sans-serif);
+              font-family: "Public Sans", var(--font-family--sans-serif);
               font-size: var(--font-size--xs);
               line-height: var(--line-height--xs);
               color: var(--color--gray--warm--500);
