@@ -369,10 +369,13 @@ const fs = require("fs/promises");
                   font-size: var(--font-size--2xs);
                   line-height: var(--line-height--2xs);
                   font-weight: var(--font-weight--bold);
-                  color: var(--color--gray--warm--400);
                   text-align: center;
                   text-transform: uppercase;
                   letter-spacing: var(--letter-spacing--widest);
+                  color: var(--color--gray--warm--400);
+                  @media (prefers-color-scheme: dark) {
+                    color: var(--color--gray--warm--400);
+                  }
                 }
 
                 .section--content {
