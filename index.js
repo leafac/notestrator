@@ -343,13 +343,13 @@ const fs = require("fs/promises");
               font-family: "Public Sans", var(--font-family--sans-serif);
               font-size: var(--font-size--xs);
               line-height: var(--line-height--xs);
-              color: var(--color--gray--warm--500);
-              background-color: var(--color--gray--warm--100);
+              color: var(--color--gray--warm--700);
+              background-color: var(--color--gray--warm--50);
               @media (prefers-color-scheme: dark) {
-                color: var(--color--gray--warm--500);
+                color: var(--color--gray--warm--200);
                 background-color: var(--color--gray--warm--900);
               }
-              padding: var(--space--2) var(--space--2);
+              padding: var(--space--2);
               position: absolute;
               top: 0;
               right: 0;
