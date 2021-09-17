@@ -1,18 +1,18 @@
 <!DOCTYPE html><html lang="en"><head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script>
-              const { ipcRenderer } = require("electron");
-              window.addEventListener("DOMContentLoaded", () => {
-                for (const element of document.querySelectorAll(
-                  "[data-ondomcontentloaded]"
-                ))
-                  new Function(element.dataset.ondomcontentloaded).call(
-                    element
-                  );
-              });
-            </script>
-          
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <script>
+                const { ipcRenderer } = require("electron");
+                window.addEventListener("DOMContentLoaded", () => {
+                  for (const element of document.querySelectorAll(
+                    "[data-ondomcontentloaded]"
+                  ))
+                    new Function(element.dataset.ondomcontentloaded).call(
+                      element
+                    );
+                });
+              </script>
+            
       <style>
         
           /* RESET */
@@ -768,746 +768,216 @@
           /* INLINE STYLES */
 
           
-                  .style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6 {
+                  .style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo {
                     
-                font-family: var(--font-family--sans-serif);
-                font-size: var(--font-size--xs);
-                line-height: var(--line-height--xs);
-                color: var(--color--gray--warm--500);
-                background-color: var(--color--gray--warm--100);
-              
+              font-family: var(--font-family--sans-serif);
+              font-size: var(--font-size--xs);
+              line-height: var(--line-height--xs);
+              color: var(--color--gray--warm--500);
+              background-color: var(--color--gray--warm--100);
+            
                   }
 
           
                   @media (prefers-color-scheme: dark) {
 
           
-                  .style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6 {
-                  color: var(--color--gray--warm--500);
-                  background-color: var(--color--gray--warm--900)
-              
+                  .style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo {
+                color: var(--color--gray--warm--500);
+                background-color: var(--color--gray--warm--900)
+            
                   }
-                }
+              }
 
           
-                  .style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6.style--1bvopc6 {
-                padding: var(--space--2) var(--space--2);
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                -webkit-user-select: none;
-                -webkit-app-region: drag;
+                  .style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo.style--e1gsbo {
+              padding: var(--space--2) var(--space--2);
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              -webkit-user-select: none;
+              -webkit-app-region: drag;
 }
 
           
                   .section {
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space--2);
-                  }
+                  display: flex;
+                  flex-direction: column;
+                  gap: var(--space--2);
+                }
 
           
                   .section--heading {
-                    font-size: var(--font-size--2xs);
-                    line-height: var(--line-height--2xs);
-                    font-weight: var(--font-weight--bold);
-                    color: var(--color--gray--warm--400);
-                    text-align: center;
-                    text-transform: uppercase;
-                    letter-spacing: var(--letter-spacing--widest);
-                  }
+                  font-size: var(--font-size--2xs);
+                  line-height: var(--line-height--2xs);
+                  font-weight: var(--font-weight--bold);
+                  color: var(--color--gray--warm--400);
+                  text-align: center;
+                  text-transform: uppercase;
+                  letter-spacing: var(--letter-spacing--widest);
+                }
 
           
                   .section--content {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    justify-content: space-between;
-                    gap: var(--space--2);
-                  }
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  justify-content: space-between;
+                  gap: var(--space--2);
+                }
 
           
                   .section--item {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: var(--space--1);
-                  }
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--space--1);
+                }
 
           
                   .section--item.section--item--row {
-                      flex-direction: row;
-                      justify-content: space-between;
-                    }
+                    flex-direction: row;
+                    justify-content: space-between;
+                  }
 
           
                   .section--item--label {
-                    display: flex;
-                    align-items: center;
-                    gap: var(--space--1);
-                  }
+                  display: flex;
+                  align-items: center;
+                  gap: var(--space--1);
+                }
 
           
                   .section--item--icon {
-                    font-size: var(--font-size--sm);
-                    line-height: var(--line-height--sm);
-                    color: var(--color--gray--warm--600);
-                  }
+                  font-size: var(--font-size--sm);
+                  line-height: var(--line-height--sm);
+                  color: var(--color--gray--warm--600);
+                }
 
           
                   .section--item--icon:hover {
-                      background-color: var(--color--gray--warm--200);
-                    }
+                    background-color: var(--color--gray--warm--200);
+                  }
 
           
                   .section--item--icon:active {
-                      background-color: var(--color--gray--warm--300);
-                    }
+                    background-color: var(--color--gray--warm--300);
+                  }
 
           
                   :checked + .section--item--icon {
-                      color: var(--color--gray--warm--100);
-                      background-color: var(--color--gray--warm--600);
-                    }
+                    color: var(--color--gray--warm--100);
+                    background-color: var(--color--gray--warm--600);
+                  }
 
           
                   @media (prefers-color-scheme: dark) {
 
           
                   .section--item--icon {
-                      color: var(--color--gray--warm--400)
-                  }
-                      .section--item--icon:hover {
-                        background-color: var(--color--gray--warm--800);
-                      }
-                      .section--item--icon:active {
-                        background-color: var(--color--gray--warm--700);
-                      }
-                      :checked + .section--item--icon {
-                        color: var(--color--gray--warm--900);
-                        background-color: var(--color--gray--warm--400);
-                      }
+                    color: var(--color--gray--warm--400)
+                }
+                    .section--item--icon:hover {
+                      background-color: var(--color--gray--warm--800);
                     }
+                    .section--item--icon:active {
+                      background-color: var(--color--gray--warm--700);
+                    }
+                    :checked + .section--item--icon {
+                      color: var(--color--gray--warm--900);
+                      background-color: var(--color--gray--warm--400);
+                    }
+                  }
 
           
                   .section--item--icon {
-                    width: var(--font-size--xl);
-                    height: var(--font-size--xl);
-                    border-radius: var(--border-radius--md);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    transition-property: var(--transition-property--colors);
-                    transition-duration: var(--transition-duration--150);
-                    transition-timing-function: var(
-                      --transition-timing-function--in-out
-                    );
+                  width: var(--font-size--xl);
+                  height: var(--font-size--xl);
+                  border-radius: var(--border-radius--md);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  transition-property: var(--transition-property--colors);
+                  transition-duration: var(--transition-duration--150);
+                  transition-timing-function: var(
+                    --transition-timing-function--in-out
+                  );
 }
 
           
                   .section--item--icon * {
-                      stroke: currentColor;
-                    }
+                    stroke: currentColor;
+                  }
 
           
                   .separator {
-                    border-top: var(--border-width--1) solid
-                      var(--color--gray--warm--200);
-                  }
+                  border-top: var(--border-width--1) solid
+                    var(--color--gray--warm--200);
+                }
 
           
                   @media (prefers-color-scheme: dark) {
 
           
                   .separator {
-                      border-color: var(--color--gray--warm--800);
+                    border-color: var(--color--gray--warm--800);
+                }
                   }
-                    }
 
           
                   .separator {
-                    margin-top: var(--space--2);
+                  margin-top: var(--space--2);
 }
                 
-                  .style--alisvw.style--alisvw.style--alisvw.style--alisvw.style--alisvw.style--alisvw {
+                  .style--uk8ugl.style--uk8ugl.style--uk8ugl.style--uk8ugl.style--uk8ugl.style--uk8ugl {
                     
-                      display: grid;
-                      grid-template-columns: 1fr 1fr;
-                      gap: var(--space--2);
-                      -moz-column-gap: var(--space--4);
-                           column-gap: var(--space--4);
-                      row-gap: var(--space--2);
-                    
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: var(--space--2);
+                    -moz-column-gap: var(--space--4);
+                         column-gap: var(--space--4);
+                    row-gap: var(--space--2);
+                  
                   }
                 
-                  .style--1t1jfqu.style--1t1jfqu.style--1t1jfqu.style--1t1jfqu.style--1t1jfqu.style--1t1jfqu {
+                  .style--qca3ic.style--qca3ic.style--qca3ic.style--qca3ic.style--qca3ic.style--qca3ic {
                     
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                        
+                  }
+                
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466 {
+                    
+                            background-color: var(--color--red--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--red--500);
+                            border-radius: var(--border-radius--circle);
                             display: flex;
-                            justify-content: space-between;
+                            justify-content: center;
                             align-items: center;
                           
                   }
                 
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia {
-                    
-                              background-color: var(--color--red--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--red--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466:hover {
+                              transform: scale(var(--scale--110));
+                            }
                 
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia:hover {
-                                transform: scale(var(--scale--110));
-                              }
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466:active {
+                              transform: scale(var(--scale--90));
+                            }
                 
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia.style--1jrj0ia {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu {
-                    
-                              background-color: var(--color--amber--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--amber--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu.style--1l869iu {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t {
-                    
-                              background-color: var(--color--lime--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--lime--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t.style--whlm1t {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8 {
-                    
-                              background-color: var(--color--teal--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--teal--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8.style--v45qw8 {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1 {
-                    
-                              background-color: var(--color--sky--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--sky--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1.style--3d0uf1 {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad {
-                    
-                              background-color: var(--color--indigo--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--indigo--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad.style--1l30nad {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev {
-                    
-                              background-color: var(--color--purple--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--purple--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev.style--1m5svev {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6 {
-                    
-                              background-color: var(--color--pink--600);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--pink--500);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6.style--1c3lkp6 {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56 {
-                    
-                              background-color: var(--color--gray--warm--900);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--gray--warm--700);
-                              border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--50);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56.style--1pjff56 {
-                              transition-property: var(
-                                --transition-property--transform
-                              );
-                              transition-duration: var(
-                                --transition-duration--150
-                              );
-                              transition-timing-function: var(
-                                --transition-timing-function--in-out
-                              );
-}
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3 {
-                    
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466::after {
+                              content: "";
                               background-color: var(--color--gray--warm--50);
-                              width: var(--font-size--xl);
-                              height: var(--font-size--xl);
-                              border: var(--border-width--1) solid
-                                var(--color--gray--warm--200);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
                               border-radius: var(--border-radius--circle);
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                            
-                  }
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3:hover {
-                                transform: scale(var(--scale--110));
-                              }
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3:active {
-                                transform: scale(var(--scale--90));
-                              }
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3::after {
-                                content: "";
-                                background-color: var(--color--gray--warm--600);
-                                display: block;
-                                width: var(--space--2);
-                                height: var(--space--2);
-                                border-radius: var(--border-radius--circle);
-                                transform: scale(var(--scale--0));
-                                transition-property: var(
-                                  --transition-property--transform
-                                );
-                                transition-duration: var(
-                                  --transition-duration--150
-                                );
-                                transition-timing-function: var(
-                                  --transition-timing-function--in-out
-                                );
-                              }
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3:checked::after {
-                                transform: scale(var(--scale--100));
-                              }
-                
-                  .style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3.style--1qbl1w3 {
+                              transform: scale(var(--scale--0));
                               transition-property: var(
                                 --transition-property--transform
                               );
@@ -1517,363 +987,883 @@
                               transition-timing-function: var(
                                 --transition-timing-function--in-out
                               );
+                            }
+                
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466.style--1yis466 {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
 }
                 
-                  .style--1w559id.style--1w559id.style--1w559id.style--1w559id.style--1w559id.style--1w559id {
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv {
                     
-                                  stroke: none;
-                                  fill: currentColor;
-                                
+                            background-color: var(--color--amber--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--amber--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
                   }
                 
-                  .style--qqz9ju.style--qqz9ju.style--qqz9ju.style--qqz9ju.style--qqz9ju.style--qqz9ju {
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv.style--1fhukyv {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h {
                     
-                                  stroke: none;
-                                  fill: url('#fade--100');
-                                
+                            background-color: var(--color--lime--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--lime--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
                   }
                 
-                  .style--4janbl.style--4janbl.style--4janbl.style--4janbl.style--4janbl.style--4janbl {
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h.style--wuxd6h {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot {
                     
-                                  stroke: none;
-                                  fill: url('#fade--60');
-                                
+                            background-color: var(--color--teal--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--teal--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--athqot.style--athqot.style--athqot.style--athqot.style--athqot.style--athqot {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3 {
+                    
+                            background-color: var(--color--sky--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--sky--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3.style--leplc3 {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j {
+                    
+                            background-color: var(--color--indigo--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--indigo--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j.style--1l1xa7j {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2 {
+                    
+                            background-color: var(--color--purple--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--purple--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2.style--1kd1jl2 {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1 {
+                    
+                            background-color: var(--color--pink--600);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--pink--500);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1.style--1k854c1 {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h {
+                    
+                            background-color: var(--color--gray--warm--900);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--gray--warm--700);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--50);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h.style--14ib81h {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3 {
+                    
+                            background-color: var(--color--gray--warm--50);
+                            width: var(--font-size--xl);
+                            height: var(--font-size--xl);
+                            border: var(--border-width--1) solid var(--color--gray--warm--200);
+                            border-radius: var(--border-radius--circle);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                          
+                  }
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3:hover {
+                              transform: scale(var(--scale--110));
+                            }
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3:active {
+                              transform: scale(var(--scale--90));
+                            }
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3::after {
+                              content: "";
+                              background-color: var(--color--gray--warm--600);
+                              display: block;
+                              width: var(--space--2);
+                              height: var(--space--2);
+                              border-radius: var(--border-radius--circle);
+                              transform: scale(var(--scale--0));
+                              transition-property: var(
+                                --transition-property--transform
+                              );
+                              transition-duration: var(
+                                --transition-duration--150
+                              );
+                              transition-timing-function: var(
+                                --transition-timing-function--in-out
+                              );
+                            }
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3:checked::after {
+                              transform: scale(var(--scale--100));
+                            }
+                
+                  .style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3.style--1go5gn3 {
+                            transition-property: var(
+                              --transition-property--transform
+                            );
+                            transition-duration: var(
+                              --transition-duration--150
+                            );
+                            transition-timing-function: var(
+                              --transition-timing-function--in-out
+                            );
+}
+                
+                  .style--1eku9z.style--1eku9z.style--1eku9z.style--1eku9z.style--1eku9z.style--1eku9z {
+                    
+                                stroke: none;
+                                fill: currentColor;
+                              
+                  }
+                
+                  .style--dz7ghv.style--dz7ghv.style--dz7ghv.style--dz7ghv.style--dz7ghv.style--dz7ghv {
+                    
+                                stroke: none;
+                                fill: url('#fade--100');
+                              
+                  }
+                
+                  .style--15a5pa0.style--15a5pa0.style--15a5pa0.style--15a5pa0.style--15a5pa0.style--15a5pa0 {
+                    
+                                stroke: none;
+                                fill: url('#fade--60');
+                              
                   }
                 
         
       </style>
     </head>
-          <body>
-            
-            <div class="style--1bvopc6">
-              <form data-ondomcontentloaded="
-                  const settings = () => {
-                    ipcRenderer.invoke(&quot;evaluate&quot;, {
-                      process: &quot;drawingEditors&quot;,
-                      javascript: `
-                        document.querySelector(&quot;.drawing-editor&quot;).setSettings(
-                          ${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
-                        );
-                      `
-                    });
-                  };
-                  settings();
-                  this.addEventListener(&quot;change&quot;, settings);
-                ">
-                <div class="section">
-                  <div class="section--heading">Color</div>
-                  <div class="style--alisvw">
-                    
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--red--600)" checked="" class="style--1jrj0ia">
-                          1
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--amber--600)" class="style--1l869iu">
-                          2
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--lime--600)" class="style--whlm1t">
-                          3
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--teal--600)" class="style--v45qw8">
-                          4
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--sky--600)" class="style--3d0uf1">
-                          5
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--indigo--600)" class="style--1l30nad">
-                          6
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--purple--600)" class="style--1m5svev">
-                          7
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--pink--600)" class="style--1c3lkp6">
-                          8
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--gray--warm--900)" class="style--1pjff56">
-                          9
-                        </div>
-                      
-                        <div class="style--1t1jfqu">
-                          <input type="radio" name="color" value="var(--color--gray--warm--50)" class="style--1qbl1w3">
-                          0
-                        </div>
-                      
-                  </div>
-                </div>
-
-                <hr class="separator">
-
-                <div class="section">
-                  <div class="section--heading">Width</div>
-                  <div class="section--content">
-                    
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="strokeWidth" value="1" hidden="">
-                            <svg class="section--item--icon">
-                              <line x1="3.5" y1="16.5" x2="16.5" y2="3.5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
-                            </svg>
-                          </label>
-                          Q
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="strokeWidth" value="3" hidden="" checked="">
-                            <svg class="section--item--icon">
-                              <line x1="4.5" y1="15.5" x2="15.5" y2="4.5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
-                            </svg>
-                          </label>
-                          W
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="strokeWidth" value="5" hidden="">
-                            <svg class="section--item--icon">
-                              <line x1="5.5" y1="14.5" x2="14.5" y2="5.5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
-                            </svg>
-                          </label>
-                          E
-                        </div>
-                      
-                  </div>
-                </div>
-
-                <hr class="separator">
-
-                <div class="section">
-                  <div class="section--heading">Tool</div>
-                  <div class="section--content">
-                    
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="tool" value="pen" hidden="" checked="">
-                            <div class="section--item--icon">
-                              <i class="fas fa-pen-fancy"></i>
-                            </div>
-                          </label>
-                          A
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="tool" value="highlighter" hidden="">
-                            <div class="section--item--icon">
-                              <i class="fas fa-highlighter"></i>
-                            </div>
-                          </label>
-                          S
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="tool" value="eraser" hidden="">
-                            <div class="section--item--icon">
-                              <i class="fas fa-eraser"></i>
-                            </div>
-                          </label>
-                          D
-                        </div>
-                      
-                  </div>
-                </div>
-
-                <hr class="separator">
-
-                <div class="section">
-                  <div class="section--heading">Fade</div>
-                  <div class="section--content">
-                    
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="fade" value="false" hidden="" checked="">
-                            <svg class="section--item--icon">
-                              
-                              <rect x="5" y="5" width="10" height="10" rx="3" class="style--1w559id"></rect>
-                            </svg>
-                          </label>
-                          Z
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="fade" value="1500" hidden="">
-                            <svg class="section--item--icon">
-                              
-                                    <defs>
-                                      <linearGradient id="fade--100" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="currentColor"></stop>
-                                        <stop offset="100%" stop-color="transparent"></stop>
-                                      </linearGradient>
-                                    </defs>
-                                  
-                              <rect x="5" y="5" width="10" height="10" rx="3" class="style--qqz9ju"></rect>
-                            </svg>
-                          </label>
-                          X
-                        </div>
-                      
-                        <div class="section--item">
-                          <label>
-                            <input type="radio" name="fade" value="500" hidden="">
-                            <svg class="section--item--icon">
-                              
-                                    <defs>
-                                      <linearGradient id="fade--60" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="currentColor"></stop>
-                                        <stop offset="60%" stop-color="transparent"></stop>
-                                      </linearGradient>
-                                    </defs>
-                                  
-                              <rect x="5" y="5" width="10" height="10" rx="3" class="style--4janbl"></rect>
-                            </svg>
-                          </label>
-                          C
-                        </div>
-                      
-                  </div>
-                </div>
-              </form>
-
-              <hr class="separator">
-
+            <body>
+              
+          <div class="style--e1gsbo">
+            <form data-ondomcontentloaded="
+                const settings = () => {
+                  ipcRenderer.invoke(&quot;evaluate&quot;, {
+                    process: &quot;drawingEditors&quot;,
+                    javascript: `
+                      document.querySelector(&quot;.drawing-editor&quot;).setSettings(
+                        ${JSON.stringify(Object.fromEntries(new URLSearchParams(new FormData(this))))}
+                      );
+                    `
+                  });
+                };
+                settings();
+                this.addEventListener(&quot;change&quot;, settings);
+              ">
               <div class="section">
-                <div class="section--heading">Mode</div>
-                <div class="section--item section--item--row">
-                  <label class="section--item--label">
-                    <input type="radio" name="ignoreMouseEvents" value="false" checked="" hidden="" onchange="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;main&quot;,
-                          javascript: &quot;\n                              for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(false);\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="far fa-edit"></i>
-                    </div>
-                    Draw
-                  </label>
-                </div>
-                <div class="section--item section--item--row">
-                  <label class="section--item--label">
-                    <input type="radio" name="ignoreMouseEvents" value="true" hidden="" onchange="
-                          ipcRenderer.invoke(&quot;evaluate&quot;, {
-                            process: &quot;main&quot;,
-                            javascript: &quot;\n                                for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(true);\n                              &quot;
-                          });
-                        ">
-                    <div class="section--item--icon">
-                      <i class="far fa-window-restore"></i>
-                    </div>
-                    Show
-                  </label>
-                  `
+                <div class="section--heading">Color</div>
+                <div class="style--uk8ugl">
+                  
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--red--600)" checked="" class="style--1yis466">
+                        1
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--amber--600)" class="style--1fhukyv">
+                        2
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--lime--600)" class="style--wuxd6h">
+                        3
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--teal--600)" class="style--athqot">
+                        4
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--sky--600)" class="style--leplc3">
+                        5
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--indigo--600)" class="style--1l1xa7j">
+                        6
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--purple--600)" class="style--1kd1jl2">
+                        7
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--pink--600)" class="style--1k854c1">
+                        8
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--gray--warm--900)" class="style--14ib81h">
+                        9
+                      </div>
+                    
+                      <div class="style--qca3ic">
+                        <input type="radio" name="color" value="var(--color--gray--warm--50)" class="style--1go5gn3">
+                        0
+                      </div>
+                    
                 </div>
               </div>
 
               <hr class="separator">
 
               <div class="section">
-                <div class="section--heading">Hide</div>
-                <div class="section--item section--item--row">
-                  <button class="section--item--label hide" onclick="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;main&quot;,
-                          javascript: &quot;\n                              for (const browserWindow of browserWindows) browserWindow.hide();\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="far fa-window-close"></i>
-                    </div>
-                    Drawing
-                  </button>
-                  ⎋
-                </div>
-                <div class="section--item section--item--row">
-                  <button class="section--item--label hide--menu" onclick="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;main&quot;,
-                          javascript: &quot;\n                              if (menu.isVisible()) menu.hide();\n                              else menu.show();\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="far fa-eye-slash"></i>
-                    </div>
-                    Menu
-                  </button>
-                  ⌘⎋
-                </div>
-              </div>
-
-              <hr class="separator">
-
-              <div class="section">
+                <div class="section--heading">Width</div>
                 <div class="section--content">
-                  <button class="section--item quit" onclick="
+                  
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="strokeWidth" value="1" hidden="">
+                          <svg class="section--item--icon">
+                            <line x1="3.5" y1="16.5" x2="16.5" y2="3.5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
+                          </svg>
+                        </label>
+                        Q
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="strokeWidth" value="3" hidden="" checked="">
+                          <svg class="section--item--icon">
+                            <line x1="4.5" y1="15.5" x2="15.5" y2="4.5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
+                          </svg>
+                        </label>
+                        W
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="strokeWidth" value="5" hidden="">
+                          <svg class="section--item--icon">
+                            <line x1="5.5" y1="14.5" x2="14.5" y2="5.5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"></line>
+                          </svg>
+                        </label>
+                        E
+                      </div>
+                    
+                </div>
+              </div>
+
+              <hr class="separator">
+
+              <div class="section">
+                <div class="section--heading">Tool</div>
+                <div class="section--content">
+                  
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="tool" value="pen" hidden="" checked="">
+                          <div class="section--item--icon">
+                            <i class="fas fa-pen-fancy"></i>
+                          </div>
+                        </label>
+                        A
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="tool" value="highlighter" hidden="">
+                          <div class="section--item--icon">
+                            <i class="fas fa-highlighter"></i>
+                          </div>
+                        </label>
+                        S
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="tool" value="eraser" hidden="">
+                          <div class="section--item--icon">
+                            <i class="fas fa-eraser"></i>
+                          </div>
+                        </label>
+                        D
+                      </div>
+                    
+                </div>
+              </div>
+
+              <hr class="separator">
+
+              <div class="section">
+                <div class="section--heading">Fade</div>
+                <div class="section--content">
+                  
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="fade" value="false" hidden="" checked="">
+                          <svg class="section--item--icon">
+                            
+                            <rect x="5" y="5" width="10" height="10" rx="3" class="style--1eku9z"></rect>
+                          </svg>
+                        </label>
+                        Z
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="fade" value="1500" hidden="">
+                          <svg class="section--item--icon">
+                            
+                                  <defs>
+                                    <linearGradient id="fade--100" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="currentColor"></stop>
+                                      <stop offset="100%" stop-color="transparent"></stop>
+                                    </linearGradient>
+                                  </defs>
+                                
+                            <rect x="5" y="5" width="10" height="10" rx="3" class="style--dz7ghv"></rect>
+                          </svg>
+                        </label>
+                        X
+                      </div>
+                    
+                      <div class="section--item">
+                        <label>
+                          <input type="radio" name="fade" value="500" hidden="">
+                          <svg class="section--item--icon">
+                            
+                                  <defs>
+                                    <linearGradient id="fade--60" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stop-color="currentColor"></stop>
+                                      <stop offset="60%" stop-color="transparent"></stop>
+                                    </linearGradient>
+                                  </defs>
+                                
+                            <rect x="5" y="5" width="10" height="10" rx="3" class="style--15a5pa0"></rect>
+                          </svg>
+                        </label>
+                        C
+                      </div>
+                    
+                </div>
+              </div>
+            </form>
+
+            <hr class="separator">
+
+            <div class="section">
+              <div class="section--heading">Mode</div>
+              <div class="section--item section--item--row">
+                <label class="section--item--label">
+                  <input type="radio" name="ignoreMouseEvents" value="false" checked="" hidden="" onchange="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;main&quot;,
+                        javascript: &quot;\n                            for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(false);\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="far fa-edit"></i>
+                  </div>
+                  Draw
+                </label>
+              </div>
+              <div class="section--item section--item--row">
+                <label class="section--item--label">
+                  <input type="radio" name="ignoreMouseEvents" value="true" hidden="" onchange="
                         ipcRenderer.invoke(&quot;evaluate&quot;, {
                           process: &quot;main&quot;,
-                          javascript: &quot;\n                              for (const browserWindow of browserWindows) browserWindow.destroy();\n                            &quot;
+                          javascript: &quot;\n                              for (const drawingEditor of drawingEditors) drawingEditor.setIgnoreMouseEvents(true);\n                            &quot;
                         });
                       ">
-                    <div class="section--item--icon">
-                      <i class="fas fa-power-off"></i>
-                    </div>
-                    ⌘Q
-                  </button>
-
-                  <button class="section--item reset-drawing" onclick="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawingEditors&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor--drawing\&quot;).reset();\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="fas fa-backspace"></i>
-                    </div>
-                    ⌫
-                  </button>
-                  <button class="section--item undo" onclick="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawingEditors&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor\&quot;).undo();\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="fas fa-undo-alt"></i>
-                    </div>
-                    ⌘Z
-                  </button>
-                  <button class="section--item redo" onclick="
-                        ipcRenderer.invoke(&quot;evaluate&quot;, {
-                          process: &quot;drawingEditors&quot;,
-                          javascript: &quot;\n                              document.querySelector(\&quot;.drawing-editor\&quot;).redo();\n                            &quot;
-                        });
-                      ">
-                    <div class="section--item--icon">
-                      <i class="fas fa-redo-alt"></i>
-                    </div>
-                    ⇧⌘Z
-                  </button>
-                </div>
+                  <div class="section--item--icon">
+                    <i class="far fa-window-restore"></i>
+                  </div>
+                  Show
+                </label>
+                `
               </div>
             </div>
-          
-          
+
+            <hr class="separator">
+
+            <div class="section">
+              <div class="section--heading">Hide</div>
+              <div class="section--item section--item--row">
+                <button class="section--item--label hide" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;main&quot;,
+                        javascript: &quot;\n                            for (const browserWindow of browserWindows) browserWindow.hide();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="far fa-window-close"></i>
+                  </div>
+                  Drawing
+                </button>
+                ⎋
+              </div>
+              <div class="section--item section--item--row">
+                <button class="section--item--label hide--menu" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;main&quot;,
+                        javascript: &quot;\n                            if (menu.isVisible()) menu.hide();\n                            else menu.show();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="far fa-eye-slash"></i>
+                  </div>
+                  Menu
+                </button>
+                ⌘⎋
+              </div>
+            </div>
+
+            <hr class="separator">
+
+            <div class="section">
+              <div class="section--content">
+                <button class="section--item quit" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;main&quot;,
+                        javascript: &quot;\n                            for (const browserWindow of browserWindows) browserWindow.destroy();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="fas fa-power-off"></i>
+                  </div>
+                  ⌘Q
+                </button>
+
+                <button class="section--item reset-drawing" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;drawingEditors&quot;,
+                        javascript: &quot;\n                            document.querySelector(\&quot;.drawing-editor--drawing\&quot;).reset();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="fas fa-backspace"></i>
+                  </div>
+                  ⌫
+                </button>
+                <button class="section--item undo" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;drawingEditors&quot;,
+                        javascript: &quot;\n                            document.querySelector(\&quot;.drawing-editor\&quot;).undo();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="fas fa-undo-alt"></i>
+                  </div>
+                  ⌘Z
+                </button>
+                <button class="section--item redo" onclick="
+                      ipcRenderer.invoke(&quot;evaluate&quot;, {
+                        process: &quot;drawingEditors&quot;,
+                        javascript: &quot;\n                            document.querySelector(\&quot;.drawing-editor\&quot;).redo();\n                          &quot;
+                      });
+                    ">
+                  <div class="section--item--icon">
+                    <i class="fas fa-redo-alt"></i>
+                  </div>
+                  ⇧⌘Z
+                </button>
+              </div>
+            </div>
+          </div>
         
-      </body></html>
+            
+          
+        </body></html>

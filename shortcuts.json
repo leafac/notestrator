@@ -2,161 +2,161 @@
   "0": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--50)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--50)\"]').click();\n                                "
     }
   ],
   "1": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--red--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--red--600)\"]').click();\n                                "
     }
   ],
   "2": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--amber--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--amber--600)\"]').click();\n                                "
     }
   ],
   "3": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--lime--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--lime--600)\"]').click();\n                                "
     }
   ],
   "4": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--teal--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--teal--600)\"]').click();\n                                "
     }
   ],
   "5": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--sky--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--sky--600)\"]').click();\n                                "
     }
   ],
   "6": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--indigo--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--indigo--600)\"]').click();\n                                "
     }
   ],
   "7": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--purple--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--purple--600)\"]').click();\n                                "
     }
   ],
   "8": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--pink--600)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--pink--600)\"]').click();\n                                "
     }
   ],
   "9": [
     {
       "process": "menu",
-      "javascript": "\n                                    document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--900)\"]').click();\n                                  "
+      "javascript": "\n                                  document.querySelector('[name=\"color\"][value=\"var(--color--gray--warm--900)\"]').click();\n                                "
     }
   ],
   "q": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"1\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"strokeWidth\"][value=\"1\"]').click();\n                                  "
     }
   ],
   "w": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"3\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"strokeWidth\"][value=\"3\"]').click();\n                                  "
     }
   ],
   "e": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"strokeWidth\"][value=\"5\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"strokeWidth\"][value=\"5\"]').click();\n                                  "
     }
   ],
   "a": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"pen\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"tool\"][value=\"pen\"]').click();\n                                  "
     }
   ],
   "s": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"highlighter\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"tool\"][value=\"highlighter\"]').click();\n                                  "
     }
   ],
   "d": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"tool\"][value=\"eraser\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"tool\"][value=\"eraser\"]').click();\n                                  "
     }
   ],
   "z": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"false\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"fade\"][value=\"false\"]').click();\n                                  "
     }
   ],
   "x": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"1500\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"fade\"][value=\"1500\"]').click();\n                                  "
     }
   ],
   "c": [
     {
       "process": "menu",
-      "javascript": "\n                                      document.querySelector('[name=\"fade\"][value=\"500\"]').click();\n                                    "
+      "javascript": "\n                                    document.querySelector('[name=\"fade\"][value=\"500\"]').click();\n                                  "
     }
   ],
   "`": [
     {
       "process": "menu",
-      "javascript": "\n                              document.querySelector('[name=\"ignoreMouseEvents\"][value=\"true\"]').click();\n                            "
+      "javascript": "\n                            document.querySelector('[name=\"ignoreMouseEvents\"][value=\"true\"]').click();\n                          "
     },
     {
       "process": "drawingEditors",
-      "javascript": "\n                              document.querySelector(\".drawing-editor--cursor\").hidden = true;\n                            "
+      "javascript": "\n                            document.querySelector(\".drawing-editor--cursor\").hidden = true;\n                          "
     }
   ],
   "Esc": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".hide\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".hide\").click();\n                        "
     }
   ],
   "Command+Esc": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".hide--menu\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".hide--menu\").click();\n                        "
     }
   ],
   "Command+Q": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".quit\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".quit\").click();\n                        "
     }
   ],
   "Backspace": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".reset-drawing\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".reset-drawing\").click();\n                        "
     }
   ],
   "Command+Z": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".undo\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".undo\").click();\n                        "
     }
   ],
   "Shift+Command+Z": [
     {
       "process": "menu",
-      "javascript": "\n                            document.querySelector(\".redo\").click();\n                          "
+      "javascript": "\n                          document.querySelector(\".redo\").click();\n                        "
     }
   ]
 }

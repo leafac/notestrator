@@ -1,18 +1,18 @@
 <!DOCTYPE html><html lang="en"><head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <script>
-              const { ipcRenderer } = require("electron");
-              window.addEventListener("DOMContentLoaded", () => {
-                for (const element of document.querySelectorAll(
-                  "[data-ondomcontentloaded]"
-                ))
-                  new Function(element.dataset.ondomcontentloaded).call(
-                    element
-                  );
-              });
-            </script>
-          
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <script>
+                const { ipcRenderer } = require("electron");
+                window.addEventListener("DOMContentLoaded", () => {
+                  for (const element of document.querySelectorAll(
+                    "[data-ondomcontentloaded]"
+                  ))
+                    new Function(element.dataset.ondomcontentloaded).call(
+                      element
+                    );
+                });
+              </script>
+            
       <style>
         
           /* RESET */
@@ -768,268 +768,268 @@
           /* INLINE STYLES */
 
           
-                  .style--kum4fg.style--kum4fg.style--kum4fg.style--kum4fg.style--kum4fg.style--kum4fg {
+                  .style--1emzg29.style--1emzg29.style--1emzg29.style--1emzg29.style--1emzg29.style--1emzg29 {
                     
-                cursor: none;
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
+              cursor: none;
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            
+                  }
+                
+                  .style--1gqihd0.style--1gqihd0.style--1gqihd0.style--1gqihd0.style--1gqihd0.style--1gqihd0 {
+                    
+                width: 100%;
+                height: 100%;
               
                   }
                 
-                  .style--uzkrjh.style--uzkrjh.style--uzkrjh.style--uzkrjh.style--uzkrjh.style--uzkrjh {
+                  .style--bw5fw8.style--bw5fw8.style--bw5fw8.style--bw5fw8.style--bw5fw8.style--bw5fw8 {
                     
-                  width: 100%;
-                  height: 100%;
-                
-                  }
-                
-                  .style--aok8hm.style--aok8hm.style--aok8hm.style--aok8hm.style--aok8hm.style--aok8hm {
-                    
-                  position: absolute;
-                  width: 15px;
-                  height: 15px;
-                  transform: translate(-50%, -50%);
-                  color: var(--color--red--600);
-                
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                transform: translate(-50%, -50%);
+                color: var(--color--red--600);
+              
                   }
                 
         
       </style>
     </head>
-          <body>
-            
-            <div class="drawing-editor style--kum4fg" data-ondomcontentloaded="
-                const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
-                const cursor = this.querySelector(&quot;.drawing-editor--cursor&quot;);
+            <body>
+              
+          <div class="drawing-editor style--1emzg29" data-ondomcontentloaded="
+              const drawing = this.querySelector(&quot;.drawing-editor--drawing&quot;);
+              const cursor = this.querySelector(&quot;.drawing-editor--cursor&quot;);
 
-                this.setSettings = (settings) => {
-                  this.settings = settings;
-                  cursor.update();
-                };
+              this.setSettings = (settings) => {
+                this.settings = settings;
+                cursor.update();
+              };
 
-                this.undoStack = [];
-                this.redoStack = [];
-                this.createUndoPoint = () => {
-                  this.undoStack.push(this.querySelector(&quot;.drawing-editor--drawing&quot;).innerHTML);
-                  this.redoStack.length = 0;
-                };
-                this.undo = () => {
-                  const undoPoint = this.undoStack.pop();
-                  if (undoPoint === undefined) return;
-                  this.redoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = undoPoint;
-                };
-                this.redo = () => {
-                  const redoPoint = this.redoStack.pop();
-                  if (redoPoint === undefined) return;
-                  this.undoStack.push(drawing.innerHTML);
-                  drawing.innerHTML = redoPoint;
-                };
-              ">
-              <svg class="drawing-editor--drawing style--uzkrjh" data-ondomcontentloaded="
-                  const drawingEditor = this.closest(&quot;.drawing-editor&quot;);
+              this.undoStack = [];
+              this.redoStack = [];
+              this.createUndoPoint = () => {
+                this.undoStack.push(this.querySelector(&quot;.drawing-editor--drawing&quot;).innerHTML);
+                this.redoStack.length = 0;
+              };
+              this.undo = () => {
+                const undoPoint = this.undoStack.pop();
+                if (undoPoint === undefined) return;
+                this.redoStack.push(drawing.innerHTML);
+                drawing.innerHTML = undoPoint;
+              };
+              this.redo = () => {
+                const redoPoint = this.redoStack.pop();
+                if (redoPoint === undefined) return;
+                this.undoStack.push(drawing.innerHTML);
+                drawing.innerHTML = redoPoint;
+              };
+            ">
+            <svg class="drawing-editor--drawing style--1gqihd0" data-ondomcontentloaded="
+                const drawingEditor = this.closest(&quot;.drawing-editor&quot;);
 
-                  window.addEventListener(&quot;mousedown&quot;, async (event) => {
-                    const isRightClick = event.button === 2;
-                    const originalTool = drawingEditor.settings.tool;
-                    if (isRightClick)
-                      await ipcRenderer.invoke(&quot;evaluate&quot;, {
-                        process: &quot;menu&quot;,
-                        javascript: &quot;\n                            document.querySelector('[value=\&quot;eraser\&quot;]').click();\n                          &quot;
-                      });
-                    let handleMousemove;
-                    let handleMouseup;
-                    switch (drawingEditor.settings.tool) {
-                      case &quot;pen&quot;:
-                      case &quot;highlighter&quot;:
-                        if (drawingEditor.settings.fade === &quot;false&quot;)
+                window.addEventListener(&quot;mousedown&quot;, async (event) => {
+                  const isRightClick = event.button === 2;
+                  const originalTool = drawingEditor.settings.tool;
+                  if (isRightClick)
+                    await ipcRenderer.invoke(&quot;evaluate&quot;, {
+                      process: &quot;menu&quot;,
+                      javascript: &quot;\n                          document.querySelector('[value=\&quot;eraser\&quot;]').click();\n                        &quot;
+                    });
+                  let handleMousemove;
+                  let handleMouseup;
+                  switch (drawingEditor.settings.tool) {
+                    case &quot;pen&quot;:
+                    case &quot;highlighter&quot;:
+                      if (drawingEditor.settings.fade === &quot;false&quot;)
+                        ipcRenderer.invoke(&quot;evaluate&quot;, {
+                          process: &quot;drawingEditors&quot;,
+                          javascript: `document.querySelector(&quot;.drawing-editor&quot;).createUndoPoint();`
+                        });
+                      const group = this.querySelector(`.${drawingEditor.settings.tool}`);
+                      group.insertAdjacentHTML(
+                        &quot;beforeend&quot;,
+                        `
+                          <path
+                            d=&quot;M ${event.clientX} ${event.clientY}&quot;
+                            fill=&quot;none&quot;
+                            stroke=&quot;${drawingEditor.settings.color}&quot;
+                            stroke-width=&quot;${
+                              drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === &quot;highlighter&quot; ? 5 : 1)
+                            }&quot;
+                            stroke-opacity=&quot;${drawingEditor.settings.tool === &quot;highlighter&quot; ? 0.5 : 1}&quot;
+                            stroke-linecap=&quot;round&quot;
+                            stroke-linejoin=&quot;round&quot;
+                            style=&quot;${
+                              drawingEditor.settings.fade === &quot;false&quot;
+                                ? ``
+                                : `transition: opacity ${drawingEditor.settings.fade}ms ease-in;`
+                            }&quot;
+                          />
+                        `
+                      );
+                      const path = group.lastElementChild;
+                      // http://scaledinnovation.com/analytics/splines/aboutSplines.html
+                      const t = 0.4;
+                      let x0 = { x: event.clientX, y: event.clientY };
+                      let x1 = { x: event.clientX, y: event.clientY };
+                      let x2 = { x: event.clientX, y: event.clientY };
+                      let p1 = { x: event.clientX, y: event.clientY };
+                      let p2 = { x: event.clientX, y: event.clientY };
+                      handleMousemove = (event) => {
+                        if (event.clientX === x2.x &amp;&amp; event.clientY === x2.y)
+                          return;
+                        x2 = { x: event.clientX, y: event.clientY };
+                        const x0_x1 = Math.sqrt(
+                          (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
+                        );
+                        const x1_x2 = Math.sqrt(
+                          (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
+                        );
+                        const x0_x1_x2 = x0_x1 + x1_x2;
+                        const ratio_x0_x1 = x0_x1 / x0_x1_x2;
+                        const ratio_x1_x2 = x1_x2 / x0_x1_x2;
+                        const w = x2.x - x0.x;
+                        const h = x2.y - x0.y;
+                        p1 = {
+                          x: x1.x - w * t * ratio_x0_x1,
+                          y: x1.y - h * t * ratio_x0_x1,
+                        };
+                        path.setAttribute(
+                          &quot;d&quot;,
+                          `${path.getAttribute(&quot;d&quot;)} C ${p2.x} ${p2.y}, ${
+                            p1.x
+                          } ${p1.y}, ${x1.x} ${x1.y}`
+                        );
+                        p2 = {
+                          x: x1.x + w * t * ratio_x1_x2,
+                          y: x1.y + h * t * ratio_x1_x2,
+                        };
+                        x0 = x1;
+                        x1 = x2;
+                      };
+                      handleMouseup = () => {
+                        const d = path.getAttribute(&quot;d&quot;);
+                        if (!d.includes(&quot;C&quot;)) {
+                          const [x, y] = d.split(&quot; &quot;).slice(1);
+                          path.setAttribute(
+                            &quot;d&quot;,
+                            `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`
+                          );
+                        }
+                        if (drawingEditor.settings.fade === &quot;false&quot;) return;
+                        path.style.opacity = 0;
+                        path.addEventListener(&quot;transitionend&quot;, () => {
+                          path.remove();
+                        });
+                      };
+                      break;
+                    case &quot;eraser&quot;:
+                      let undoPointCreated = false;
+                      handleMousemove = (event) => {
+                        const elementsToRemove = new Set();
+                        for (const element of this.querySelectorAll(&quot;*&quot;))
+                          switch (element.tagName) {
+                            case &quot;path&quot;:
+                              for (const [x, y] of element
+                                .getAttribute(&quot;d&quot;)
+                                .match(
+                                  /C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g
+                                )
+                                .map((curve) =>
+                                  curve
+                                    .split(&quot;,&quot;)[2]
+                                    .trim()
+                                    .split(&quot; &quot;)
+                                    .map(Number)
+                                ))
+                                if (
+                                  Math.sqrt(
+                                    (event.clientX - x) ** 2 +
+                                      (event.clientY - y) ** 2
+                                  ) <
+                                  drawingEditor.settings.strokeWidth * 5
+                                )
+                                  elementsToRemove.add(element);
+                              break;
+                          }
+
+                        if (!undoPointCreated &amp;&amp; elementsToRemove.size > 0) {
+                          undoPointCreated = true;
                           ipcRenderer.invoke(&quot;evaluate&quot;, {
                             process: &quot;drawingEditors&quot;,
                             javascript: `document.querySelector(&quot;.drawing-editor&quot;).createUndoPoint();`
                           });
-                        const group = this.querySelector(`.${drawingEditor.settings.tool}`);
-                        group.insertAdjacentHTML(
-                          &quot;beforeend&quot;,
+                        }
+                        for (const element of elementsToRemove) element.remove();
+                      };
+                      break;
+                  }
+                  window.addEventListener(&quot;mousemove&quot;, handleMousemove);
+                  window.addEventListener(
+                    &quot;mouseup&quot;,
+                    () => {
+                      if (isRightClick)
+                        ipcRenderer.invoke(&quot;evaluate&quot;, {
+                          process: &quot;menu&quot;,
+                          javascript: `
+                            document.querySelector('[value=&quot;${ originalTool }&quot;]').click();
                           `
-                            <path
-                              d=&quot;M ${event.clientX} ${event.clientY}&quot;
-                              fill=&quot;none&quot;
-                              stroke=&quot;${drawingEditor.settings.color}&quot;
-                              stroke-width=&quot;${
-                                drawingEditor.settings.strokeWidth * (drawingEditor.settings.tool === &quot;highlighter&quot; ? 5 : 1)
-                              }&quot;
-                              stroke-opacity=&quot;${drawingEditor.settings.tool === &quot;highlighter&quot; ? 0.5 : 1}&quot;
-                              stroke-linecap=&quot;round&quot;
-                              stroke-linejoin=&quot;round&quot;
-                              style=&quot;${
-                                drawingEditor.settings.fade === &quot;false&quot;
-                                  ? ``
-                                  : `transition: opacity ${drawingEditor.settings.fade}ms ease-in;`
-                              }&quot;
-                            />
-                          `
-                        );
-                        const path = group.lastElementChild;
-                        // http://scaledinnovation.com/analytics/splines/aboutSplines.html
-                        const t = 0.4;
-                        let x0 = { x: event.clientX, y: event.clientY };
-                        let x1 = { x: event.clientX, y: event.clientY };
-                        let x2 = { x: event.clientX, y: event.clientY };
-                        let p1 = { x: event.clientX, y: event.clientY };
-                        let p2 = { x: event.clientX, y: event.clientY };
-                        handleMousemove = (event) => {
-                          if (event.clientX === x2.x &amp;&amp; event.clientY === x2.y)
-                            return;
-                          x2 = { x: event.clientX, y: event.clientY };
-                          const x0_x1 = Math.sqrt(
-                            (x0.x - x1.x) ** 2 + (x0.y - x1.y) ** 2
-                          );
-                          const x1_x2 = Math.sqrt(
-                            (x1.x - x2.x) ** 2 + (x1.y - x2.y) ** 2
-                          );
-                          const x0_x1_x2 = x0_x1 + x1_x2;
-                          const ratio_x0_x1 = x0_x1 / x0_x1_x2;
-                          const ratio_x1_x2 = x1_x2 / x0_x1_x2;
-                          const w = x2.x - x0.x;
-                          const h = x2.y - x0.y;
-                          p1 = {
-                            x: x1.x - w * t * ratio_x0_x1,
-                            y: x1.y - h * t * ratio_x0_x1,
-                          };
-                          path.setAttribute(
-                            &quot;d&quot;,
-                            `${path.getAttribute(&quot;d&quot;)} C ${p2.x} ${p2.y}, ${
-                              p1.x
-                            } ${p1.y}, ${x1.x} ${x1.y}`
-                          );
-                          p2 = {
-                            x: x1.x + w * t * ratio_x1_x2,
-                            y: x1.y + h * t * ratio_x1_x2,
-                          };
-                          x0 = x1;
-                          x1 = x2;
-                        };
-                        handleMouseup = () => {
-                          const d = path.getAttribute(&quot;d&quot;);
-                          if (!d.includes(&quot;C&quot;)) {
-                            const [x, y] = d.split(&quot; &quot;).slice(1);
-                            path.setAttribute(
-                              &quot;d&quot;,
-                              `${d} C ${x} ${y}, ${x} ${y}, ${x} ${y}`
-                            );
-                          }
-                          if (drawingEditor.settings.fade === &quot;false&quot;) return;
-                          path.style.opacity = 0;
-                          path.addEventListener(&quot;transitionend&quot;, () => {
-                            path.remove();
-                          });
-                        };
-                        break;
-                      case &quot;eraser&quot;:
-                        let undoPointCreated = false;
-                        handleMousemove = (event) => {
-                          const elementsToRemove = new Set();
-                          for (const element of this.querySelectorAll(&quot;*&quot;))
-                            switch (element.tagName) {
-                              case &quot;path&quot;:
-                                for (const [x, y] of element
-                                  .getAttribute(&quot;d&quot;)
-                                  .match(
-                                    /C [\d.]+ [\d.]+, [\d.]+ [\d.]+, [\d.]+ [\d.]+/g
-                                  )
-                                  .map((curve) =>
-                                    curve
-                                      .split(&quot;,&quot;)[2]
-                                      .trim()
-                                      .split(&quot; &quot;)
-                                      .map(Number)
-                                  ))
-                                  if (
-                                    Math.sqrt(
-                                      (event.clientX - x) ** 2 +
-                                        (event.clientY - y) ** 2
-                                    ) <
-                                    drawingEditor.settings.strokeWidth * 5
-                                  )
-                                    elementsToRemove.add(element);
-                                break;
-                            }
+                        });
+                      window.removeEventListener(&quot;mousemove&quot;, handleMousemove);
+                      if (handleMouseup !== undefined) handleMouseup();
+                    },
+                    { once: true }
+                  );
+                });
 
-                          if (!undoPointCreated &amp;&amp; elementsToRemove.size > 0) {
-                            undoPointCreated = true;
-                            ipcRenderer.invoke(&quot;evaluate&quot;, {
-                              process: &quot;drawingEditors&quot;,
-                              javascript: `document.querySelector(&quot;.drawing-editor&quot;).createUndoPoint();`
-                            });
-                          }
-                          for (const element of elementsToRemove) element.remove();
-                        };
-                        break;
-                    }
-                    window.addEventListener(&quot;mousemove&quot;, handleMousemove);
-                    window.addEventListener(
-                      &quot;mouseup&quot;,
-                      () => {
-                        if (isRightClick)
-                          ipcRenderer.invoke(&quot;evaluate&quot;, {
-                            process: &quot;menu&quot;,
-                            javascript: `
-                              document.querySelector('[value=&quot;${ originalTool }&quot;]').click();
-                            `
-                          });
-                        window.removeEventListener(&quot;mousemove&quot;, handleMousemove);
-                        if (handleMouseup !== undefined) handleMouseup();
-                      },
-                      { once: true }
-                    );
-                  });
-
-                  this.reset = () => {
-                    drawingEditor.createUndoPoint();
-                    this.querySelector(&quot;.highlighter&quot;).replaceChildren();
-                    this.querySelector(&quot;.pen&quot;).replaceChildren();
-                  };
-                ">
-                <g class="highlighter"></g>
-                <g class="pen"></g>
-              </svg>
-              <div class="drawing-editor--cursor style--aok8hm" data-ondomcontentloaded="
-                  document.addEventListener(&quot;mouseenter&quot;, (event) => {
-                    this.hidden = false;
-                  });
-                  document.addEventListener(&quot;mouseleave&quot;, (event) => {
-                    this.hidden = true;
-                  });
-                  new MutationObserver(() => {
-                    this.closest(&quot;.drawing-editor&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
-                  }).observe(this, { attributes: true, attributeFilter: [&quot;hidden&quot;] });
-                  document.addEventListener(&quot;mousemove&quot;, (event) => {
-                    this.style.top = String(event.clientY) + &quot;px&quot;;
-                    this.style.left = String(event.clientX) + &quot;px&quot;;
-                  });
-                  this.update = () => {
-                    const settings = this.closest(&quot;.drawing-editor&quot;).settings;
-                    this.style.color = settings.color;
-                    this.querySelector(&quot;.crosshair&quot;).hidden = settings.tool === &quot;eraser&quot;;
-                    this.querySelector(&quot;.eraser&quot;).hidden = settings.tool !== &quot;eraser&quot;;
-                  };
-                ">
-                <div class="crosshair">
-                  <svg viewBox="-7.5 -7.5, 15 15">
-                    <path d="M -6 0 L 6 0 M 0 -6 L 0 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
-                </div>
-                <div class="eraser" hidden="">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
-                    <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"></path>
-                  </svg>
-                </div>
+                this.reset = () => {
+                  drawingEditor.createUndoPoint();
+                  this.querySelector(&quot;.highlighter&quot;).replaceChildren();
+                  this.querySelector(&quot;.pen&quot;).replaceChildren();
+                };
+              ">
+              <g class="highlighter"></g>
+              <g class="pen"></g>
+            </svg>
+            <div class="drawing-editor--cursor style--bw5fw8" data-ondomcontentloaded="
+                document.addEventListener(&quot;mouseenter&quot;, (event) => {
+                  this.hidden = false;
+                });
+                document.addEventListener(&quot;mouseleave&quot;, (event) => {
+                  this.hidden = true;
+                });
+                new MutationObserver(() => {
+                  this.closest(&quot;.drawing-editor&quot;).style.cursor = this.hidden ? &quot;default&quot; : &quot;none&quot;;
+                }).observe(this, { attributes: true, attributeFilter: [&quot;hidden&quot;] });
+                document.addEventListener(&quot;mousemove&quot;, (event) => {
+                  this.style.top = String(event.clientY) + &quot;px&quot;;
+                  this.style.left = String(event.clientX) + &quot;px&quot;;
+                });
+                this.update = () => {
+                  const settings = this.closest(&quot;.drawing-editor&quot;).settings;
+                  this.style.color = settings.color;
+                  this.querySelector(&quot;.crosshair&quot;).hidden = settings.tool === &quot;eraser&quot;;
+                  this.querySelector(&quot;.eraser&quot;).hidden = settings.tool !== &quot;eraser&quot;;
+                };
+              ">
+              <div class="crosshair">
+                <svg viewBox="-7.5 -7.5, 15 15">
+                  <path d="M -6 0 L 6 0 M 0 -6 L 0 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <div class="eraser" hidden="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+                  <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"></path>
+                </svg>
               </div>
             </div>
-          
-          
+          </div>
         
-      </body></html>
+            
+          
+        </body></html>

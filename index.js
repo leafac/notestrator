@@ -18,7 +18,7 @@ const fs = require("fs/promises");
 
     const shortcuts = {};
 
-    const layout = (content) =>
+    const layout = (body) =>
       extractInlineStyles(
         html`
           <!DOCTYPE html>
@@ -42,7 +42,7 @@ const fs = require("fs/promises");
               </script>
             </head>
             <body>
-              $${content}
+              $${body}
             </body>
           </html>
         `
