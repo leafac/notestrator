@@ -18,9 +18,8 @@ const fs = require("fs/promises");
 
     const shortcuts = {};
 
-    await fs.writeFile(
-      "drawing-editor.html",
-      extractInlineStyles(html`
+    const layout = (content) =>
+      html`
         <!DOCTYPE html>
         <html lang="en">
           <head>
@@ -42,6 +41,16 @@ const fs = require("fs/promises");
             </script>
           </head>
           <body>
+            $${content}
+          </body>
+        </html>
+      `;
+
+    await fs.writeFile(
+      "drawing-editor.html",
+      extractInlineStyles(
+        layout(
+          html`
             <div
               class="drawing-editor"
               style="${css`
@@ -317,35 +326,16 @@ const fs = require("fs/promises");
                 </div>
               </div>
             </div>
-          </body>
-        </html>
-      `)
+          `
+        )
+      )
     );
     await fs.writeFile(
       "menu.html",
       extractInlineStyles(
-        html`
-          <!DOCTYPE html>
-          <html lang="en">
-            <head>
-              <meta charset="UTF-8" />
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-              />
-              <script>
-                const { ipcRenderer } = require("electron");
-                window.addEventListener("DOMContentLoaded", () => {
-                  for (const element of document.querySelectorAll(
-                    "[data-ondomcontentloaded]"
-                  ))
-                    new Function(element.dataset.ondomcontentloaded).call(
-                      element
-                    );
-                });
-              </script>
-            </head>
-            <body
+        layout(
+          html`
+            <div
               style="${css`
                 font-family: var(--font-family--sans-serif);
                 font-size: var(--font-size--xs);
@@ -1092,9 +1082,9 @@ const fs = require("fs/promises");
                   </button>
                 </div>
               </div>
-            </body>
-          </html>
-        `
+            </div>
+          `
+        )
       )
     );
     await fs.writeFile(
