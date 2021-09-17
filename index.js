@@ -378,7 +378,7 @@ const fs = require("fs/promises");
                   }
                 }
 
-                .section--content {
+                .section--content--three-column {
                   display: grid;
                   grid-template-columns: repeat(3, 1fr);
                   justify-content: space-between;
@@ -626,7 +626,7 @@ const fs = require("fs/promises");
 
               <div class="section">
                 <div class="section--heading">Width</div>
-                <div class="section--content">
+                <div class="section--content--three-column">
                   $${[
                     {
                       strokeWidth: 1,
@@ -687,7 +687,7 @@ const fs = require("fs/promises");
 
               <div class="section">
                 <div class="section--heading">Tool</div>
-                <div class="section--content">
+                <div class="section--content--three-column">
                   $${[
                     {
                       tool: "pen",
@@ -742,7 +742,7 @@ const fs = require("fs/promises");
 
               <div class="section">
                 <div class="section--heading">Fade</div>
-                <div class="section--content">
+                <div class="section--content--three-column">
                   $${[
                     {
                       fade: "false",
@@ -971,7 +971,7 @@ const fs = require("fs/promises");
             <hr class="separator" />
 
             <div class="section">
-              <div class="section--content">
+              <div class="section--content--three-column">
                 <button
                   class="section--item quit"
                   onclick="${(() => {
