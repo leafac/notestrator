@@ -18,7 +18,7 @@ const fs = require("fs/promises");
 
     const shortcuts = {};
 
-    const layout = (body) =>
+    const layout = ({ body }) =>
       extractInlineStyles(
         html`
           <!DOCTYPE html>
@@ -50,8 +50,8 @@ const fs = require("fs/promises");
 
     await fs.writeFile(
       "drawing-editor.html",
-      layout(
-        html`
+      layout({
+        body: html`
           <div
             class="drawing-editor"
             style="${css`
@@ -327,13 +327,13 @@ const fs = require("fs/promises");
               </div>
             </div>
           </div>
-        `
-      )
+        `,
+      })
     );
     await fs.writeFile(
       "menu.html",
-      layout(
-        html`
+      layout({
+        body: html`
           <div
             style="${css`
               font-family: var(--font-family--sans-serif);
@@ -1081,8 +1081,8 @@ const fs = require("fs/promises");
               </div>
             </div>
           </div>
-        `
-      )
+        `,
+      })
     );
     await fs.writeFile(
       "shortcuts.json",
