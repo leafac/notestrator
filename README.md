@@ -6,6 +6,8 @@
 
 ### Backlog
 
+- Curve-fitting for better smoothing (but perhaps not real-time, producing a jump at the end): AN ALGORITHM FOR AUTOMATICALLY FITTING DIGITIZED CURVES Philip J. Schneider
+
 - Custom cursor doesn’t go away on click-through mode.
 - Multiple displays.
   - Improve on the `primaryDrawing` hack.

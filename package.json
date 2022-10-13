@@ -14,7 +14,7 @@
   "author": "Leandro Facchinetti <notestrator@leafac.com> (https://leafac.com)",
   "license": "MIT",
   "bugs": "https://github.com/leafac/notestrator/issues",
-  "homepage": "https://github.com/leafac/notestrator#readme",
+  "homepage": "https://github.com/leafac/notestrator",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
