@@ -29,6 +29,7 @@
 - [ ] - [ ] TLDraw
   - [ ] excalidraw
   - [ ] Smooth drawing
+    - [ ] [perfect-freehand](https://github.com/steveruizok/perfect-freehand)!
     - [ ] http://paperjs.org/tutorials/paths/smoothing-simplifying-flattening/
     - [ ] Smooth
       - [ ] https://developer.mozilla.org/en-US/docs/Web/SVG/Element/path
